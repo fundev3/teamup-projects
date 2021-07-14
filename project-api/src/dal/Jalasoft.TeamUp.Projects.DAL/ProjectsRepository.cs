@@ -8,7 +8,7 @@
 
     public class ProjectsRepository : IProjectsRepository
     {
-        private Health health = new Health() { Message = "projects-api" };
+        private Health health = new Health() { Message = "I'm projects-api and I'm alive and running! ;)" };
 
         public Health GetHealth()
         {
