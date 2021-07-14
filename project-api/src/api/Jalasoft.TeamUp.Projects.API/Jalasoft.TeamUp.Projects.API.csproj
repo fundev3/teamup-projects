@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<AzureFunctionsVersion>v3</AzureFunctionsVersion>
+		<!--<CodeAnalysisRuleSet>../../../stylecop.ruleset</CodeAnalysisRuleSet>-->
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions.OpenApi" Version="0.7.2-preview" />
+		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\core\Jalasoft.TeamUp.Projects.Core.Interfaces\Jalasoft.TeamUp.Projects.Core.Interfaces.csproj" />
+	  <ProjectReference Include="..\..\core\Jalasoft.TeamUp.Projects.Core\Jalasoft.TeamUp.Projects.Core.csproj" />
+	  <ProjectReference Include="..\..\dal\Jalasoft.TeamUp.Projects.DAL\Jalasoft.TeamUp.Projects.DAL.csproj" />
+	</ItemGroup>
+</Project>
