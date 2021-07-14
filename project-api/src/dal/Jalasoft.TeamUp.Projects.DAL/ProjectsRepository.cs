@@ -8,11 +8,11 @@
 
     public class ProjectsRepository : IProjectsRepository
     {
-        private List<Health> healthList = new List<Health>() { new Health() { Message = "I'm resumes-api and I'm alive and running! ;)" } };
+        private Health health = new Health() { Message = "projects-api" };
 
         public Health GetHealth()
         {
-            return this.healthList[0];
+            return this.health;
         }
     }
 }
