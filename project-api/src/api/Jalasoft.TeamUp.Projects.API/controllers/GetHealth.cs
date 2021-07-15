@@ -16,15 +16,16 @@
 
     public class GetHealth
     {
-        private readonly IProjectsService projectsService;
-        public GetHealth(IProjectsService projectsService)
+        private readonly IHealthsService projectsService;
+
+        public GetHealth(IHealthsService projectsService)
         {
             this.projectsService = projectsService;
         }
 
         [FunctionName("GetHealth")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "Health" })]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "json", bodyType: typeof(Health), Description = "Successful response")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Health), Description = "Successful response")]
         public async Task<IActionResult> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {

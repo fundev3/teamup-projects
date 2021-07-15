@@ -6,13 +6,11 @@
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public class ProjectsRepository : IProjectsRepository
+    public class HealthsRepository : IHealthsRepository
     {
-        private Health health = new Health() { Message = "I'm projects-api and I'm alive and running! ;)" };
-
         public Health GetHealth()
         {
-            return this.health;
+            return new Health() { Message = "I'm projects-api and I'm alive and running! ;)" };
         }
     }
 }
