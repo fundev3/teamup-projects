@@ -9,16 +9,16 @@
 
     public class HealthsService : IHealthsService
     {
-        private readonly IHealthsRepository projectsRepository;
+        private readonly IHealthsRepository healthsRepository;
 
         public HealthsService(IHealthsRepository projectsRepository)
         {
-            this.projectsRepository = projectsRepository;
+            this.healthsRepository = projectsRepository;
         }
 
         public Health GetHealth()
         {
-            return this.projectsRepository.GetHealth();
+            return this.healthsRepository.GetHealth();
         }
     }
 }

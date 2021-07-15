@@ -16,11 +16,11 @@
 
     public class GetHealth
     {
-        private readonly IHealthsService projectsService;
+        private readonly IHealthsService healthsService;
 
-        public GetHealth(IHealthsService projectsService)
+        public GetHealth(IHealthsService healthsService)
         {
-            this.projectsService = projectsService;
+            this.healthsService = healthsService;
         }
 
         [FunctionName("GetHealth")]
@@ -30,7 +30,7 @@
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            var result = this.projectsService.GetHealth();
+            var result = this.healthsService.GetHealth();
             return new OkObjectResult(result);
         }
     }
