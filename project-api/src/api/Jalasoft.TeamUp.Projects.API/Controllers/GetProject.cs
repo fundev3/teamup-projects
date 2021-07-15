@@ -22,10 +22,6 @@
             this.projectsService = projectsService;
         }
 
-        // [FunctionName("GetUser")]
-        // [OpenApiOperation(operationId: "Get")]
-        // [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
-        // [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(List<string>), Description = "The OK response")]
         [FunctionName("GetProject")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "Project" })]
         [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(Guid), Description = "The **Id** parameter")]
