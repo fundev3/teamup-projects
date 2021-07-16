@@ -16,6 +16,9 @@ pr:
     include:
       - master
       - develop
+
+variables:
+  BuildConfiguration: 'Release'
       
 pool:
   vmImage: ubuntu-latest
@@ -43,7 +46,7 @@ steps:
     zipAfterPublish: False
 
 - task: PublishBuildArtifacts@1
-  displayName: DropArtifacts
+  displayName: PublishArtifacts
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
