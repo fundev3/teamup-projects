@@ -32,6 +32,14 @@ steps:
     projects: '**/**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/**/*.csproj'    
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: False
+
 - task: PublishBuildArtifacts@1
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   inputs:
