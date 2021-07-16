@@ -17,23 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{52F6AF87-D02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{9F25305E-A142-4678-BB91-54FBA3C7F3F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.API", "src\api\Jalasoft.TeamUp.Projects.API\Jalasoft.TeamUp.Projects.API.csproj", "{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.API", "src\api\Jalasoft.TeamUp.Projects.API\Jalasoft.TeamUp.Projects.API.csproj", "{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.Core", "src\core\Jalasoft.TeamUp.Projects.Core\Jalasoft.TeamUp.Projects.Core.csproj", "{D903BB83-B838-499F-B616-FC15DA493EAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Core", "src\core\Jalasoft.TeamUp.Projects.Core\Jalasoft.TeamUp.Projects.Core.csproj", "{D903BB83-B838-499F-B616-FC15DA493EAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.Core.Interfaces", "src\core\Jalasoft.TeamUp.Projects.Core.Interfaces\Jalasoft.TeamUp.Projects.Core.Interfaces.csproj", "{4A5FFBA4-A11E-4BBE-9793-676B4EF9EA99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Core.Interfaces", "src\core\Jalasoft.TeamUp.Projects.Core.Interfaces\Jalasoft.TeamUp.Projects.Core.Interfaces.csproj", "{4A5FFBA4-A11E-4BBE-9793-676B4EF9EA99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.DAL", "src\dal\Jalasoft.TeamUp.Projects.DAL\Jalasoft.TeamUp.Projects.DAL.csproj", "{032FE7E0-7BC8-480C-BDB0-F19B2B2CCD5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.DAL", "src\dal\Jalasoft.TeamUp.Projects.DAL\Jalasoft.TeamUp.Projects.DAL.csproj", "{032FE7E0-7BC8-480C-BDB0-F19B2B2CCD5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.DAL.Interfaces", "src\dal\Jalasoft.TeamUp.Projects.DAL.Interfaces\Jalasoft.TeamUp.Projects.DAL.Interfaces.csproj", "{D5592C5D-B394-4814-9ACE-F7E7D5DA74F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.DAL.Interfaces", "src\dal\Jalasoft.TeamUp.Projects.DAL.Interfaces\Jalasoft.TeamUp.Projects.DAL.Interfaces.csproj", "{D5592C5D-B394-4814-9ACE-F7E7D5DA74F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.API.Tests", "tests\api\Jalasoft.TeamUp.Projects.API.Tests\Jalasoft.TeamUp.Projects.API.Tests.csproj", "{52240B7F-E531-46B4-AD8D-2E2BA2722963}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.API.Tests", "tests\api\Jalasoft.TeamUp.Projects.API.Tests\Jalasoft.TeamUp.Projects.API.Tests.csproj", "{52240B7F-E531-46B4-AD8D-2E2BA2722963}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.Core.Tests", "tests\core\Jalasoft.TeamUp.Projects.Core.Tests\Jalasoft.TeamUp.Projects.Core.Tests.csproj", "{3F9397DE-3872-4F14-BC1B-B164ABAC7CEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Core.Tests", "tests\core\Jalasoft.TeamUp.Projects.Core.Tests\Jalasoft.TeamUp.Projects.Core.Tests.csproj", "{3F9397DE-3872-4F14-BC1B-B164ABAC7CEA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models", "models", "{AA0C86FE-D611-4374-926A-1954B5E240AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jalasoft.TeamUp.Projects.Models", "src\models\Jalasoft.TeamUp.Projects.Models\Jalasoft.TeamUp.Projects.Models.csproj", "{F97290D7-95B7-4279-91E0-091BEBA639A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Models", "src\models\Jalasoft.TeamUp.Projects.Models\Jalasoft.TeamUp.Projects.Models.csproj", "{F97290D7-95B7-4279-91E0-091BEBA639A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
