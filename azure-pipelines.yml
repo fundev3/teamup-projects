@@ -17,39 +17,27 @@ pr:
       - master
       - develop
 
-variables:
-  BuildConfiguration: 'Release'
-      
 pool:
   vmImage: ubuntu-latest
 
 steps:
 - task: UseDotNet@2
+  displayName: 'Install DotNet'
   inputs:
     packageType: 'sdk'
-    version: '5.0.x'
+    version: '3.x'
 
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: 'Dotnet Build'
   inputs:
     command: 'build'
     projects: '**/**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/**/*.csproj'    
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: False
 
 - task: PublishBuildArtifacts@1
-  displayName: PublishArtifacts
+  displayName: 'Dotnet Drop Artifacts'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/s/projects-api'
+    ArtifactName: 'Drop'
     publishLocation: 'Container'
 
