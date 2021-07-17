@@ -31,7 +31,7 @@ steps:
   displayName: 'Dotnet Drop Artifacts'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   inputs:
-    PathtoPublish: '$(Agent.BuildDirectory)/s/projects-api'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'Drop'
     publishLocation: 'Container'
 
