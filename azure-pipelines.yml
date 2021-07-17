@@ -26,6 +26,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/**/*.csproj'
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Dotnet Drop Artifacts'
