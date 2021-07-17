@@ -11,6 +11,9 @@ pr:
       - develop
   drafts: false
 
+variables:
+  projects: '**/**/*.sln'
+
 pool:
   vmImage: ubuntu-latest
 
@@ -25,7 +28,7 @@ steps:
   displayName: 'Dotnet Build'
   inputs:
     command: 'build'
-    projects: '**/**/*.csproj'
+    projects: $(projects)
     arguments: '--output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
