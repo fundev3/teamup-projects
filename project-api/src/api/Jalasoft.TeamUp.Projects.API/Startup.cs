@@ -18,8 +18,8 @@ namespace Jalasoft.TeamUp.Projects.API
         {
             builder.Services.AddTransient<IHealthsService, HealthsService>();
             builder.Services.AddTransient<IHealthsRepository, HealthsRepository>();
-            builder.Services.AddTransient<ICreateProjectService, CreateProjectService>();
-            builder.Services.AddTransient<ICreateProjectRepository, CreateProjectRepository>();
+            builder.Services.AddTransient<IProjectsService, ProjectsService>();
+            builder.Services.AddTransient<IProjectsRepository, ProjectsRepository>();
         }
     }
 }

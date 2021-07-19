@@ -2,7 +2,7 @@
 {
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface ICreateProjectService
+    public interface IProjectsService
     {
         public Project CreateProject(Project project);
     }

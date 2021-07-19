@@ -4,14 +4,14 @@
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public class CreateProjectRepository : ICreateProjectRepository
+    public class ProjectsRepository : IProjectsRepository
     {
         private static IList<Project> projects = new List<Project>();
 
-        public Project PostProject(Project myProject)
+        public Project PostProject(Project project)
         {
-            projects.Add(myProject);
-            return myProject;
+            projects.Add(project);
+            return project;
         }
     }
 }
