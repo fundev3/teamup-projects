@@ -16,11 +16,11 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
 
     public class PostProject
     {
-        private readonly IProjectsService createProjectService;
+        private readonly IProjectsService postProjectService;
 
-        public PostProject(IProjectsService createProjectService)
+        public PostProject(IProjectsService postProjectService)
         {
-            this.createProjectService = createProjectService;
+            this.postProjectService = postProjectService;
         }
 
         [FunctionName("PostProject")]
@@ -31,10 +31,9 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<Project>(requestBody);
-            var result = this.createProjectService.CreateProject(data);
+            var result = this.postProjectService.PostProject(data);
             return new OkObjectResult(result);
         }
     }

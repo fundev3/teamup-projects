@@ -4,6 +4,6 @@
 
     public interface IProjectsService
     {
-        public Project CreateProject(Project project);
+        Project PostProject(Project project);
     }
 }

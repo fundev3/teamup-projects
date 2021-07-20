@@ -5,6 +5,6 @@
 
     public interface IProjectsRepository
     {
-        public Project PostProject(Project project);
+        Project PostProject(Project project);
     }
 }
