@@ -26,8 +26,8 @@
         [OpenApiOperation(operationId: "Run", tags: new[] { "Project" })]
         [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(Guid), Description = "The **Id** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
-        public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req, ILogger log)
+        public IActionResult Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
         {
             Guid id = Guid.Parse(req.Query["id"]);
             var result = this.projectsService.GetProject(id);

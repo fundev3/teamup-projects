@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Jalasoft.TeamUp.Projects.API": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --pause--on-error",
+      "nativeDebugging": false,
+      "jsWebView2Debugging": false
+    }
+  }
+}

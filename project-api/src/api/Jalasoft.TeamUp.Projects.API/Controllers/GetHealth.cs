@@ -26,7 +26,7 @@
         [FunctionName("GetHealth")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "Health" })]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Health), Description = "Successful response")]
-        public async Task<IActionResult> Run(
+        public IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req, ILogger log)
         {
             var result = this.healthsService.GetHealth();
