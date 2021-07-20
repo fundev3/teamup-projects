@@ -15,6 +15,15 @@ COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
+# [Optional] Upgrade system packages IF NECESSARY
+# RUN apt-get update && apt-get -y dist-upgrade
+
+# Install Azure Functions Core Tools
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
+    && sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg \
+    && sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN apt-get update && apt-get install azure-functions-core-tools-3
+
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
