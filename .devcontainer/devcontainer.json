@@ -21,7 +21,8 @@
 	"extensions": [
 		"ms-dotnettools.csharp",
 		"ms-vscode.vscode-node-azure-pack",
-		"eamodio.gitlens"
+		"eamodio.gitlens",
+		"azurite.azurite"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
