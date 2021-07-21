@@ -11,10 +11,6 @@ pr:
       - develop
   drafts: false
 
-variables:
-  projects: '**/**/*.sln'
-  testProjects: '**/tests/**/*.csproj'
-
 pool:
   vmImage: ubuntu-latest
 
