@@ -42,7 +42,7 @@ stages:
   dependsOn: Build
   condition: succeeded()
   jobs:
-  - deployment: Deploy'
+  - deployment: Deploy
     pool:
       vmImage: 'ubuntu-latest'
     strategy:
