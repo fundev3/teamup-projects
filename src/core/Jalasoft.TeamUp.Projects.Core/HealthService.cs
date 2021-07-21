@@ -7,18 +7,18 @@
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public class HealthsService : IHealthsService
+    public class HealthService : IHealthService
     {
-        private readonly IHealthsRepository healthsRepository;
+        private readonly IHealthRepository healthRepository;
 
-        public HealthsService(IHealthsRepository projectsRepository)
+        public HealthService(IHealthRepository healthRepository)
         {
-            this.healthsRepository = projectsRepository;
+            this.healthRepository = healthRepository;
         }
 
         public Health GetHealth()
         {
-            return this.healthsRepository.GetHealth();
+            return this.healthRepository.GetHealth();
         }
     }
 }

@@ -5,7 +5,7 @@
     using System.Text;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IHealthsRepository
+    public interface IHealthRepository
     {
         Health GetHealth();
     }

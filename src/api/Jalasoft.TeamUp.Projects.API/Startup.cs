@@ -16,8 +16,8 @@ namespace Jalasoft.TeamUp.Projects.API
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-              builder.Services.AddTransient<IHealthsService, HealthsService>();
-              builder.Services.AddTransient<IHealthsRepository, HealthsRepository>();
+              builder.Services.AddTransient<IHealthService, HealthService>();
+              builder.Services.AddTransient<IHealthRepository, HealthRepository>();
               builder.Services.AddTransient<IProjectsService, ProjectsService>();
               builder.Services.AddTransient<IProjectsRepository, ProjectsRepository>();
         }

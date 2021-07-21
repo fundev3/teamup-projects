@@ -16,20 +16,20 @@
 
     public class GetHealth
     {
-        private readonly IHealthsService healthsService;
+        private readonly IHealthService healthService;
 
-        public GetHealth(IHealthsService healthsService)
+        public GetHealth(IHealthService healthService)
         {
-            this.healthsService = healthsService;
+            this.healthService = healthService;
         }
 
         [FunctionName("GetHealth")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "Health" })]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Health), Description = "Successful response")]
         public IActionResult Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req, ILogger log)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/health")] HttpRequest req, ILogger log)
         {
-            var result = this.healthsService.GetHealth();
+            var result = this.healthService.GetHealth();
             return new OkObjectResult(result);
         }
     }
