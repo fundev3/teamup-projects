@@ -30,7 +30,7 @@ steps:
   inputs:
     command: 'build'
     projects: $(projects)
-    arguments: '--output $(Build.ArtifactStagingDirectory) /p:TreatWarningsAsErrors=true'
+    arguments: '--output $(Build.ArtifactStagingDirectory) $(styleCopEnabled)'
     
 - task: DotNetCoreCLI@2
   displayName: 'Dotnet Test'
