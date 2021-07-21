@@ -41,21 +41,21 @@ stages:
 - stage: Deploy
   dependsOn: Build
   condition: succeeded()
-  jobs: 
-  - job: Deploy
-    pool: 
+  jobs:
+  - deployment: Deploy
+    pool:
       vmImage: 'ubuntu-latest'
     strategy:
-     runOnce:
+      runOnce:
         deploy:
           steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'Azure App Service Deploy: projects-dev'
+          - task: AzureRmWebAppDeployment@4
+            displayName: 'Azure App Service Deploy: team-up-dev'
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
-              appType: 'projectsLinux'
-              WebAppName: 'projects-dev'
+              appType: 'webAppLinux'
+              WebAppName: 'team-up-dev'
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               RuntimeStack: 'NODE|14-lts'    
               InlineScript: |
