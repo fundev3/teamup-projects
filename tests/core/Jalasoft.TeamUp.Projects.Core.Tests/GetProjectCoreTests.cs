@@ -1,9 +1,6 @@
 ﻿namespace Jalasoft.TeamUp.Projects.Core.Tests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Moq;

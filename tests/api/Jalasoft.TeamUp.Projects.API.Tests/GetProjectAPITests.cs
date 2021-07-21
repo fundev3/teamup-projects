@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Net.Http;
     using Jalasoft.TeamUp.Projects.API.Controllers;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
@@ -12,7 +10,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Primitives;
     using Moq;
-    using Newtonsoft.Json;
     using Xunit;
 
     public class GetProjectAPITests
