@@ -47,7 +47,7 @@ stages:
       # condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        ArtifactName: 'Drop'
+        ArtifactName: 'drop'
         publishLocation: 'Container'
 
 - stage: Deploy
