@@ -18,7 +18,7 @@
 
         public string Logo { get; set; }
 
-        public Contact[] Contacts { get; set; }
+        public Contact[] MemberList { get; set; }
 
         public DateTime CreationDate { get; set; }
     }
