@@ -11,9 +11,6 @@ pr:
       - develop
   drafts: false
 
-variables:
-  projects: '**/**/*.sln'
-
 pool:
   vmImage: ubuntu-latest
 
@@ -29,7 +26,13 @@ steps:
   inputs:
     command: 'build'
     projects: $(projects)
-    arguments: '--output $(Build.ArtifactStagingDirectory)'
+    arguments: '--output $(Build.ArtifactStagingDirectory) $(styleCopEnabled)'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Dotnet Test'
+  inputs:
+    command: 'test'
+    projects: $(testsProjects)
 
 - task: PublishBuildArtifacts@1
   displayName: 'Dotnet Drop Artifacts'
