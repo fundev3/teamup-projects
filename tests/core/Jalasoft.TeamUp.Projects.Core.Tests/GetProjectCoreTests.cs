@@ -22,7 +22,7 @@
         {
             this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());
             var result = this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            Assert.NotNull(result);
+            Assert.IsType<Project>(result);
         }
 
         [Fact]

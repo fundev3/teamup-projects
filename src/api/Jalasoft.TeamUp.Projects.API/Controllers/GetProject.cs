@@ -31,7 +31,17 @@
         {
             Guid id = Guid.Parse(req.Query["id"]);
             var result = this.projectsService.GetProject(id);
-            return new OkObjectResult(result);
+            IActionResult response;
+            if (result == null)
+            {
+                response = new NotFoundObjectResult(result);
+            }
+            else
+            {
+                response = new OkObjectResult(result);
+            }
+
+            return response;
         }
     }
 }
