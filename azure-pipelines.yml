@@ -47,7 +47,7 @@ stages:
 
     - task: PublishBuildArtifacts@1
       displayName: 'Dotnet Drop Artifacts'
-      # condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+      condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         ArtifactName: 'drop'
@@ -56,8 +56,8 @@ stages:
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
-  condition: succeeded()
-  
+  condition: and(succeeded(),'merge_request')
+
   jobs: 
   - job: Deploy
     displayName: Deploy
