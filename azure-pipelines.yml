@@ -29,26 +29,19 @@ steps:
   inputs:
     command: 'build'
     projects: $(projects)
-    arguments: '--output $(Build.ArtifactStagingDirectory)/drop'
-- task: DotNetCoreCLI@2
-  displayName: 'Dotnet Test'
-  inputs:
-    command: 'test'
-    projects: $(testsProjects)
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/drop'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
     includeRootFolder: false
     archiveType: zip
     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
     replaceExistingArchive: true
 
-- publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-  artifact: drop
 - task: PublishBuildArtifacts@1
   displayName: 'Dotnet Drop Artifacts'
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  # condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     ArtifactName: 'Drop'
     publishLocation: 'Container'
