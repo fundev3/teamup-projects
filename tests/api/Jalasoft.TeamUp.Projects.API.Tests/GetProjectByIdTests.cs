@@ -12,46 +12,47 @@
     using Moq;
     using Xunit;
 
-    public class GetProjectAPITests
+    public class GetProjectByIdTests
     {
         private readonly Mock<IProjectsService> mockService;
         private readonly DefaultHttpContext mockHttpContext;
-        private readonly GetProject getProject;
+        private readonly GetProjectById getProject;
 
-        public GetProjectAPITests()
+        public GetProjectByIdTests()
         {
             this.mockService = new Mock<IProjectsService>();
             this.mockHttpContext = new DefaultHttpContext();
-            this.getProject = new GetProject(this.mockService.Object);
+            this.getProject = new GetProjectById(this.mockService.Object);
         }
 
         [Fact]
-        public void GetProject_Returns_OkObjectResult_Project()
+        public void GetProject_Returns_OkObjectResult()
         {
-            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());
+            // Arrange
             var request = this.mockHttpContext.Request;
-            request.Query = new QueryCollection(CreateDictionary("id", "5a7939fd-59de-44bd-a092-f5d8434584de"));
-            var okObjectResult = Assert.IsType<OkObjectResult>(this.getProject.Run(request));
+            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());
+
+            // Act
+            var response = this.getProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
+
+            // Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(response);
             Assert.IsType<Project>(okObjectResult.Value);
         }
 
         [Fact]
         public void GetProject_Returns_NotFoundResult()
         {
+            // Arrange
             var request = this.mockHttpContext.Request;
             this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Equals(null);
-            request.Query = new QueryCollection(CreateDictionary("id", "5a7939fd-59de-44bd-a092-f5d8434584de"));
-            var notfountObjectResult = Assert.IsType<NotFoundObjectResult>(this.getProject.Run(request));
-            Assert.Null(notfountObjectResult.Value);
-        }
 
-        private static Dictionary<string, StringValues> CreateDictionary(string key, string value)
-        {
-            var qs = new Dictionary<string, StringValues>
-            {
-                { key, value }
-            };
-            return qs;
+            // Act
+            var response = this.getProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
+
+            // Assert
+            var notfountObjectResult = Assert.IsType<NotFoundObjectResult>(response);
+            Assert.Null(notfountObjectResult.Value);
         }
     }
 }

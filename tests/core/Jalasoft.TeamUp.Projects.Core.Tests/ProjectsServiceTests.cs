@@ -6,30 +6,42 @@
     using Moq;
     using Xunit;
 
-    public class GetProjectCoreTests
+    public class ProjectsServiceTests
     {
         private readonly Mock<IProjectsRepository> mockRepository;
         private readonly ProjectsService service;
 
-        public GetProjectCoreTests()
+        public ProjectsServiceTests()
         {
             this.mockRepository = new Mock<IProjectsRepository>();
             this.service = new ProjectsService(this.mockRepository.Object);
         }
 
         [Fact]
-        public void GetProject_Returns_Project()
+        public void GetProject_Returns_SingleProject()
         {
-            this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());
+            // Arrange
+            var stubProject = new Project { Id = Guid.NewGuid() };
+            this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+
+            // Act
             var result = this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            Assert.IsType<Project>(result);
+
+            // Assert
+            Assert.NotNull(result);
         }
 
         [Fact]
         public void GetProject_Returns_Null()
         {
-            this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584de"))).Equals(null);
+            // Arrange
+            Project stubProject = null;
+            this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+
+            // Act
             var result = this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
+
+            // Assert
             Assert.Null(result);
         }
     }
