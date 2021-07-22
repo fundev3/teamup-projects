@@ -56,7 +56,7 @@ stages:
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
-  condition: and(succeeded(),'merge_request')
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
 
   jobs: 
   - job: Deploy
