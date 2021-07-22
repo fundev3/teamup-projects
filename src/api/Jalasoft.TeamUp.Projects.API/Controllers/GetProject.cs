@@ -19,9 +19,9 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             this.projectService = projectService;
         }
 
-        [FunctionName("projects")]
+        [FunctionName("GetProject")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "Projects" })]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project[]), Description = "Successful response")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
         public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects")] HttpRequest req)
