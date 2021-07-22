@@ -28,8 +28,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         [OpenApiRequestBody("application/json", typeof(Project), Description = "JSON request body containing { ID, Name, Description, Contact }")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<Project>(requestBody);
