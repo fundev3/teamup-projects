@@ -57,40 +57,11 @@ stages:
     displayName: Deploy
     pool: 
       vmImage: 'ubuntu-latest'
-    steps:
-    - task: DownloadBuildArtifacts@0
+    steps:    
+    - task: AzureFunctionApp@1
       inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'drop'
-        downloadPath: '$(System.DefaultWorkingDirectory)'
-
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'drop'
-        downloadPath: '$(System.DefaultWorkingDirectory)'
-
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'labAzureSubscription'
-        appType: 'webApp'
-        WebAppName: '$(WEBAPPNAME)'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
-    - task: AzureAppServiceSettings@1
-         inputs:
-        azureSubscription: 'labAzureSubscription'
-        appName: '$(WEBAPPNAME)'
-        resourceGroupName: '$(RESOURCEGROUPNAME)'
-        connectionStrings: |
-          [
-            {
-              "name": "MyDbConnection",
-              "value": "Server=tcp:$(SQLSRVNAME).database.windows.net,1433;Initial Catalog=tododb;Persist Security Info=False;User ID=$(USERNAME);Password=$(PASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
-              "type": "SqlAzure",
-              "slotSetting": false
-            }
-          ]
+        azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
+        appType: 'functionAppLinux'
+        appName: 'team-up-backend'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        runtimeStack: 'DOTNET|3.1'
