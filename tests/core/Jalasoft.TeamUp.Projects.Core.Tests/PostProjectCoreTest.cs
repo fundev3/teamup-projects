@@ -32,7 +32,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
                 {
                     Id = Guid.NewGuid(),
                     IdResume = Guid.NewGuid(),
-                    Name = "Nelson Harris"
+                    Name = "Julio"
                 }
             };
             this.mockRepository.Setup(repository => repository.PostProject(project1)).Returns(new Project());
