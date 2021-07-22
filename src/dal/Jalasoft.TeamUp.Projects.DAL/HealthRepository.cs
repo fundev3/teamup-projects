@@ -1,12 +1,9 @@
 ﻿namespace Jalasoft.TeamUp.Projects.DAL
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public class HealthsRepository : IHealthsRepository
+    public class HealthRepository : IHealthRepository
     {
         public Health GetHealth()
         {

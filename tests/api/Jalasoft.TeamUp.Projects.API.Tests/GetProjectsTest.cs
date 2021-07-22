@@ -12,13 +12,13 @@
 
     public class GetProjectsTest
     {
-        private readonly Mock<IProjectsService> mockService;
+        private readonly Mock<IProjectService> mockService;
         private readonly Mock<HttpRequest> mockRequest;
         private readonly GetProjects getResumes;
 
         public GetProjectsTest()
         {
-            this.mockService = new Mock<IProjectsService>();
+            this.mockService = new Mock<IProjectService>();
             this.mockRequest = new Mock<HttpRequest>();
             this.getResumes = new GetProjects(this.mockService.Object);
         }

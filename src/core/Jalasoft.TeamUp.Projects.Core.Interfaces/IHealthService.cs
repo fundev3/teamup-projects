@@ -2,8 +2,8 @@
 {
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IProjectsService
+    public interface IHealthService
     {
-        Project[] GetProjects();
+        Health GetHealth();
     }
 }
