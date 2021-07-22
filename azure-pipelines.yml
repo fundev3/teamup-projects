@@ -64,6 +64,6 @@ stages:
       inputs:
         azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
         appType: 'functionAppLinux'
-        appName: 'team-up-backend'
+        appName: 'fa-tuapi-projects-dev-bra'
         package: '$(System.DefaultWorkingDirectory)/**/*.zip'
         runtimeStack: 'DOTNET|3.1'
