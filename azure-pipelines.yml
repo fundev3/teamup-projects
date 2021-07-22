@@ -65,5 +65,5 @@ stages:
         azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
         appType: 'functionAppLinux'
         appName: 'fa-tuapi-projects-dev-bra'
-        package: '$(Build.ArtifactStagingDirectory)/drop/*.zip'
+        package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         runtimeStack: 'DOTNET|3.1'
