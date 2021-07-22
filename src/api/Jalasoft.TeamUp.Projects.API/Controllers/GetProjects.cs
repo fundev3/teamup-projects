@@ -23,7 +23,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         [OpenApiOperation(operationId: "Run", tags: new[] { "Projects" })]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
         public IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects")] HttpRequest req)
         {
             var projects = this.projectService.GetProjects();
             return new OkObjectResult(projects);
