@@ -2,62 +2,95 @@
 # Build and test ASP.NET projects.
 # Add steps that publish symbols, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
-
 trigger:
-- develop
+  branches:
+    include:
+      - main
+      - develop
+
+pr:
+  branches:
+    include:
+      - main
+      - develop
+  drafts: false
+
+variables:
+      projects: '**/**/*.sln'
+      azureSubscription: 'a797242d-ce60-41aa-98ca-2e22d5221cfe'
 
 stages:
 - stage: Build
+  displayName: Build stage
   jobs: 
   - job: Build
-
     pool:
-      vmImage: 'ubuntu-latest'
-
-    variables:
-      solution: '**/*.sln'
-      buildPlatform: 'Any CPU'
-      buildConfiguration: 'Release'
-
+      vmImage: ubuntu-latest
     steps:
-    - task: NuGetToolInstaller@1
-
-    - task: NuGetCommand@2
+    - task: UseDotNet@2
+      displayName: 'DotNet Install'
       inputs:
-        restoreSolution: '$(solution)'
+        packageType: 'sdk'
+        version: '3.x'
 
-    - task: VSBuild@1
+    - task: DotNetCoreCLI@2
+      displayName: 'Dotnet Build'
       inputs:
-        solution: '$(solution)'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
+        command: 'build'
+        projects: $(projects)
+        arguments: '--output $(Build.ArtifactStagingDirectory)'
 
-    - task: VSTest@2
+    - task: PublishBuildArtifacts@1
+      displayName: 'Dotnet Drop Artifacts'
+      condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
       inputs:
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'Drop'
+        publishLocation: 'Container'
 
 - stage: Deploy
+  displayName: Deploy stage
   dependsOn: Build
   condition: succeeded()
-  jobs:
-  - deployment: Deploy
-    pool:
+  jobs: 
+  - job: Deploy
+    displayName: Deploy
+    pool: 
       vmImage: 'ubuntu-latest'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureRmWebAppDeployment@4
-            displayName: 'Azure App Service Deploy: team-up-dev'
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
-              appType: 'webAppLinux'
-              WebAppName: 'team-up-dev'
-              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              RuntimeStack: 'NODE|14-lts'    
-              InlineScript: |
-                          npm install
-                          npm run build --if-present
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.DefaultWorkingDirectory)'
+
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.DefaultWorkingDirectory)'
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'labAzureSubscription'
+        appType: 'webApp'
+        WebAppName: '$(WEBAPPNAME)'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+    - task: AzureAppServiceSettings@1
+         inputs:
+        azureSubscription: 'labAzureSubscription'
+        appName: '$(WEBAPPNAME)'
+        resourceGroupName: '$(RESOURCEGROUPNAME)'
+        connectionStrings: |
+          [
+            {
+              "name": "MyDbConnection",
+              "value": "Server=tcp:$(SQLSRVNAME).database.windows.net,1433;Initial Catalog=tododb;Persist Security Info=False;User ID=$(USERNAME);Password=$(PASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+              "type": "SqlAzure",
+              "slotSetting": false
+            }
+          ]
