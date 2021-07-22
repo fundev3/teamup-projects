@@ -12,6 +12,16 @@
 
         public string Description { get; set; }
 
-        public string Contact { get; set; }
+        public bool State { get; set; }
+
+        public string TextInvitation { get; set; }
+
+        public string Logo { get; set; }
+
+        public DateTimeOffset CreationDate { get; set; }
+
+        public List<Contact> Contacts { get; set; }
+
+        public Contact Contact { get; set; }
     }
 }
