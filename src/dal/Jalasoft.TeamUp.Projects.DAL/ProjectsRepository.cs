@@ -36,7 +36,7 @@
 
         public Project GetProject(Guid id)
         {
-            Project result = Projects.Where(p => Guid.Equals(p.Id, id)).SingleOrDefault();
+            Project result = Projects.FirstOrDefault(p => Equals(p.Id, id));
             return result;
         }
     }
