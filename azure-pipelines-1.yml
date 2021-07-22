@@ -16,7 +16,7 @@ pr:
   drafts: false
 
 variables:
-      projects: '**/**/*.sln'
+      projects: '**/*.sln'
       azureSubscription: 'a797242d-ce60-41aa-98ca-2e22d5221cfe'
 
 stages:
