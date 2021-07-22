@@ -69,7 +69,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        itemPattern: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        itemPattern: '$(Build.ArtifactStagingDirectory)/drop/$(Build.BuildId).zip'
         downloadPath: '$(System.ArtifactsDirectory)'
     - task: AzureFunctionApp@1
       inputs:
