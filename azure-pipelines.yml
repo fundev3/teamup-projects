@@ -29,7 +29,7 @@ steps:
   inputs:
     command: 'build'
     projects: $(projects)
-    arguments: '--output $(Build.ArtifactStagingDirectory)/drop $(styleCopEnabled)'
+    arguments: '--output $(Build.ArtifactStagingDirectory)/drop'
 - task: DotNetCoreCLI@2
   displayName: 'Dotnet Test'
   inputs:
