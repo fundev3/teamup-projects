@@ -1,8 +1,6 @@
 ﻿namespace Jalasoft.TeamUp.Projects.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     public class Project
     {
@@ -20,7 +18,7 @@
 
         public string Logo { get; set; }
 
-        public List<Contact> MemberList { get; set; }
+        public Contact[] Contacts { get; set; }
 
         public DateTime CreationDate { get; set; }
     }

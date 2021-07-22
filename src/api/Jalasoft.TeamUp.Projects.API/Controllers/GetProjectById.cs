@@ -2,7 +2,6 @@
 {
     using System;
     using System.Net;
-    using System.Threading.Tasks;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Microsoft.AspNetCore.Http;
@@ -10,38 +9,35 @@
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-    using Microsoft.Extensions.Logging;
     using Microsoft.OpenApi.Models;
 
-    public class GetProject
+    public class GetProjectById
     {
         private readonly IProjectsService projectsService;
 
-        public GetProject(IProjectsService projectsService)
+        public GetProjectById(IProjectsService projectsService)
         {
             this.projectsService = projectsService;
         }
 
-        [FunctionName("GetProject")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "Project" })]
-        [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(Guid), Description = "The **Id** parameter")]
+        [FunctionName("GetProjectById")]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Projects" })]
+        [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(Guid), Description = "The project identifier.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
         public IActionResult Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route ="v1/projects/{id}")] HttpRequest req)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects/{id:guid}")] HttpRequest req, Guid id)
         {
-            Guid id = Guid.Parse(req.Query["id"]);
             var result = this.projectsService.GetProject(id);
-            IActionResult response;
+
             if (result == null)
             {
-                response = new NotFoundObjectResult(result);
+                return new NotFoundObjectResult(result);
             }
             else
             {
-                response = new OkObjectResult(result);
+                return new OkObjectResult(result);
             }
-
-            return response;
         }
     }
 }
