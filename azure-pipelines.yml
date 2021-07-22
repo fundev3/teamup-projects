@@ -14,34 +14,56 @@ pr:
 variables:
   projects: '**/**/*.sln'
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs: 
+  - job: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: UseDotNet@2
+      displayName: 'DotNet Install'
+      inputs:
+        packageType: 'sdk'
+        version: '3.x'
 
-steps:
-- task: UseDotNet@2
-  displayName: 'DotNet Install'
-  inputs:
-    packageType: 'sdk'
-    version: '3.x'
+    - task: DotNetCoreCLI@2
+      displayName: 'Dotnet Build'
+      inputs:
+        command: 'build'
+        projects: $(projects)
+        arguments: '--output $(Build.ArtifactStagingDirectory)'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        replaceExistingArchive: true
 
-- task: DotNetCoreCLI@2
-  displayName: 'Dotnet Build'
-  inputs:
-    command: 'build'
-    projects: $(projects)
-    arguments: '--output $(Build.ArtifactStagingDirectory)'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: false
-    archiveType: zip
-    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-    replaceExistingArchive: true
+    - task: PublishBuildArtifacts@1
+      displayName: 'Dotnet Drop Artifacts'
+      # condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        ArtifactName: 'Drop'
+        publishLocation: 'Container'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Dotnet Drop Artifacts'
-  # condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    ArtifactName: 'Drop'
-    publishLocation: 'Container'
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs: 
+  - job: Deploy
+    displayName: Deploy
+    pool: 
+      vmImage: 'ubuntu-latest'
+    steps:    
+    - task: AzureFunctionApp@1
+      inputs:
+        azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
+        appType: 'functionAppLinux'
+        appName: 'team-up-backend'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        runtimeStack: 'DOTNET|3.1'
