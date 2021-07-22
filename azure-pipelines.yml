@@ -31,11 +31,17 @@ stages:
         version: '3.x'
 
     - task: DotNetCoreCLI@2
-      displayName: 'DotNet Build'
+      displayName: 'Dotnet Build'
       inputs:
         command: 'build'
         projects: $(projects)
-        arguments: '--output $(Build.ArtifactStagingDirectory)'
+        arguments: '--output $(Build.ArtifactStagingDirectory) $(styleCopEnabled)'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Dotnet Test'
+      inputs:
+        command: 'test'
+        projects: $(testsProjects)
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
