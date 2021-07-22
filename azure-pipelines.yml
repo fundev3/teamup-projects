@@ -16,7 +16,7 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build stage
+  displayName: Build
 
   jobs: 
   - job: Build
@@ -31,13 +31,14 @@ stages:
         version: '3.x'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Dotnet Build'
+      displayName: 'DotNet Build'
       inputs:
         command: 'build'
         projects: $(projects)
         arguments: '--output $(Build.ArtifactStagingDirectory)'
 
     - task: ArchiveFiles@2
+      displayName: 'Archive files'
       inputs:
         rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
         includeRootFolder: false
@@ -46,7 +47,7 @@ stages:
         replaceExistingArchive: true
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Dotnet Drop Artifacts'
+      displayName: 'Drop Artifact'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
@@ -54,7 +55,7 @@ stages:
         publishLocation: 'Container'
 
 - stage: Deploy
-  displayName: Deploy stage
+  displayName: Deploy
   dependsOn: Build
   condition: and(succeeded(),'merge_request')
 
