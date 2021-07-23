@@ -68,17 +68,17 @@ stages:
   jobs: 
   - job: Deploy
     displayName: Deploy
-    pool: 
-      vmImage: 'ubuntu-latest'
     
     steps:    
     - task: DownloadBuildArtifacts@1
+      displayName: 'Download Artifact'
       inputs:
         buildType: 'current'
         downloadType: 'single'
         itemPattern: 'drop/$(Build.BuildId).zip'
         downloadPath: '$(System.ArtifactsDirectory)'
     - task: AzureFunctionApp@1
+      displayName: 'Deploy API'
       inputs:
         azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
         appType: 'functionAppLinux'
