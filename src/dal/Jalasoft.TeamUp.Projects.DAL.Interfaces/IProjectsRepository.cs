@@ -6,6 +6,7 @@
     public interface IProjectsRepository
     {
         Project PostProject(Project project);
+
         public Project GetProject(Guid id);
     }
 }
