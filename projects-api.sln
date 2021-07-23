@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{52F6AF87-D02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{9F25305E-A142-4678-BB91-54FBA3C7F3F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.API", "src\api\Jalasoft.TeamUp.Projects.API\Jalasoft.TeamUp.Projects.API.csproj", "{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Core", "src\core\Jalasoft.TeamUp.Projects.Core\Jalasoft.TeamUp.Projects.Core.csproj", "{D903BB83-B838-499F-B616-FC15DA493EAF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Core.Interfaces", "src\core\Jalasoft.TeamUp.Projects.Core.Interfaces\Jalasoft.TeamUp.Projects.Core.Interfaces.csproj", "{4A5FFBA4-A11E-4BBE-9793-676B4EF9EA99}"
@@ -35,16 +33,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models", "models", "{AA0C86
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.Models", "src\models\Jalasoft.TeamUp.Projects.Models\Jalasoft.TeamUp.Projects.Models.csproj", "{F97290D7-95B7-4279-91E0-091BEBA639A7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jalasoft.TeamUp.Projects.API", "src\api\Jalasoft.TeamUp.Projects.API\Jalasoft.TeamUp.Projects.API.csproj", "{C72CD72D-5EE9-48A1-BE20-4EC9EFA9F171}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFE935E7-0C3C-4568-97D4-0315C5AF2F06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D903BB83-B838-499F-B616-FC15DA493EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D903BB83-B838-499F-B616-FC15DA493EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D903BB83-B838-499F-B616-FC15DA493EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,6 +69,10 @@ Global
 		{F97290D7-95B7-4279-91E0-091BEBA639A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F97290D7-95B7-4279-91E0-091BEBA639A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F97290D7-95B7-4279-91E0-091BEBA639A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72CD72D-5EE9-48A1-BE20-4EC9EFA9F171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72CD72D-5EE9-48A1-BE20-4EC9EFA9F171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72CD72D-5EE9-48A1-BE20-4EC9EFA9F171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72CD72D-5EE9-48A1-BE20-4EC9EFA9F171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,7 +83,6 @@ Global
 		{66972D30-7597-407F-81AA-AE33DF7729F3} = {B2662325-56A5-44D6-9E1A-A98BC9F94FD1}
 		{52F6AF87-D025-488F-BA1E-4A10AAA590F0} = {46B89A3D-A788-4EC2-9BDF-F2128532ABBA}
 		{9F25305E-A142-4678-BB91-54FBA3C7F3F0} = {46B89A3D-A788-4EC2-9BDF-F2128532ABBA}
-		{DFE935E7-0C3C-4568-97D4-0315C5AF2F06} = {2679252E-BCB8-466A-AD4F-EC048DCBEA41}
 		{D903BB83-B838-499F-B616-FC15DA493EAF} = {25ACCD2F-1C15-47B8-8648-45EF2F253545}
 		{4A5FFBA4-A11E-4BBE-9793-676B4EF9EA99} = {25ACCD2F-1C15-47B8-8648-45EF2F253545}
 		{032FE7E0-7BC8-480C-BDB0-F19B2B2CCD5E} = {66972D30-7597-407F-81AA-AE33DF7729F3}
@@ -92,6 +91,7 @@ Global
 		{3F9397DE-3872-4F14-BC1B-B164ABAC7CEA} = {9F25305E-A142-4678-BB91-54FBA3C7F3F0}
 		{AA0C86FE-D611-4374-926A-1954B5E240AA} = {B2662325-56A5-44D6-9E1A-A98BC9F94FD1}
 		{F97290D7-95B7-4279-91E0-091BEBA639A7} = {AA0C86FE-D611-4374-926A-1954B5E240AA}
+		{C72CD72D-5EE9-48A1-BE20-4EC9EFA9F171} = {2679252E-BCB8-466A-AD4F-EC048DCBEA41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {725749DB-B97F-476B-9BA4-003A52BDDB0F}

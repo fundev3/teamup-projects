@@ -7,17 +7,20 @@
 
     public class ProjectsService : IProjectsService
     {
-        private readonly IProjectsRepository projectRepository;
+        private readonly IProjectsRepository projectsRepository;
 
-        public ProjectsService(IProjectsRepository projectRepository)
+        public ProjectsService(IProjectsRepository projectsRepository)
         {
-            this.projectRepository = projectRepository;
+            this.projectsRepository = projectsRepository;
         }
-
+        public Project GetProject(Guid id)
+        {
+            return this.projectsRepository.GetProject(id);
+        }
         public Project PostProject(Project project)
         {
             project.Id = Guid.NewGuid();
-            var result = this.projectRepository.PostProject(project);
+            var result = this.projectsRepository.PostProject(project);
             return result;
         }
     }
