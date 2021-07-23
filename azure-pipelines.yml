@@ -11,6 +11,9 @@ pr:
       - develop
   drafts: false
 
+pool:
+  vmImage: ubuntu-latest
+
 variables:
   projects: '**/**/*.sln'
 
@@ -20,8 +23,6 @@ stages:
 
   jobs: 
   - job: Build
-    pool:
-      vmImage: ubuntu-latest
 
     steps:
     - task: UseDotNet@2
