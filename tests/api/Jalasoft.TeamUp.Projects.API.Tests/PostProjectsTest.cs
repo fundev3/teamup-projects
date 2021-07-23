@@ -1,13 +1,13 @@
 namespace Jalasoft.TeamUp.Projects.API.Tests
 {
     using System;
-    using System.Collections.Generic;
+    using System.IO;
     using Jalasoft.TeamUp.Projects.API.Controllers;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
     using Moq;
+    using Newtonsoft.Json;
     using Xunit;
 
     public class PostProjectsTest
@@ -23,12 +23,22 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
             this.postProject = new PostProject(this.mockProjectsService.Object);
         }
 
+        public static Stream SetStream(string body)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(body);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
         [Fact]
         public void PostProject_Returns_OkObjectResult_Project()
         {
-            Project project1 = new Project()
+            var obj = new Project()
             {
-                Name = "Project Name example",
+                Name = "Project Name",
                 Description = "This is a Description",
                 State = true,
                 TextInvitation = "You are invited",
@@ -41,8 +51,10 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
                     Name = "Julio"
                 }
             };
+            string stream = JsonConvert.SerializeObject(obj);
+            var result = SetStream(stream);
             var request = this.mockHttpContext.Request;
-            this.mockProjectsService.Setup(service => service.PostProject(project1)).Returns(new Project());
+            this.mockProjectsService.Setup(service => service.PostProject(obj)).Returns(new Project());
             var response = this.postProject.Run(request);
         }
     }
