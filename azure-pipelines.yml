@@ -5,25 +5,20 @@ trigger:
       - develop
 
 pr:
+  drafts: false
   branches:
     include:
       - main
       - develop
-  drafts: false
 
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  projects: '**/**/*.sln'
-
 stages:
 - stage: Build
   displayName: Build
-
   jobs: 
   - job: Build
-
     steps:
     - task: UseDotNet@2
       displayName: 'DotNet Install'
@@ -65,24 +60,27 @@ stages:
   displayName: Deploy
   dependsOn: Build
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-
   jobs: 
-  - job: Deploy
-    displayName: Deploy
-    
-    steps:    
-    - task: DownloadBuildArtifacts@1
-      displayName: 'Download Artifact'
-      inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        itemPattern: 'drop/$(Build.BuildId).zip'
-        downloadPath: '$(System.ArtifactsDirectory)'
-    - task: AzureFunctionApp@1
-      displayName: 'Deploy API'
-      inputs:
-        azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
-        appType: 'functionAppLinux'
-        appName: 'fa-tuapi-projects-dev-bra'
-        package: '$(System.ArtifactsDirectory)/drop/$(Build.BuildId).zip'
-        runtimeStack: 'DOTNET|3.1'
+  - deployment: Deploy
+    displayName: 'Deploy to $(EnvName)'
+    environment: $(EnvName)
+    strategy:
+     runOnce:
+       deploy:
+         steps:
+         - task: DownloadBuildArtifacts@1
+           displayName: 'Download Artifact'
+           inputs:
+             buildType: 'current'
+             downloadType: 'single'
+             itemPattern: 'drop/$(Build.BuildId).zip'
+             downloadPath: '$(System.ArtifactsDirectory)'
+
+         - task: AzureFunctionApp@1
+           displayName: 'Deploy API'
+           inputs:
+             azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
+             appType: 'functionAppLinux'
+             appName: 'fa-tuapi-projects-dev-bra'
+             package: '$(System.ArtifactsDirectory)/drop/$(Build.BuildId).zip'
+             runtimeStack: 'DOTNET|3.1'
