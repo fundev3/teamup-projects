@@ -31,13 +31,19 @@ stages:
       inputs:
         command: 'build'
         projects: $(projects)
-        arguments: '--output $(Build.ArtifactStagingDirectory) $(styleCopEnabled)'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) $(styleCopEnabled)'
     
     - task: DotNetCoreCLI@2
       displayName: 'Dotnet Test'
       inputs:
         command: 'test'
         projects: $(testsProjects)
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '--configuration $(buildConfiguration)'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
@@ -62,8 +68,8 @@ stages:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs: 
   - deployment: Deploy
-    displayName: 'Deploy to $(EnvName)'
-    environment: $(EnvName)
+    displayName: 'Deploy to $(envName)'
+    environment: $(envName)
     strategy:
      runOnce:
        deploy:
@@ -81,6 +87,6 @@ stages:
            inputs:
              azureSubscription: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
              appType: 'functionAppLinux'
-             appName: 'fa-tuapi-projects-dev-bra'
+             appName: 'fa-tuapi-projects-$(envName)-bra'
              package: '$(System.ArtifactsDirectory)/drop/$(Build.BuildId).zip'
              runtimeStack: 'DOTNET|3.1'
