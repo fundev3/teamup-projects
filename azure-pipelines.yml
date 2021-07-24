@@ -76,14 +76,6 @@ stages:
      runOnce:
        deploy:
          steps:
-         - task: DownloadBuildArtifacts@1
-           displayName: 'Download Artifact'
-           inputs:
-             buildType: 'current'
-             downloadType: 'single'
-             itemPattern: 'drop/$(Build.BuildId).zip'
-             downloadPath: '$(System.ArtifactsDirectory)'
-
          - task: AzureFunctionApp@1
            displayName: 'Deploy API'
            inputs:
