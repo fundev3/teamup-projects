@@ -21,7 +21,7 @@ stages:
   - job: Build
     steps:
     - task: UseDotNet@2
-      displayName: 'DotNet Install'
+      displayName: 'Dotnet Install'
       inputs:
         packageType: 'sdk'
         version: '3.x'
@@ -40,9 +40,10 @@ stages:
         projects: $(testsProjects)
 
     - task: DotNetCoreCLI@2
+      displayName: 'Dotnet Publish'
       inputs:
         command: 'publish'
-        publishWebProjects: true
+        publishWebProjects: false
         arguments: '--configuration $(buildConfiguration)'
 
     - task: ArchiveFiles@2
