@@ -45,6 +45,7 @@ stages:
         command: 'publish'
         publishWebProjects: false
         arguments: '--configuration $(buildConfiguration)'
+        workingDirectory: '$(Build.ArtifactStagingDirectory)'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
@@ -69,7 +70,7 @@ stages:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs: 
   - deployment: Deploy
-    displayName: 'Deploy to $(envName)'
+    displayName: 'Deploy to dev'
     environment: $(envName)
     strategy:
      runOnce:
