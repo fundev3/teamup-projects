@@ -45,7 +45,7 @@ stages:
         command: 'publish'
         publishWebProjects: false
         arguments: '--configuration $(buildConfiguration)'
-        workingDirectory: '$(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: false
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
