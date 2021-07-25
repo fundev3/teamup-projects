@@ -3,6 +3,8 @@ resources:
     - repository: templates
       type: github
       name: fundev3/teamup-infrastructure
+      ref: refs/heads/develop
+
 
 trigger:
   branches:
