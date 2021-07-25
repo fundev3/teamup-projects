@@ -4,7 +4,7 @@ resources:
       type: github
       name: fundev3/teamup-infrastructure
       ref: refs/heads/develop
-      endpoint: $(repoConnAuth)
+      endpoint: '$(repoConnAuth)'
 
 trigger:
   branches:
