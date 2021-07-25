@@ -1,3 +1,9 @@
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: fundev3/teamup-infrastructure
+
 trigger:
   branches:
     include:
@@ -18,51 +24,7 @@ stages:
 - stage: Build
   displayName: Build
   jobs: 
-  - job: Build
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Dotnet Install'
-      inputs:
-        packageType: 'sdk'
-        version: '3.x'
-
-    - task: DotNetCoreCLI@2
-      displayName: 'Dotnet Build'
-      inputs:
-        command: 'build'
-        projects: $(projects)
-        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) $(styleCopEnabled)'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'Dotnet Test'
-      inputs:
-        command: 'test'
-        projects: $(testsProjects)
-
-    - task: DotNetCoreCLI@2
-      displayName: 'Dotnet Publish'
-      inputs:
-        command: 'publish'
-        publishWebProjects: false
-        arguments: '--configuration $(buildConfiguration)'
-        zipAfterPublish: false
-
-    - task: ArchiveFiles@2
-      displayName: 'Archive files'
-      inputs:
-        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-        includeRootFolder: false
-        archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-        replaceExistingArchive: true
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Drop Artifact'
-      condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+  - template: azure-pipelines/netcore-build-template.yml@templates
 
 - stage: Deploy
   displayName: Deploy
