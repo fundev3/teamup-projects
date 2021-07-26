@@ -13,10 +13,12 @@
         {
             this.projectsRepository = projectsRepository;
         }
+
         public Project GetProject(Guid id)
         {
             return this.projectsRepository.GetProject(id);
         }
+
         public Project PostProject(Project project)
         {
             project.Id = Guid.NewGuid();

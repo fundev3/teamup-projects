@@ -20,32 +20,39 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
         [Fact]
         public void PostProject_Return_Project()
         {
-            Project project1 = new Project()
+            var stubProject = new Project()
             {
-                Name = "Project Name example",
-                Description = "This is a Description",
-                State = true,
-                TextInvitation = "You are invited",
-                Logo = "This is a logo",
-                CreationDate = new DateTimeOffset(DateTime.Now.Year, 4, 14, 10, 00, 00, new TimeSpan(7, 0, 0)),
+                Name = "Name Example",
+                Description = "Description Example",
                 Contact = new Contact()
                 {
-                    Id = Guid.NewGuid(),
-                    IdResume = Guid.NewGuid(),
-                    Name = "Julio"
-                }
+                    Name = "Jose Ecos",
+                    IdResume = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")
+                },
+                Logo = "https://www.example.com/images/dinosaur.jpg",
+                MemberList = new Contact[1]
+                {
+                    new Contact
+                    {
+                        Name = "Paola Quintanilla",
+                        IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
+                    }
+                },
+                State = true,
+                TextInvitation = "You are invited to be part of TeamUp",
+                CreationDate = DateTime.Today.AddDays(-10)
             };
-            this.mockRepository.Setup(repository => repository.PostProject(project1)).Returns(new Project());
-            var result = this.projectsService.PostProject(project1);
+            this.mockRepository.Setup(repository => repository.PostProject(stubProject)).Returns(new Project());
+            var result = this.projectsService.PostProject(stubProject);
             Assert.IsType<Project>(result);
         }
 
         [Fact]
         public void PostProject_Return_Null()
         {
-            Project project1 = new Project();
-            this.mockRepository.Setup(repository => repository.PostProject(project1)).Equals(null);
-            var result = this.projectsService.PostProject(project1);
+            Project stubProject = null;
+            this.mockRepository.Setup(repository => repository.PostProject(new Project())).Returns(stubProject);
+            var result = this.projectsService.PostProject(new Project());
             Assert.Null(result);
         }
     }

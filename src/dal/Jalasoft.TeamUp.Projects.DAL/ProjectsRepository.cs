@@ -1,20 +1,13 @@
 ﻿namespace Jalasoft.TeamUp.Projects.DAL
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
     public class ProjectsRepository : IProjectsRepository
     {
-        private static IEnumerable<Project> projects = new List<Project>();
-
-        public Project PostProject(Project project)
-        {
-            projects = projects.Append(project);
-            return project;
-        }
         private static readonly Project[] Projects = new Project[]
             {
                 new Project
@@ -42,10 +35,18 @@
                 }
             };
 
+        private static IEnumerable<Project> projects = new List<Project>();
+
         public Project GetProject(Guid id)
         {
             Project result = Projects.FirstOrDefault(p => Equals(p.Id, id));
             return result;
+        }
+
+        public Project PostProject(Project project)
+        {
+            projects = projects.Append(project);
+            return project;
         }
     }
 }

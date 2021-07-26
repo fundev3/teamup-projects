@@ -6,6 +6,7 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Moq;
     using Newtonsoft.Json;
     using Xunit;
@@ -36,26 +37,35 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
         [Fact]
         public void PostProject_Returns_OkObjectResult_Project()
         {
-            var obj = new Project()
+            var project = new Project()
             {
-                Name = "Project Name",
-                Description = "This is a Description",
-                State = true,
-                TextInvitation = "You are invited",
-                Logo = "This is a logo",
-                CreationDate = new DateTimeOffset(DateTime.Now.Year, 4, 14, 10, 00, 00, new TimeSpan(7, 0, 0)),
+                Name = "TeamUp",
                 Contact = new Contact()
                 {
-                    Id = Guid.NewGuid(),
-                    IdResume = Guid.NewGuid(),
-                    Name = "Julio"
-                }
+                    Name = "Jose Ecos",
+                    IdResume = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")
+                },
+                Description = "Centralize resumes and project",
+                Logo = "It's a logo",
+                MemberList = new Contact[1]
+                {
+                    new Contact
+                    {
+                        Name = "Luis",
+                        IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
+                    }
+                },
+                State = true,
+                TextInvitation = "You are invited to be part of TeamUp",
+                CreationDate = DateTime.Today.AddDays(-10)
             };
-            string stream = JsonConvert.SerializeObject(obj);
-            var result = SetStream(stream);
-            var request = this.mockHttpContext.Request;
-            this.mockProjectsService.Setup(service => service.PostProject(obj)).Returns(new Project());
-            var response = this.postProject.Run(request);
+            string body = JsonConvert.SerializeObject(project);
+            this.mockHttpContext.Request.Headers.Add("post", "application/json");
+            this.mockHttpContext.Request.Body = SetStream(body);
+            this.mockProjectsService.Setup(service => service.PostProject(new Project())).Returns(new Project());
+            var response = this.postProject.Run();
+            var okObjectResult = Assert.IsType<OkObjectResult>(response);
+            Assert.IsType<Project>(okObjectResult.Value);
         }
     }
 }
