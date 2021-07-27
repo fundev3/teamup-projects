@@ -8,17 +8,17 @@
     using Moq;
     using Xunit;
 
-    public class GetProjectTest
+    public class GetProjectsTest
     {
-        private readonly Mock<IProjectService> mockService;
+        private readonly Mock<IProjectsService> mockService;
         private readonly DefaultHttpContext mockHttpContext;
-        private readonly GetProject getProject;
+        private readonly GetProjects getProjects;
 
-        public GetProjectTest()
+        public GetProjectsTest()
         {
-            this.mockService = new Mock<IProjectService>();
+            this.mockService = new Mock<IProjectsService>();
             this.mockHttpContext = new DefaultHttpContext();
-            this.getProject = new GetProject(this.mockService.Object);
+            this.getProjects = new GetProjects(this.mockService.Object);
         }
 
         [Fact]
@@ -28,7 +28,7 @@
             var request = this.mockHttpContext.Request;
 
             // Act
-            var response = this.getProject.Run(request);
+            var response = this.getProjects.Run(request);
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(response);

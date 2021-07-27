@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IProjectRepository
+    public interface IProjectsRepository
     {
         public Project GetProject(Guid id);
 

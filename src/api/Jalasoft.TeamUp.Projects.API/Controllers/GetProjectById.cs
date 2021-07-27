@@ -13,9 +13,9 @@
 
     public class GetProjectById
     {
-        private readonly IProjectService projectsService;
+        private readonly IProjectsService projectsService;
 
-        public GetProjectById(IProjectService projectsService)
+        public GetProjectById(IProjectsService projectsService)
         {
             this.projectsService = projectsService;
         }

@@ -18,8 +18,8 @@ namespace Jalasoft.TeamUp.Projects.API
         {
             builder.Services.AddScoped<IHealthService, HealthService>();
             builder.Services.AddScoped<IHealthRepository, HealthRepository>();
-            builder.Services.AddScoped<IProjectService, ProjectService>();
-            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+            builder.Services.AddScoped<IProjectsService, ProjectsService>();
+            builder.Services.AddScoped<IProjectsRepository, ProjectsRepository>();
         }
     }
 }

@@ -6,7 +6,7 @@
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public class ProjectRepository : IProjectRepository
+    public class ProjectsRepository : IProjectsRepository
     {
         private static readonly Project[] Projects = new Project[]
             {

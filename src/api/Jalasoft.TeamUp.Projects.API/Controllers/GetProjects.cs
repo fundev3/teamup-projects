@@ -10,19 +10,18 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
     using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
     using Microsoft.OpenApi.Models;
 
-    public class GetProject
+    public class GetProjects
     {
-        private readonly IProjectService projectService;
+        private readonly IProjectsService projectService;
 
-        public GetProject(IProjectService projectService)
+        public GetProjects(IProjectsService projectService)
         {
             this.projectService = projectService;
         }
 
-        [FunctionName("GetProject")]
+        [FunctionName("GetProjects")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "Projects" })]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project[]), Description = "Successful response")]
-        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
         public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects")] HttpRequest req)
         {

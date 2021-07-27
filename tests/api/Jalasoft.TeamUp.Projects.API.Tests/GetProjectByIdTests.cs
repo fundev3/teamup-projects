@@ -14,13 +14,13 @@
 
     public class GetProjectByIdTests
     {
-        private readonly Mock<IProjectService> mockService;
+        private readonly Mock<IProjectsService> mockService;
         private readonly DefaultHttpContext mockHttpContext;
         private readonly GetProjectById getProject;
 
         public GetProjectByIdTests()
         {
-            this.mockService = new Mock<IProjectService>();
+            this.mockService = new Mock<IProjectsService>();
             this.mockHttpContext = new DefaultHttpContext();
             this.getProject = new GetProjectById(this.mockService.Object);
         }

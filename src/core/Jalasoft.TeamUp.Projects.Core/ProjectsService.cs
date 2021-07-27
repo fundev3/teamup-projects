@@ -6,11 +6,11 @@
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public class ProjectService : IProjectService
+    public class ProjectsService : IProjectsService
     {
-        private readonly IProjectRepository projectsRepository;
+        private readonly IProjectsRepository projectsRepository;
 
-        public ProjectService(IProjectRepository projectsRepository)
+        public ProjectsService(IProjectsRepository projectsRepository)
         {
             this.projectsRepository = projectsRepository;
         }
