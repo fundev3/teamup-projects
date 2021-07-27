@@ -8,7 +8,7 @@
     {
         public T GetById(Guid id);
 
-        public List<T> GetAll();
+        public IEnumerable<T> GetAll();
 
         public T Create();
     }
