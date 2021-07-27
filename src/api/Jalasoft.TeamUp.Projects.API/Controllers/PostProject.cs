@@ -22,10 +22,10 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             this.postProjectService = postProjectService;
         }
 
-        [FunctionName("project")]
-        [OpenApiOperation(operationId: "createProject", tags: new[] { "CreateProject" })]
+        [FunctionName("PostProject")]
+        [OpenApiOperation(operationId: "PostProject", tags: new[] { "CreateProject" })]
         [OpenApiRequestBody("application/json", typeof(Project), Description = "JSON request body")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
         public async Task<IActionResult> CreateProject(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/projects")] HttpRequest req)
         {

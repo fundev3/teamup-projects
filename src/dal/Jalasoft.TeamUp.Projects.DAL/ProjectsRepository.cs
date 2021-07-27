@@ -58,8 +58,6 @@
                 }
             };
 
-        private static IEnumerable<Project> projects = new List<Project>();
-
         public Project GetProject(Guid id)
         {
             Project result = Projects.FirstOrDefault(p => Equals(p.Id, id));
@@ -68,7 +66,7 @@
 
         public Project PostProject(Project project)
         {
-            projects = projects.Append(project);
+            Projects.Append(project);
             return project;
         }
 
