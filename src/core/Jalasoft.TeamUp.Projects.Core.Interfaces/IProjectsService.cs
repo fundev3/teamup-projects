@@ -6,5 +6,7 @@
     public interface IProjectsService
     {
         public Project GetProject(Guid id);
+
+        Project[] GetProjects();
     }
 }
