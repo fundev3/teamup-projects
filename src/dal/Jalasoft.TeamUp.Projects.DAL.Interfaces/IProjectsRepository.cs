@@ -3,8 +3,7 @@
     using System;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IProjectsRepository
+    public interface IProjectsRepository : IRepository<Project>
     {
-        public Project GetProject(Guid id);
     }
 }

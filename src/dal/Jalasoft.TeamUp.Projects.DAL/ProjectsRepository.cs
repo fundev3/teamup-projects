@@ -1,6 +1,7 @@
 ﻿namespace Jalasoft.TeamUp.Projects.DAL
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
@@ -34,7 +35,17 @@
                 }
             };
 
-        public Project GetProject(Guid id)
+        public Project Create()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Project> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Project GetById(Guid id)
         {
             Project result = Projects.FirstOrDefault(p => Equals(p.Id, id));
             return result;

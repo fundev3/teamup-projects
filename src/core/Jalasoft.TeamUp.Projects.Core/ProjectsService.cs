@@ -16,7 +16,7 @@
 
         public Project GetProject(Guid id)
         {
-            return this.projectsRepository.GetProject(id);
+            return this.projectsRepository.GetById(id);
         }
     }
 }
