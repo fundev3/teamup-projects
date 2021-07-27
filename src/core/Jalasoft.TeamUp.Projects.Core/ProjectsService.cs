@@ -1,6 +1,7 @@
 ﻿namespace Jalasoft.TeamUp.Projects.Core
 {
     using System;
+    using System.Linq;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
@@ -24,6 +25,11 @@
             project.Id = Guid.NewGuid();
             var result = this.projectsRepository.PostProject(project);
             return result;
+        }
+
+        public Project[] GetProjects()
+        {
+            return this.projectsRepository.GetProjects().ToArray();
         }
     }
 }
