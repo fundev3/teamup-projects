@@ -23,7 +23,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         }
 
         [FunctionName("PostProject")]
-        [OpenApiOperation(operationId: "PostProject", tags: new[] { "CreateProject" })]
+        [OpenApiOperation(operationId: "PostProject", tags: new[] { "Projects" })]
         [OpenApiRequestBody("application/json", typeof(Project), Description = "JSON request body")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
         public async Task<IActionResult> CreateProject(
@@ -32,7 +32,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<Project>(requestBody);
             var result = this.postProjectService.PostProject(data);
-            return new OkObjectResult(result);
+            return new CreatedResult("v1/projects/:id", result);
         }
     }
 }

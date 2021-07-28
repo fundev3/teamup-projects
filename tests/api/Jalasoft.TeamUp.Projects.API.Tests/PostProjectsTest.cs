@@ -1,5 +1,6 @@
 namespace Jalasoft.TeamUp.Projects.API.Tests
 {
+    using System.IO;
     using Jalasoft.TeamUp.Projects.API.Controllers;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
@@ -22,12 +23,12 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
         }
 
         [Fact]
-        public async void PostProject_Returns_OkObjectResult_Project()
+        public async void PostProject_Returns_CreateProject_Project()
         {
             var request = this.mockHttpContext.Request;
-            this.mockProjectsService.Setup(service => service.PostProject(null)).Returns(new Project());
+            this.mockProjectsService.Setup(service => service.PostProject(null)).Returns(new Project() { Name = "TeamUp" });
             var response = await this.postProject.CreateProject(request);
-            var okObjectResult = Assert.IsType<OkObjectResult>(response);
+            var okObjectResult = Assert.IsType<CreatedResult>(response);
             Assert.IsType<Project>(okObjectResult.Value);
         }
     }
