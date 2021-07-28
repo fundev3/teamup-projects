@@ -4,10 +4,18 @@
     using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using MongoDB.Driver;
 
     public class ProjectsMongoDbRepository : IProjectsMongoDbRepository
     {
-        public Project Create()
+        private static MongoClient client;
+
+        public ProjectsMongoDbRepository()
+        {
+            client = new MongoClient("mongodb://localhost:27017");
+        }
+
+        public Project Add()
         {
             throw new NotImplementedException();
         }
