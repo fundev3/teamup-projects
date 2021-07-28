@@ -15,7 +15,7 @@
             client = new MongoClient("mongodb://localhost:27017");
         }
 
-        public Project Add()
+        public Project Add(Project project)
         {
             throw new NotImplementedException();
         }

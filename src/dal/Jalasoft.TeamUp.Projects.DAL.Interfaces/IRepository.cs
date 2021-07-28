@@ -10,6 +10,6 @@
 
         public IEnumerable<T> GetAll();
 
-        public T Add();
+        public T Add(T project);
     }
 }

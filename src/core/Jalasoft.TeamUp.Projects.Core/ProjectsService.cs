@@ -20,6 +20,13 @@
             return this.projectsRepository.GetById(id);
         }
 
+        public Project PostProject(Project project)
+        {
+            project.Id = Guid.NewGuid();
+            var result = this.projectsRepository.Add(project);
+            return result;
+        }
+
         public Project[] GetProjects()
         {
             return this.projectsRepository.GetAll().ToArray();

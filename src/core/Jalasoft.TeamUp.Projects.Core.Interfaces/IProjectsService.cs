@@ -5,6 +5,8 @@
 
     public interface IProjectsService
     {
+        Project PostProject(Project project);
+
         public Project GetProject(Guid id);
 
         Project[] GetProjects();
