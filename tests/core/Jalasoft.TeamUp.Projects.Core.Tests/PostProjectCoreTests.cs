@@ -6,12 +6,12 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
     using Moq;
     using Xunit;
 
-    public class PostProjectCoreTest
+    public class PostProjectCoreTests
     {
         private readonly Mock<IProjectsRepository> mockRepository;
         private readonly ProjectsService projectsService;
 
-        public PostProjectCoreTest()
+        public PostProjectCoreTests()
         {
             this.mockRepository = new Mock<IProjectsRepository>();
             this.projectsService = new ProjectsService(this.mockRepository.Object);
