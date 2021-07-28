@@ -46,14 +46,5 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
             var result = this.projectsService.PostProject(stubProject);
             Assert.IsType<Project>(result);
         }
-
-        [Fact]
-        public void PostProject_Return_Null()
-        {
-            Project stubProject = null;
-            this.mockRepository.Setup(repository => repository.PostProject(new Project())).Returns(stubProject);
-            var result = this.projectsService.PostProject(new Project());
-            Assert.Null(result);
-        }
     }
 }

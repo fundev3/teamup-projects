@@ -30,5 +30,15 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
             var okObjectResult = Assert.IsType<OkObjectResult>(response);
             Assert.IsType<Project>(okObjectResult.Value);
         }
+
+        [Fact]
+        public async void PostProject_Returns_StatusCode_201()
+        {
+            var request = this.mockHttpContext.Request;
+            this.mockProjectsService.Setup(service => service.PostProject(null)).Returns(new Project());
+            var response = await this.postProject.CreateProject(request);
+            var okObjectResult = Assert.IsType<OkObjectResult>(response);
+            Assert.IsType<Project>(okObjectResult.Value);
+        }
     }
 }
