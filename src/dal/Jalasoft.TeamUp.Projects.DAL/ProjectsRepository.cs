@@ -8,7 +8,7 @@
 
     public class ProjectsRepository : IProjectsRepository
     {
-        private static readonly Project[] Projects = new Project[]
+        private static Project[] projects = new Project[]
             {
                 new Project
                 {
@@ -60,13 +60,19 @@
 
         public Project GetProject(Guid id)
         {
-            Project result = Projects.FirstOrDefault(p => Equals(p.Id, id));
+            Project result = projects.FirstOrDefault(p => Equals(p.Id, id));
             return result;
+        }
+
+        public Project PostProject(Project project)
+        {
+            projects = new List<Project>(projects) { project }.ToArray();
+            return project;
         }
 
         public IEnumerable<Project> GetProjects()
         {
-            return Projects;
+            return projects;
         }
     }
 }
