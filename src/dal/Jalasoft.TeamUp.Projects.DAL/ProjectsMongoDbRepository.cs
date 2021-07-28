@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using MongoDB.Driver;
@@ -12,7 +13,8 @@
 
         public ProjectsMongoDbRepository()
         {
-            client = new MongoClient("mongodb://localhost:27017");
+            string stringConnection = ConfigurationManager.ConnectionStrings["MongoSessionServices"].ConnectionString;
+            client = new MongoClient(stringConnection);
         }
 
         public Project Add(Project project)
