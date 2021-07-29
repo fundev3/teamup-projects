@@ -1,8 +1,6 @@
 ﻿namespace Jalasoft.TeamUp.Projects.Models
 {
     using System;
-    using MongoDB.Bson;
-    using MongoDB.Bson.Serialization.Attributes;
 
     public class Contact
     {
