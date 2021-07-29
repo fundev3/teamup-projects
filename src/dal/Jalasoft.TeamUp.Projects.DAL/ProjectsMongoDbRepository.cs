@@ -10,11 +10,15 @@
     public class ProjectsMongoDbRepository : IProjectsMongoDbRepository
     {
         private static MongoClient client;
+        private static IMongoDatabase database;
+        private static IMongoCollection<Project> collection;
 
         public ProjectsMongoDbRepository()
         {
             string stringConnection = ConfigurationManager.ConnectionStrings["MongoSessionServices"].ConnectionString;
             client = new MongoClient(stringConnection);
+            database = client.GetDatabase("Projects");
+            collection = database.GetCollection<Project>("Projects");
         }
 
         public Project Add(Project project)
@@ -29,7 +33,8 @@
 
         public Project GetById(Guid id)
         {
-            throw new NotImplementedException();
+            Project project = (Project)collection.Find(x => x.Id == id);
+            return project;
         }
     }
 }
