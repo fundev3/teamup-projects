@@ -15,7 +15,7 @@
 
         public ProjectsMongoDbRepository()
         {
-            string stringConnection = ConfigurationManager.ConnectionStrings["MongoSessionServices"].ConnectionString;
+            string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process); // ConfigurationManager.ConnectionStrings["MongoSessionServices"].ConnectionString;
             client = new MongoClient(stringConnection);
             database = client.GetDatabase("Projects");
             collection = database.GetCollection<Project>("Projects");

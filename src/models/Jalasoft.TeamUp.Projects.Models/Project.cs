@@ -7,7 +7,7 @@
     public class Project
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
 
         [BsonRepresentation(BsonType.String)]
