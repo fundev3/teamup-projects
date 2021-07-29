@@ -24,14 +24,12 @@
 
         public Project Add(Project project)
         {
-            collection.InsertOne(project);
-            return project;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Project> GetAll()
         {
-            List<Project> projects = collection.Find(new BsonDocument()).ToList();
-            return projects;
+            throw new NotImplementedException();
         }
 
         public Project GetById(Guid id)
