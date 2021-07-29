@@ -5,6 +5,7 @@
     using System.Configuration;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using MongoDB.Bson;
     using MongoDB.Driver;
 
     public class ProjectsMongoDbRepository : IProjectsMongoDbRepository
@@ -23,19 +24,17 @@
 
         public Project Add(Project project)
         {
-            collection.InsertOne(project);
-            return project;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Project> GetAll()
         {
-            List<Project> projects = collection.Find(x => true).ToList();
-            return projects;
+            throw new NotImplementedException();
         }
 
         public Project GetById(Guid id)
         {
-            Project project = collection.Find(x => x.Id == id).Single();
+            Project project = collection.Find(x => x.Id == id).FirstOrDefault();
             return project;
         }
     }
