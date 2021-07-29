@@ -4,6 +4,7 @@ using Jalasoft.TeamUp.Projects.Core;
 using Jalasoft.TeamUp.Projects.Core.Interfaces;
 using Jalasoft.TeamUp.Projects.DAL;
 using Jalasoft.TeamUp.Projects.DAL.Interfaces;
+using Jalasoft.TeamUp.Projects.Models;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,8 +19,7 @@ namespace Jalasoft.TeamUp.Projects.API
             builder.Services.AddScoped<IHealthService, HealthService>();
             builder.Services.AddScoped<IHealthRepository, HealthRepository>();
             builder.Services.AddScoped<IProjectsService, ProjectsService>();
-            builder.Services.AddScoped<IProjectsRepository, ProjectsRepository>();
-            builder.Services.AddScoped<IProjectsMongoDbRepository, ProjectsMongoDbRepository>();
+            builder.Services.AddScoped<IRepository<Project>, ProjectsRepository>();
         }
     }
 }
