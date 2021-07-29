@@ -42,7 +42,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
                 TextInvitation = "You are invited to be part of TeamUp",
                 CreationDate = DateTime.Today.AddDays(-10)
             };
-            this.mockRepository.Setup(repository => repository.PostProject(stubProject)).Returns(new Project());
+            this.mockRepository.Setup(repository => repository.Add(stubProject)).Returns(new Project());
             var result = this.projectsService.PostProject(stubProject);
             Assert.IsType<Project>(result);
         }

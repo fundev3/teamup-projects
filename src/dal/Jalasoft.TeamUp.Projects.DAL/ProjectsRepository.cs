@@ -58,21 +58,21 @@
                 }
             };
 
-        public Project GetProject(Guid id)
+        public Project GetById(Guid id)
         {
             Project result = projects.FirstOrDefault(p => Equals(p.Id, id));
             return result;
         }
 
-        public Project PostProject(Project project)
+        public IEnumerable<Project> GetAll()
+        {
+            return projects;
+        }
+
+        public Project Add(Project project)
         {
             projects = new List<Project>(projects) { project }.ToArray();
             return project;
-        }
-
-        public IEnumerable<Project> GetProjects()
-        {
-            return projects;
         }
     }
 }

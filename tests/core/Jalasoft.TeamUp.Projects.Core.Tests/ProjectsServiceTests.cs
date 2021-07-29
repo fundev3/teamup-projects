@@ -77,7 +77,7 @@
         {
             // Arrange
             var stubProject = new Project { Id = Guid.NewGuid() };
-            this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
 
             // Act
             var result = this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
@@ -91,7 +91,7 @@
         {
             // Arrange
             Project stubProject = null;
-            this.mockRepository.Setup(repository => repository.GetProject(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
 
             // Act
             var result = this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
@@ -105,7 +105,7 @@
         {
             // Arrange
             var stubEmptyProjectList = new List<Project>();
-            this.mockRepository.Setup(repository => repository.GetProjects()).Returns(stubEmptyProjectList);
+            this.mockRepository.Setup(repository => repository.GetAll()).Returns(stubEmptyProjectList);
 
             // Act
             var result = this.service.GetProjects();
@@ -118,7 +118,7 @@
         public void GetProjects_Returns_AllItemsResult()
         {
             // Arrange
-            this.mockRepository.Setup(repository => repository.GetProjects()).Returns(MockProjects());
+            this.mockRepository.Setup(repository => repository.GetAll()).Returns(MockProjects());
 
             // Act
             var result = this.service.GetProjects();

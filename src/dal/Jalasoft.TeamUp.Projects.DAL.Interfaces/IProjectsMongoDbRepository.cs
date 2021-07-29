@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IProjectsRepository : IRepository<Project>
+    public interface IProjectsMongoDbRepository : IRepository<Project>
     {
     }
 }

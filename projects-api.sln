@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{25ACCD2F-1C15-47B8-8648-45EF2F253545}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dal", "dal", "{66972D30-7597-407F-81AA-AE33DF7729F3}"
+	ProjectSection(SolutionItems) = preProject
+		App.config = App.config
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{52F6AF87-D025-488F-BA1E-4A10AAA590F0}"
 EndProject
