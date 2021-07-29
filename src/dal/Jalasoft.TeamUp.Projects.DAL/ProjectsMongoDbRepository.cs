@@ -24,7 +24,8 @@
 
         public Project Add(Project project)
         {
-            throw new NotImplementedException();
+            collection.InsertOne(project);
+            return project;
         }
 
         public IEnumerable<Project> GetAll()
