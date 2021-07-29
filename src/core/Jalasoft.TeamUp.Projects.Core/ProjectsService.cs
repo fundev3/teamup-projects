@@ -8,9 +8,9 @@
 
     public class ProjectsService : IProjectsService
     {
-        private readonly IProjectsMongoDbRepository projectsRepository;
+        private readonly IRepository<Project> projectsRepository;
 
-        public ProjectsService(IProjectsMongoDbRepository projectsRepository)
+        public ProjectsService(IRepository<Project> projectsRepository)
         {
             this.projectsRepository = projectsRepository;
         }

@@ -8,12 +8,12 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
 
     public class PostProjectCoreTests
     {
-        private readonly Mock<IProjectsMongoDbRepository> mockRepository;
+        private readonly Mock<IRepository<Project>> mockRepository;
         private readonly ProjectsService projectsService;
 
         public PostProjectCoreTests()
         {
-            this.mockRepository = new Mock<IProjectsMongoDbRepository>();
+            this.mockRepository = new Mock<IRepository<Project>>();
             this.projectsService = new ProjectsService(this.mockRepository.Object);
         }
 

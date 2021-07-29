@@ -15,7 +15,7 @@
 
         public ProjectsMongoDbRepository()
         {
-            string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process); // ConfigurationManager.ConnectionStrings["MongoSessionServices"].ConnectionString;
+            string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process);
             client = new MongoClient(stringConnection);
             database = client.GetDatabase("Projects");
             collection = database.GetCollection<Project>("Projects");
@@ -35,7 +35,8 @@
 
         public Project GetById(Guid id)
         {
-            throw new NotImplementedException();
+            Project project = collection.Find(x => x.Id == id).Single();
+            return project;
         }
     }
 }
