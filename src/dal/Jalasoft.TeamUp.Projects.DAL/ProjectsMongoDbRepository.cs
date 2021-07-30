@@ -29,8 +29,7 @@
 
         public IEnumerable<Project> GetAll()
         {
-            List<Project> projects = collection.Find(new BsonDocument()).ToList();
-            return projects;
+            return collection.Find(new BsonDocument()).ToEnumerable<Project>();
         }
 
         public Project GetById(Guid id)
