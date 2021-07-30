@@ -30,7 +30,7 @@
 
         public IEnumerable<Project> GetAll()
         {
-            throw new NotImplementedException();
+            return collection.Find(new BsonDocument()).ToEnumerable<Project>();
         }
 
         public Project GetById(Guid id)
