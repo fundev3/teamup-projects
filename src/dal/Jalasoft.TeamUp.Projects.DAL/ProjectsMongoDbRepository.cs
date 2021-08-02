@@ -5,31 +5,38 @@
     using System.Configuration;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using MongoDB.Bson;
     using MongoDB.Driver;
 
     public class ProjectsMongoDbRepository : IProjectsMongoDbRepository
     {
         private static MongoClient client;
+        private static IMongoDatabase database;
+        private static IMongoCollection<Project> collection;
 
         public ProjectsMongoDbRepository()
         {
-            string stringConnection = ConfigurationManager.ConnectionStrings["MongoSessionServices"].ConnectionString;
+            string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process);
             client = new MongoClient(stringConnection);
+            database = client.GetDatabase("Projects");
+            collection = database.GetCollection<Project>("Projects");
         }
 
         public Project Add(Project project)
         {
-            throw new NotImplementedException();
+            collection.InsertOne(project);
+            return project;
         }
 
         public IEnumerable<Project> GetAll()
         {
-            throw new NotImplementedException();
+            return collection.Find(new BsonDocument()).ToEnumerable<Project>();
         }
 
         public Project GetById(Guid id)
         {
-            throw new NotImplementedException();
+            Project project = collection.Find(x => x.Id == id).FirstOrDefault();
+            return project;
         }
     }
 }
