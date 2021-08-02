@@ -3,17 +3,17 @@
   "proxies": {
     "swaggerUI": {
       "matchCondition": {
-        "methods": [ "GET" ],
+        "methods": ["GET"],
         "route": "/swagger/ui"
       },
-      "backendUri": "%OpenApi__BackendProxyUrl%/v1/swagger/ui"
+      "backendUri": "%OpenApi__BackendProxyUrl%/api/swagger/ui"
     },
     "swaggerDoc": {
       "matchCondition": {
-        "methods": [ "GET" ],
+        "methods": ["GET"],
         "route": "/swagger.{extension}"
       },
-      "backendUri": "%OpenApi__BackendProxyUrl%/v1/swagger.{extension}"
+      "backendUri": "%OpenApi__BackendProxyUrl%/api/swagger.{extension}"
     }
   }
 }
