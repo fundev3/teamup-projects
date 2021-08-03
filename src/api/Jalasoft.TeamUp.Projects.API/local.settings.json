@@ -4,7 +4,7 @@
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL": "true",
-    "OpenApi__BackendProxyUrl": "http://localhost:7072",
+    "OpenApi__BackendProxyUrl": "https://fa-tuapi-projects-dev-bra.azurewebsites.net",
     "MongoSessionServices": "mongodb://localhost:27017"
   },
   "Host": {
