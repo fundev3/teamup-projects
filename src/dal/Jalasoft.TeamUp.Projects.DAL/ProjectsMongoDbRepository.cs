@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using MongoDB.Bson;
@@ -18,6 +17,7 @@
         {
             string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process);
             client = new MongoClient(stringConnection);
+
             database = client.GetDatabase("Projects");
             collection = database.GetCollection<Project>("Projects");
         }
@@ -36,6 +36,7 @@
         public Project GetById(Guid id)
         {
             Project project = collection.Find(x => x.Id == id).FirstOrDefault();
+
             return project;
         }
     }

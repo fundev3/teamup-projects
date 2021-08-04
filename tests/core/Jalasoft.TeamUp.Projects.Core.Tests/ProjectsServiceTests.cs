@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Moq;
     using Xunit;
 
@@ -87,17 +88,14 @@
         }
 
         [Fact]
-        public void GetProject_Returns_Null()
+        public void GetProject_Throws_ProjectsException()
         {
             // Arrange
             Project stubProject = null;
             this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
 
-            // Act
-            var result = this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
-
             // Assert
-            Assert.Null(result);
+            Assert.Throws<ProjectsException>(() => this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")));
         }
 
         [Fact]

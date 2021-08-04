@@ -5,6 +5,7 @@
     using Jalasoft.TeamUp.Projects.API.Controllers;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Internal;
     using Microsoft.AspNetCore.Mvc;
@@ -45,14 +46,13 @@
         {
             // Arrange
             var request = this.mockHttpContext.Request;
-            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Equals(null);
+            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new ProjectsException(ProjectsException.ProjectsErros.NotFound));
 
             // Act
             var response = this.getProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
 
             // Assert
-            var notfountObjectResult = Assert.IsType<NotFoundObjectResult>(response);
-            Assert.Null(notfountObjectResult.Value);
+            var notfountObjectResult = Assert.IsType<ContentResult>(response);
         }
     }
 }
