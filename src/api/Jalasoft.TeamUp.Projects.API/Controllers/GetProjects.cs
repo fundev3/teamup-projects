@@ -1,6 +1,5 @@
 namespace Jalasoft.TeamUp.Projects.API.Controllers
 {
-    using System;
     using System.Net;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
@@ -38,6 +37,14 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
                 {
                     StatusCode = e.StatusCode,
                     Content = e.ProjectsErrorMessage,
+                };
+            }
+            catch (System.Exception)
+            {
+                return new ContentResult
+                {
+                    StatusCode = 500,
+                    Content = "Something went wrong, please contact the TeamUp administrator.",
                 };
             }
         }
