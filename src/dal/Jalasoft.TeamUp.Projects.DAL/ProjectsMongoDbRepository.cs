@@ -16,14 +16,7 @@
         public ProjectsMongoDbRepository()
         {
             string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process);
-            try
-            {
-                client = new MongoClient(stringConnection);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            client = new MongoClient(stringConnection);
 
             database = client.GetDatabase("Projects");
             collection = database.GetCollection<Project>("Projects");
