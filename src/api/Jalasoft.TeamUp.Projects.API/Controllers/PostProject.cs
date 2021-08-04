@@ -5,6 +5,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
     using System.Threading.Tasks;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Azure.WebJobs;
@@ -29,10 +30,21 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         public async Task<IActionResult> CreateProject(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/projects")] HttpRequest req)
         {
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var data = JsonConvert.DeserializeObject<Project>(requestBody);
-            var result = this.postProjectService.PostProject(data);
-            return new CreatedResult("v1/projects/:id", result);
+            try
+            {
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                var data = JsonConvert.DeserializeObject<Project>(requestBody);
+                var result = this.postProjectService.PostProject(data);
+                return new CreatedResult("v1/projects/:id", result);
+            }
+            catch (ProjectsException e)
+            {
+                return new ContentResult
+                {
+                    StatusCode = e.StatusCode,
+                    Content = e.ProjectsErrorMessage,
+                };
+            }
         }
     }
 }
