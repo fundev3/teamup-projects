@@ -42,14 +42,6 @@
                     Content = e.ProjectsErrorMessage,
                 };
             }
-            catch (System.Exception)
-            {
-                return new ContentResult
-                {
-                    StatusCode = 500,
-                    Content = "Something went wrong, please contact the TeamUp administrator.",
-                };
-            }
         }
     }
 }
