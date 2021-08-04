@@ -12,34 +12,18 @@
                 .NotEmpty().NotNull();
 
             this.RuleFor(project => project.Name)
-                .Length(3, 70)
+                .Length(3, 15)
                 .Matches("^[a-zñ A-ZÑ]+$")
                 .NotEmpty().NotNull();
 
             this.RuleFor(project => project.Description)
-                .MaximumLength(160)
-                .WithMessage("It must not have more than 160 characters");
-
-            this.RuleFor(project => project.State)
-                .NotNull()
-                .Must(x => x == false || x == true);
+                .MaximumLength(160);
 
             this.RuleFor(project => project.TextInvitation)
-                .MaximumLength(160)
-                .WithMessage("It must not have more than 160 characters");
+                .MaximumLength(160);
 
             this.RuleFor(project => project.Logo)
-                .Matches("[^\\s]+(.*?)\\.(jpg|jpeg|png|JPG|JPEG|PNG)$")
-                .WithMessage("The logo extension is not valid");
-
-            this.RuleFor(project => project.CreationDate)
-                .Must(BeAValidDate)
-                .WithMessage("Creation date is required");
-        }
-
-        private static bool BeAValidDate(DateTime date)
-        {
-            return !date.Equals(default(DateTime));
+                .Matches("[^\\s]+(.*?)\\.(jpg|jpeg|png|JPG|JPEG|PNG)$");
         }
     }
 }

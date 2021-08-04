@@ -1,6 +1,7 @@
 ﻿namespace Jalasoft.TeamUp.Projects.Core.Tests.Validators
 {
     using System;
+    using System.Collections.Generic;
     using FluentValidation.TestHelper;
     using Jalasoft.TeamUp.Projects.Core.Validators;
     using Jalasoft.TeamUp.Projects.Models;
@@ -15,8 +16,16 @@
             this.validator = new ProjectValidator();
         }
 
+        public static IEnumerable<object[]> Projects =>
+        new List<object[]>
+        {
+            new object[] { new Project { Name = " " } },
+            new object[] { new Project { Name = null } },
+            new object[] { new Project { Name = "TeamUp 78484" } }
+        };
+
         [Fact]
-        public void Should_Have_Pass_Id_is_Valid()
+        public void ProjectValidator_Valid_Id_Success()
         {
             // Arrange
             var project = new Project { Name = "TeamUp", Id = Guid.NewGuid() };
@@ -28,47 +37,22 @@
             result.ShouldNotHaveValidationErrorFor(project => project.Id);
         }
 
-        [Fact]
-        public void Should_Have_Error_When_Name_is_Empty()
+        [Theory]
+        [MemberData(nameof(Projects))]
+        public void ProjectValidator_Validate_Name_With_Errors_ThrowsError(Project project)
         {
             // Arrange
-            var project = new Project { Name = " " };
+            var projectToTest = project;
 
             // Act
-            var result = this.validator.TestValidate(project);
+            var result = this.validator.TestValidate(projectToTest);
 
             // Assert
             result.ShouldHaveValidationErrorFor("Name");
         }
 
         [Fact]
-        public void Should_Have_Error_When_Name_is_Null()
-        {
-            // Arrange
-            var project = new Project { Name = null };
-
-            // Act
-            var result = this.validator.TestValidate(project);
-
-            // Assert
-            result.ShouldHaveValidationErrorFor("Name");
-        }
-
-        [Fact]
-        public void Should_Have_Error_When_Name_Contain_Numbers()
-        {
-            // Arrange
-            var project = new Project { Name = "TeamUp 78484" };
-
-            // Act
-            var result = this.validator.TestValidate(project);
-
-            // Assert
-            result.ShouldHaveValidationErrorFor("Name");
-        }
-
-        [Fact]
-        public void Should_Have_Error_When_Description_is_More_Than_160_Characters()
+        public void ProjectValidator_Description_More_Than_160_characters_ThrowsError()
         {
             // Arrange
             var project = new Project { Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus in eros eu hendrerit. Nulla a nunc eget est tempor placerat at nec diam. Donec at tincidunt." };
@@ -78,11 +62,10 @@
 
             // Assert
             result.ShouldHaveValidationErrorFor(project => project.Description);
-            result.ShouldHaveValidationErrorFor(project => project.Description).WithErrorMessage("It must not have more than 160 characters");
         }
 
         [Fact]
-        public void Should_Have_Error_When_Text_Invitation_is_More_Than_160_Characters()
+        public void ProjectValidator_Text_Invitation_More_Than_160_characters_ThrowsError()
         {
             // Arrange
             var project = new Project { TextInvitation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus in eros eu hendrerit. Nulla a nunc eget est tempor placerat at nec diam. Donec at tincidunt." };
@@ -92,11 +75,10 @@
 
             // Assert
             result.ShouldHaveValidationErrorFor(project => project.TextInvitation);
-            result.ShouldHaveValidationErrorFor(project => project.TextInvitation).WithErrorMessage("It must not have more than 160 characters");
         }
 
         [Fact]
-        public void Should_Have_Error_When_Extesion_logo_is_Invalid()
+        public void ProjectValidator_Logo_Extension_Invalid_ThrowsError()
         {
             // Arrange
             var project = new Project { Logo = "noextensionvalid.com" };
@@ -109,33 +91,7 @@
         }
 
         [Fact]
-        public void Should_Have_Error_When_Date_is_Invalid()
-        {
-            // Arrange
-            var project = new Project { CreationDate = default(DateTime) };
-
-            // Act
-            var result = this.validator.TestValidate(project);
-
-            // Assert
-            result.ShouldHaveValidationErrorFor(project => project.CreationDate);
-        }
-
-        [Fact]
-        public void Should_Not_Have_Pass_When_State_is_Bool()
-        {
-            // Arrange
-            var project = new Project { State = true };
-
-            // Act
-            var result = this.validator.TestValidate(project);
-
-            // Assert
-            result.ShouldNotHaveValidationErrorFor(project => project.State);
-        }
-
-        [Fact]
-        public void Validation_Project_Success()
+        public void ProjectValidator_Creating_New_Project_Valid_Success()
         {
             // Arrange
             var project = new Project
