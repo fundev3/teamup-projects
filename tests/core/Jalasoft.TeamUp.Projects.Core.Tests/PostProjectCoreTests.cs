@@ -22,6 +22,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
         {
             var stubProject = new Project()
             {
+                Id = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"),
                 Name = "Name Example",
                 Description = "Description Example",
                 Contact = new Contact()

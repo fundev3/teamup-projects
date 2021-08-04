@@ -44,8 +44,11 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                return new StatusCodeResult(500);
+                return new ContentResult
+                {
+                    StatusCode = 500,
+                    Content = ex.Message,
+                };
             }
         }
     }
