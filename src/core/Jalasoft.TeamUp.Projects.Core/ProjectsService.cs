@@ -2,7 +2,9 @@
 {
     using System;
     using System.Linq;
+    using FluentValidation;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
+    using Jalasoft.TeamUp.Projects.Core.Validators;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
@@ -22,6 +24,8 @@
 
         public Project PostProject(Project project)
         {
+            ProjectValidator validator = new ProjectValidator();
+            validator.ValidateAndThrow(project);
             project.Id = Guid.NewGuid();
             var result = this.projectsRepository.Add(project);
             return result;
