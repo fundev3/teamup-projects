@@ -27,10 +27,10 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Build
-  displayName: Build
-  jobs: 
-  - template: azure-pipelines/netcore-build-template.yml@templates
+  - stage: Build
+    displayName: Build
+    jobs:
+      - template: azure-pipelines/netcore-build-template.yml@templates
 
 - stage: Deploy
   displayName: Deploy
@@ -38,3 +38,4 @@ stages:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs: 
   - template: azure-pipelines/netcore-deploy-template.yml@templates
+

@@ -22,7 +22,7 @@
         }
 
         [FunctionName("GetProjectById")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "Projects" })]
+        [OpenApiOperation(operationId: "GetProjectById", tags: new[] { "Projects" })]
         [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "The project identifier.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
