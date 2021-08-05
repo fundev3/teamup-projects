@@ -4,6 +4,7 @@
     using System.Net;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Azure.WebJobs;
@@ -28,15 +29,18 @@
         public IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects/{id:guid}")] HttpRequest req, Guid id)
         {
-            var result = this.projectsService.GetProject(id);
-
-            if (result == null)
+            try
             {
-                return new NotFoundObjectResult(result);
-            }
-            else
-            {
+                var result = this.projectsService.GetProject(id);
                 return new OkObjectResult(result);
+            }
+            catch (ProjectsException e)
+            {
+                return new ContentResult
+                {
+                    StatusCode = e.StatusCode,
+                    Content = e.ProjectsErrorMessage,
+                };
             }
         }
     }
