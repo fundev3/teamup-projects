@@ -27,10 +27,10 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: Build
-    displayName: Build
-    jobs:
-      - template: azure-pipelines/netcore-build-template.yml@templates
+- stage: Build
+  displayName: Build
+  jobs: 
+  - template: azure-pipelines/netcore-build-template.yml@templates
 
 - stage: Deploy
   displayName: Deploy
