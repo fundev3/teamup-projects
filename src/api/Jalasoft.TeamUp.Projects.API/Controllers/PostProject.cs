@@ -1,8 +1,10 @@
 namespace Jalasoft.TeamUp.Projects.API.Controllers
 {
+    using System;
     using System.IO;
     using System.Net;
     using System.Threading.Tasks;
+    using FluentValidation;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Jalasoft.TeamUp.Projects.ProjectsException;
