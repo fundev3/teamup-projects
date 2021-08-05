@@ -6,14 +6,14 @@
         "methods": ["GET"],
         "route": "/swagger/ui"
       },
-      "backendUri": "%OpenApi__BackendProxyUrl%/api/swagger/ui"
+      "backendUri": "https://fa-tuapi-projects-dev-bra.azurewebsites.net/api/swagger/ui"
     },
     "swaggerDoc": {
       "matchCondition": {
         "methods": ["GET"],
         "route": "/swagger.{extension}"
       },
-      "backendUri": "%OpenApi__BackendProxyUrl%/api/swagger.{extension}"
+      "backendUri": "https://fa-tuapi-projects-dev-bra.azurewebsites.net/api/swagger.{extension}"
     }
   }
 }
