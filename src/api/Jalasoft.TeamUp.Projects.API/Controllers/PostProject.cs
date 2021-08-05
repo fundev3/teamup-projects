@@ -7,6 +7,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
     using FluentValidation;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Azure.WebJobs;
@@ -38,16 +39,20 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
                 var result = this.postProjectService.PostProject(data);
                 return new CreatedResult("v1/projects/:id", result);
             }
-            catch (ValidationException ex)
+            catch (ProjectsException e)
             {
-                return new BadRequestObjectResult(ex);
+                return new ContentResult
+                {
+                    StatusCode = e.StatusCode,
+                    Content = e.ProjectsErrorMessage,
+                };
             }
-            catch (Exception ex)
+            catch (System.Exception)
             {
                 return new ContentResult
                 {
                     StatusCode = 500,
-                    Content = ex.Message,
+                    Content = "Something went wrong, please contact the TeamUp administrator.",
                 };
             }
         }

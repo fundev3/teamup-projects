@@ -7,6 +7,7 @@
     using Jalasoft.TeamUp.Projects.Core.Validators;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
 
     public class ProjectsService : IProjectsService
     {
@@ -19,21 +20,54 @@
 
         public Project GetProject(Guid id)
         {
-            return this.projectsRepository.GetById(id);
+            try
+            {
+                var project = this.projectsRepository.GetById(id);
+                if (project == null)
+                {
+                    throw new ProjectsException(ProjectsException.ProjectsErros.NotFound);
+                }
+
+                return project;
+            }
+            catch (Exception)
+            {
+                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
+            }
         }
 
         public Project PostProject(Project project)
         {
-            ProjectValidator validator = new ProjectValidator();
-            validator.ValidateAndThrow(project);
-            project.Id = Guid.NewGuid();
-            var result = this.projectsRepository.Add(project);
-            return result;
+            try
+            {
+                ProjectValidator validator = new ProjectValidator();
+                validator.ValidateAndThrow(project);
+                project.Id = Guid.NewGuid();
+                var result = this.projectsRepository.Add(project);
+                return result;
+            }
+            catch (Exception)
+            {
+                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
+            }
         }
 
         public Project[] GetProjects()
         {
-            return this.projectsRepository.GetAll().ToArray();
+            try
+            {
+                var projects = this.projectsRepository.GetAll().ToArray();
+                if (projects == null)
+                {
+                    throw new ProjectsException(ProjectsException.ProjectsErros.NotFound);
+                }
+
+                return projects;
+            }
+            catch (Exception)
+            {
+                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
+            }
         }
     }
 }
