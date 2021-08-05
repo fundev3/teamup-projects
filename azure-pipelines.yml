@@ -1,3 +1,7 @@
+variables:
+- name: projName
+  value: 'projects'
+
 resources:
   repositories:
     - repository: templates
@@ -23,28 +27,15 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: Build
-    displayName: Build
-    jobs:
-      - template: azure-pipelines/netcore-build-template.yml@templates
+- stage: Build
+  displayName: Build
+  jobs: 
+  - template: azure-pipelines/netcore-build-template.yml@templates
 
-  - stage: Deploy
-    displayName: Deploy
-    dependsOn: Build
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-    jobs:
-      - deployment: Deploy
-        displayName: "Deploy to dev"
-        environment: $(envName)
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - task: AzureFunctionApp@1
-                  displayName: "Deploy API"
-                  inputs:
-                    azureSubscription: "devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)"
-                    appType: "functionAppLinux"
-                    appName: "fa-tuapi-projects-$(envName)-bra"
-                    package: "$(Pipeline.Workspace)/drop/$(Build.BuildId).zip"
-                    runtimeStack: "DOTNET|3.1"
+- stage: Deploy
+  displayName: Deploy
+  dependsOn: Build
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  jobs: 
+  - template: azure-pipelines/netcore-deploy-template.yml@templates
+
