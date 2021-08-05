@@ -1,6 +1,6 @@
 variables:
 - name: projName
-  value: 'Projects'
+  value: 'projects'
 
 resources:
   repositories:
