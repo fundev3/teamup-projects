@@ -18,11 +18,11 @@ namespace Jalasoft.TeamUp.Projects.ProjectsException
             {
                 case ProjectsErros.InternalServerError:
                     this.StatusCode = (int) ProjectsErros.InternalServerError;
-                    this.ProjectsErrorMessage = "{\"message\": \"Something went wrong, please contact the TeamUp administrator.\"";
+                    this.ProjectsErrorMessage = "{\"message\": \"Something went wrong, please contact the TeamUp administrator.\"}";
                     break;
                 case ProjectsErros.NotFound:
                     this.StatusCode = (int) ProjectsErros.NotFound;
-                    this.ProjectsErrorMessage = "{\"message\": \"The resource couldn't be found.\"";
+                    this.ProjectsErrorMessage = "{\"message\": \"The resource couldn't be found.\"}";
                     break;
                 default:
                     break;
