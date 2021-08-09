@@ -1,9 +1,7 @@
 ﻿namespace Jalasoft.TeamUp.Projects.ProjectsException
 {
-    using FluentValidation;
-    using System;
     using System.Collections.Generic;
-    using System.Text;
+    using FluentValidation;
 
     public class ErrorMessage
     {

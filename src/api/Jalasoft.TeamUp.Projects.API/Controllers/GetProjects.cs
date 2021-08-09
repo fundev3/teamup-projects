@@ -33,7 +33,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             }
             catch (ProjectsException e)
             {
-                var error = new ObjectResult(e._ErrorMessage);
+                var error = new ObjectResult(e.ErrorMessage);
                 error.StatusCode = e.StatusCode;
                 return error;
             }
