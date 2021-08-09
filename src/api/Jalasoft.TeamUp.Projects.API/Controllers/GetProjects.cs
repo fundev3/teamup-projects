@@ -33,11 +33,9 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             }
             catch (ProjectsException e)
             {
-                return new ContentResult
-                {
-                    StatusCode = e.StatusCode,
-                    Content = e.ProjectsErrorMessage,
-                };
+                var error = new ObjectResult(e._ErrorMessage);
+                error.StatusCode = e.StatusCode;
+                return error;
             }
         }
     }

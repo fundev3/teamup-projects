@@ -25,14 +25,14 @@
                 var project = this.projectsRepository.GetById(id);
                 if (project == null)
                 {
-                    throw new ProjectsException(ProjectsException.ProjectsErros.NotFound);
+                    throw new ProjectsException(ProjectsException.ProjectsErrors.NotFound);
                 }
 
                 return project;
             }
             catch (Exception)
             {
-                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
+                throw new ProjectsException(ProjectsException.ProjectsErrors.InternalServerError);
             }
         }
 
@@ -46,9 +46,13 @@
                 var result = this.projectsRepository.Add(project);
                 return result;
             }
+            catch (ValidationException exVal)
+            {
+                throw new ProjectsException(ProjectsException.ProjectsErrors.BadRequest, exVal);
+            }
             catch (Exception)
             {
-                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
+                throw new ProjectsException(ProjectsException.ProjectsErrors.InternalServerError);
             }
         }
 
@@ -59,14 +63,14 @@
                 var projects = this.projectsRepository.GetAll().ToArray();
                 if (projects == null)
                 {
-                    throw new ProjectsException(ProjectsException.ProjectsErros.NotFound);
+                    throw new ProjectsException(ProjectsException.ProjectsErrors.NotFound);
                 }
 
                 return projects;
             }
             catch (Exception)
             {
-                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
+                throw new ProjectsException(ProjectsException.ProjectsErrors.InternalServerError);
             }
         }
     }
