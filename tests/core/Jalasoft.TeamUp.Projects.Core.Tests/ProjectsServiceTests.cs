@@ -91,11 +91,10 @@
         public void GetProject_Throws_ProjectsException()
         {
             // Arrange
-            Project stubProject = null;
-            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584df"))).Throws(new ProjectsException(ProjectsErrors.NotFound, new Exception()));
 
             // Assert
-            Assert.Throws<ProjectsException>(() => this.service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")));
+            Assert.Throws<ProjectsException>(() => this.service.GetProject(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584df")));
         }
 
         [Fact]
