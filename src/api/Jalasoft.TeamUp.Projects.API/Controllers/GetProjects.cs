@@ -29,13 +29,21 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             try
             {
                 var projects = this.projectService.GetProjects();
+                if (projects == null)
+                {
+                    throw new ProjectsException(ProjectsErrors.NotFound);
+                }
+
                 return new OkObjectResult(projects);
             }
             catch (ProjectsException e)
             {
-                var error = new ObjectResult(e.ErrorMessage);
-                error.StatusCode = e.StatusCode;
-                return error;
+                return e.Error;
+            }
+            catch (System.Exception e)
+            {
+                var errorException = new ProjectsException(ProjectsErrors.InternalServerError, e);
+                return errorException.Error;
             }
         }
     }

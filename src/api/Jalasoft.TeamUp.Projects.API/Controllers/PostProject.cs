@@ -39,18 +39,19 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
                 var result = this.postProjectService.PostProject(data);
                 return new CreatedResult("v1/projects/:id", result);
             }
+            catch (ValidationException exVal)
+            {
+                var errorException = new ProjectsException(ProjectsErrors.BadRequest, exVal);
+                return errorException.Error;
+            }
             catch (ProjectsException e)
             {
-                var error = new ObjectResult(e.ErrorMessage);
-                error.StatusCode = e.StatusCode;
-                return error;
+                return e.Error;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                var errorException = new ProjectsException(ProjectsException.ProjectsErrors.InternalServerError);
-                var error = new ObjectResult(errorException.ErrorMessage);
-                error.StatusCode = errorException.StatusCode;
-                return error;
+                var errorException = new ProjectsException(ProjectsErrors.InternalServerError, e);
+                return errorException.Error;
             }
         }
     }

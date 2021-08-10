@@ -32,12 +32,22 @@
             try
             {
                 var result = this.projectsService.GetProject(id);
+                if (result == null)
+                {
+                    throw new ProjectsException(ProjectsErrors.NotFound);
+                }
+
                 return new OkObjectResult(result);
             }
             catch (ProjectsException e)
             {
-                var error = new ObjectResult(e.ErrorMessage);
-                error.StatusCode = e.StatusCode;
+                return e.Error;
+            }
+            catch (Exception ex)
+            {
+                var errorException = new ProjectsException(ProjectsErrors.InternalServerError, ex);
+                var error = new ObjectResult(errorException.ErrorMessage);
+                error.StatusCode = errorException.StatusCode;
                 return error;
             }
         }
