@@ -5,17 +5,6 @@
 
     public class ProjectsException : Exception
     {
-        public enum ProjectsErrors
-        {
-            InternalServerError = 500,
-            BadRequest = 400,
-            NotFound = 404,
-        }
-
-        public ErrorMessage ErrorMessage { get; set; }
-
-        public int StatusCode { get; set; }
-
         public ProjectsException(ProjectsErrors code)
         {
             this.ErrorMessage = new ErrorMessage();
@@ -48,5 +37,16 @@
                     break;
             }
         }
+
+        public enum ProjectsErrors
+        {
+            InternalServerError = 500,
+            BadRequest = 400,
+            NotFound = 404,
+        }
+
+        public ErrorMessage ErrorMessage { get; set; }
+
+        public int StatusCode { get; set; }
     }
 }
