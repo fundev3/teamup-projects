@@ -25,7 +25,6 @@
                     var validationException = (ValidationException)exception;
                     this.ValidationError.Message = "Please review the errors, inconsistent data.";
 
-                    // this.ErrorValidations.Errors = validationException.Errors;
                     foreach (var error in validationException.Errors)
                     {
                         var myError = new Error();
