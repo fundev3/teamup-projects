@@ -46,9 +46,7 @@
             catch (Exception ex)
             {
                 var errorException = new ProjectsException(ProjectsErrors.InternalServerError, ex);
-                var error = new ObjectResult(errorException.ErrorMessage);
-                error.StatusCode = errorException.StatusCode;
-                return error;
+                return errorException.Error;
             }
         }
     }

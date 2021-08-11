@@ -48,7 +48,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
             {
                 return e.Error;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 var errorException = new ProjectsException(ProjectsErrors.InternalServerError, e);
                 return errorException.Error;

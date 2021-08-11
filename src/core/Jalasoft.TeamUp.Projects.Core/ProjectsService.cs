@@ -26,9 +26,9 @@
 
         public Project PostProject(Project project)
         {
+            project.Id = Guid.NewGuid();
             ProjectValidator validator = new ProjectValidator();
             validator.ValidateAndThrow(project);
-            project.Id = Guid.NewGuid();
             var result = this.projectsRepository.Add(project);
             return result;
         }
