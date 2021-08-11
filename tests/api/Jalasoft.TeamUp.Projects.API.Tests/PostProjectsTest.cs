@@ -40,6 +40,7 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
             this.mockProjectsService.Setup(service => service.PostProject(null)).Throws(new ProjectsException(ProjectsErrors.BadRequest, new FluentValidation.ValidationException("BadRequest")));
             var response = await this.postProject.CreateProject(request);
             var objectResult = Assert.IsType<ObjectResult>(response);
+            Assert.Equal(400, objectResult.StatusCode);
         }
     }
 }

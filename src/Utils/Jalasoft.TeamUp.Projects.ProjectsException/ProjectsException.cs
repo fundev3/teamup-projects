@@ -35,12 +35,6 @@
                     this.Error = new ObjectResult(this.ErrorMessage);
                     this.Error.StatusCode = this.StatusCode;
                     break;
-                case ProjectsErrors.NotFound:
-                    this.ErrorMessage.Message = "The resource couldn't be found";
-                    this.StatusCode = (int)ProjectsErrors.NotFound;
-                    this.Error = new ObjectResult(this.ErrorMessage);
-                    this.Error.StatusCode = this.StatusCode;
-                    break;
                 default:
                     break;
             }

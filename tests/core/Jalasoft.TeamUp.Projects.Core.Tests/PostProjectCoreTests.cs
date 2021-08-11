@@ -51,7 +51,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
         [Fact]
         public void PostProject_Returns_ValidationException()
         {
-            var stubProject = new Project()
+            var badProject = new Project()
             {
                 Id = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"),
                 Name = "Name Example",
@@ -61,7 +61,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
                     Name = "Jose Ecos",
                     IdResume = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")
                 },
-                Logo = "https://www.example.com/images/dinosaur.jpg",
+                Logo = "BAD LOGO FORMAT",
                 MemberList = new Contact[1]
                 {
                     new Contact
@@ -74,9 +74,9 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
                 TextInvitation = "You are invited to be part of TeamUp",
                 CreationDate = DateTime.Today.AddDays(-10)
             };
-            this.mockRepository.Setup(repository => repository.Add(stubProject)).Throws(new FluentValidation.ValidationException("BadRequest"));
+            this.mockRepository.Setup(repository => repository.Add(badProject)).Returns(new Project());
 
-            Assert.Throws<FluentValidation.ValidationException>(() => this.projectsService.PostProject(stubProject));
+            Assert.Throws<FluentValidation.ValidationException>(() => this.projectsService.PostProject(badProject));
         }
     }
 }
