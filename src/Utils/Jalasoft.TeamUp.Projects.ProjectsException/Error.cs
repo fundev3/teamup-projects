@@ -1,6 +1,6 @@
 ﻿namespace Jalasoft.TeamUp.Projects.ProjectsException
 {
-    public class ErrorDAO
+    public class Error
     {
         public string PropertyName { get; set; }
 
