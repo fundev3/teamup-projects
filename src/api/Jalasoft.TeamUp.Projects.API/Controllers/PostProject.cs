@@ -39,21 +39,19 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
                 var result = this.postProjectService.PostProject(data);
                 return new CreatedResult("v1/projects/:id", result);
             }
+            catch (ValidationException exVal)
+            {
+                var errorException = new ProjectsException(ProjectsErrors.BadRequest, exVal);
+                return errorException.Error;
+            }
             catch (ProjectsException e)
             {
-                return new ContentResult
-                {
-                    StatusCode = e.StatusCode,
-                    Content = e.ProjectsErrorMessage,
-                };
+                return e.Error;
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-                return new ContentResult
-                {
-                    StatusCode = 500,
-                    Content = "Something went wrong, please contact the TeamUp administrator.",
-                };
+                var errorException = new ProjectsException(ProjectsErrors.InternalServerError, e);
+                return errorException.Error;
             }
         }
     }

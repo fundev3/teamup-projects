@@ -20,54 +20,23 @@
 
         public Project GetProject(Guid id)
         {
-            try
-            {
-                var project = this.projectsRepository.GetById(id);
-                if (project == null)
-                {
-                    throw new ProjectsException(ProjectsException.ProjectsErros.NotFound);
-                }
-
-                return project;
-            }
-            catch (Exception)
-            {
-                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
-            }
+            var project = this.projectsRepository.GetById(id);
+            return project;
         }
 
         public Project PostProject(Project project)
         {
-            try
-            {
-                ProjectValidator validator = new ProjectValidator();
-                validator.ValidateAndThrow(project);
-                project.Id = Guid.NewGuid();
-                var result = this.projectsRepository.Add(project);
-                return result;
-            }
-            catch (Exception)
-            {
-                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
-            }
+            project.Id = Guid.NewGuid();
+            ProjectValidator validator = new ProjectValidator();
+            validator.ValidateAndThrow(project);
+            var result = this.projectsRepository.Add(project);
+            return result;
         }
 
         public Project[] GetProjects()
         {
-            try
-            {
                 var projects = this.projectsRepository.GetAll().ToArray();
-                if (projects == null)
-                {
-                    throw new ProjectsException(ProjectsException.ProjectsErros.NotFound);
-                }
-
                 return projects;
-            }
-            catch (Exception)
-            {
-                throw new ProjectsException(ProjectsException.ProjectsErros.InternalServerError);
-            }
         }
     }
 }

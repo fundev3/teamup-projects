@@ -46,13 +46,13 @@
         {
             // Arrange
             var request = this.mockHttpContext.Request;
-            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new ProjectsException(ProjectsException.ProjectsErros.NotFound));
+            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new ProjectsException(ProjectsErrors.NotFound));
 
             // Act
             var response = this.getProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
 
             // Assert
-            var notfountObjectResult = Assert.IsType<ContentResult>(response);
+            var notfountObjectResult = Assert.IsType<ObjectResult>(response);
         }
     }
 }
