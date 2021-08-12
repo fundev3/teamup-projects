@@ -30,7 +30,13 @@
         {
             try
             {
-                var result = this.projectsService.DeleteProject(id);
+                var result = this.projectsService.GetProject(id);
+                if (result == null)
+                {
+                    throw new ProjectsException(ProjectsErrors.NotFound);
+                }
+
+                this.projectsService.RemoveProject(id);
                 return new NoContentResult();
             }
             catch (ProjectsException e)

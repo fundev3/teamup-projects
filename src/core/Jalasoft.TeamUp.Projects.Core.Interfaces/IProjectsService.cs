@@ -11,6 +11,6 @@
 
         Project[] GetProjects();
 
-        public Project DeleteProject(Guid id);
+        public void RemoveProject(Guid id);
     }
 }

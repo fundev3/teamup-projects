@@ -40,11 +40,9 @@
             return project;
         }
 
-        public Project DeleteById(Guid id)
+        public void Remove(Guid id)
         {
-            Project project = collection.FindOneAndDelete(x => x.Id == id);
-
-            return project;
+           collection.FindOneAndDelete(x => x.Id == id);
         }
     }
 }

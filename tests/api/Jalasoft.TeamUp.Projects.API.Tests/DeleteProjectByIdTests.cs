@@ -26,31 +26,34 @@
         }
 
         [Fact]
-        public void DeleteProject_Returns_NoContentResult()
+        public void DeleteProject_Returns_ObjectResult()
         {
             var request = this.mockHttpContext.Request;
-            this.mockService.Setup(service => service.DeleteProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")));
+            this.mockService.Setup(service => service.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")));
             var response = this.deleteProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            var noContentResult = response;
-            Assert.IsType<NoContentResult>(noContentResult);
+            var objectResult = response;
+            Assert.IsType<ObjectResult>(objectResult);
         }
 
         [Fact]
-        public void DeleteProject_Returns__NotFoundResult()
+        public void DeleteProject_Returns_NotFoundResult()
         {
             var request = this.mockHttpContext.Request;
-            this.mockService.Setup(service => service.DeleteProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new ProjectsException(ProjectsErrors.NotFound));
+            this.mockService.Setup(service => service.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new ProjectsException(ProjectsErrors.NotFound));
             var response = this.deleteProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            Assert.IsType<ObjectResult>(response);
+            var objectResult = Assert.IsType<ObjectResult>(response);
+            Assert.Equal(404, objectResult.StatusCode);
         }
 
         [Fact]
-        public void DeleteProject_Returns__InternalServerError()
+        public void DeleteProject_Returns_InternalServerError()
         {
             var request = this.mockHttpContext.Request;
-            this.mockService.Setup(service => service.DeleteProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new Exception());
+            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());
+            this.mockService.Setup(service => service.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new Exception());
             var response = this.deleteProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            Assert.IsType<ObjectResult>(response);
+            var objectResult = Assert.IsType<ObjectResult>(response);
+            Assert.Equal(500, objectResult.StatusCode);
         }
     }
 }

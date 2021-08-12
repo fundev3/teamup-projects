@@ -75,13 +75,10 @@
             return project;
         }
 
-        public Project DeleteById(Guid id)
+        public void Remove(Guid id)
         {
-            var projectsList = new List<Project>(projects);
-            Project result = projectsList.FirstOrDefault(p => Equals(p.Id, id));
-            projectsList.Remove(result);
-            projects = new List<Project>(projectsList).ToArray();
-            return result;
+            int projectIndex = Array.IndexOf(projects, this.GetById(id));
+            projects = projects.Where((val, idx) => idx != projectIndex).ToArray();
         }
     }
 }

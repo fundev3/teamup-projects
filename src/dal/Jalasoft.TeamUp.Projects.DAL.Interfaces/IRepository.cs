@@ -12,6 +12,6 @@
 
         public T Add(T project);
 
-        public T DeleteById(Guid id);
+        public void Remove(Guid id);
     }
 }

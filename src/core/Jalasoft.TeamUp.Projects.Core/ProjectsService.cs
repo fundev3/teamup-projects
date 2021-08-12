@@ -39,10 +39,9 @@
                 return projects;
         }
 
-        public Project DeleteProject(Guid id)
+        public void RemoveProject(Guid id)
         {
-            var project = this.projectsRepository.DeleteById(id);
-            return project;
+            this.projectsRepository.Remove(id);
         }
     }
 }
