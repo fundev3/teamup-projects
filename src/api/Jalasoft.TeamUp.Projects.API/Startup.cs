@@ -22,7 +22,7 @@ namespace Jalasoft.TeamUp.Projects.API
 #if DEBUG
             builder.Services.AddScoped<IRepository<Project>, ProjectsMongoDbRepository>();
 #else
-            builder.Services.AddScoped<IRepository<Project>, ProjectsInMemoryRepository>();
+            builder.Services.AddScoped<IRepository<Project>, ProjectsMongoDbRepository>();
 #endif
         }
     }
