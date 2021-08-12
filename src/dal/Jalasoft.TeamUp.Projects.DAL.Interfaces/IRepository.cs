@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Jalasoft.TeamUp.Projects.Models;
 
     public interface IRepository<T>
     {
@@ -11,5 +12,7 @@
         public IEnumerable<T> GetAll();
 
         public T Add(T project);
+
+        public T UpdateProject(Project project);
     }
 }

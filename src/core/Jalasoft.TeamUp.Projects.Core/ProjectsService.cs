@@ -38,5 +38,13 @@
                 var projects = this.projectsRepository.GetAll().ToArray();
                 return projects;
         }
+
+        public Project UpdateProject(Project project)
+        {
+                ProjectValidator validator = new ProjectValidator();
+                validator.ValidateAndThrow(project);
+                var result = this.projectsRepository.UpdateProject(project);
+                return project;
+        }
     }
 }

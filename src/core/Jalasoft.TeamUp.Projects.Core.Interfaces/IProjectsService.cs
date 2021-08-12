@@ -10,5 +10,7 @@
         public Project GetProject(Guid id);
 
         Project[] GetProjects();
+
+        Project UpdateProject(Project projectUpd);
     }
 }

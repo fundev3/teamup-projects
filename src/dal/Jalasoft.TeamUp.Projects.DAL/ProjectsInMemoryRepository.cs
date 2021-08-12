@@ -74,5 +74,15 @@
             projects = new List<Project>(projects) { project }.ToArray();
             return project;
         }
+
+        public Project UpdateProject(Project project)
+        {
+            var projectsList = new List<Project>(projects);
+            Project result = projectsList.FirstOrDefault(p => Equals(p.Id, project.Id));
+            projectsList.Remove(result);
+            projectsList.Add(project);
+            projects = new List<Project>(projectsList).ToArray();
+            return project;
+        }
     }
 }
