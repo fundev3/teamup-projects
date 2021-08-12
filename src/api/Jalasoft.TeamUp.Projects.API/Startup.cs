@@ -20,7 +20,7 @@ namespace Jalasoft.TeamUp.Projects.API
             builder.Services.AddScoped<IHealthRepository, HealthRepository>();
             builder.Services.AddScoped<IProjectsService, ProjectsService>();
 #if DEBUG
-            builder.Services.AddScoped<IRepository<Project>, ProjectsMongoDbRepository>();
+            builder.Services.AddScoped<IRepository<Project>, ProjectsInMemoryRepository>();
 #else
             builder.Services.AddScoped<IRepository<Project>, ProjectsMongoDbRepository>();
 #endif
