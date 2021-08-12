@@ -74,5 +74,14 @@
             projects = new List<Project>(projects) { project }.ToArray();
             return project;
         }
+
+        public Project DeleteById(Guid id)
+        {
+            var projectsList = new List<Project>(projects);
+            Project result = projectsList.FirstOrDefault(p => Equals(p.Id, id));
+            projectsList.Remove(result);
+            projects = new List<Project>(projectsList).ToArray();
+            return result;
+        }
     }
 }

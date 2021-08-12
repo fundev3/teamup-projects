@@ -39,5 +39,12 @@
 
             return project;
         }
+
+        public Project DeleteById(Guid id)
+        {
+            Project project = collection.FindOneAndDelete(x => x.Id == id);
+
+            return project;
+        }
     }
 }

@@ -11,5 +11,7 @@
         public IEnumerable<T> GetAll();
 
         public T Add(T project);
+
+        public T DeleteById(Guid id);
     }
 }

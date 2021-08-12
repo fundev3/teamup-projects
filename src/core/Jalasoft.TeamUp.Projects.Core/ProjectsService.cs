@@ -38,5 +38,11 @@
                 var projects = this.projectsRepository.GetAll().ToArray();
                 return projects;
         }
+
+        public Project DeleteProject(Guid id)
+        {
+            var project = this.projectsRepository.DeleteById(id);
+            return project;
+        }
     }
 }

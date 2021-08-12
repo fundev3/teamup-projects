@@ -123,5 +123,19 @@
             // Assert
             Assert.Equal(2, result.Length);
         }
+
+        [Fact]
+        public void DeleteProjectById_ProcessSuccess()
+        {
+            // Arrange
+            var stubProject = new Project { Id = Guid.NewGuid() };
+            this.mockRepository.Setup(repository => repository.DeleteById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+
+            // Act
+            var result = this.service.DeleteProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
+
+            // Assert
+            Assert.IsType<Project>(result);
+        }
     }
 }
