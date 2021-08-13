@@ -26,17 +26,16 @@
         }
 
         [Fact]
-        public void DeleteProject_Returns_ObjectResult()
+        public void DeleteProject_IdIsValid_NoContentResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockService.Setup(service => service.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")));
-            var response = this.deleteProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            var objectResult = response;
-            Assert.IsType<ObjectResult>(objectResult);
+            this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());
+            Assert.IsType<NoContentResult>(this.deleteProject.Run(request, new Guid("5a7939fd-59de-44bd-a092-f5d8434584de")));
         }
 
         [Fact]
-        public void DeleteProject_Returns_NotFoundResult()
+        public void DeleteProject_IdIsNotValid_NotFoundResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockService.Setup(service => service.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Throws(new ProjectsException(ProjectsErrors.NotFound));
@@ -46,7 +45,7 @@
         }
 
         [Fact]
-        public void DeleteProject_Returns_InternalServerError()
+        public void DeleteProject_SystemError_InternalServerError()
         {
             var request = this.mockHttpContext.Request;
             this.mockService.Setup(service => service.GetProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(new Project());

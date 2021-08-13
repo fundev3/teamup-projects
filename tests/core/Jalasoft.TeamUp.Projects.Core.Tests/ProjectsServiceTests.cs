@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Jalasoft.TeamUp.Projects.DAL;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Jalasoft.TeamUp.Projects.ProjectsException;
@@ -74,7 +75,7 @@
         }
 
         [Fact]
-        public void GetProject_Returns_SingleProject()
+        public void GetProject_IdIsValid_SingleProject()
         {
             // Arrange
             var stubProject = new Project { Id = Guid.NewGuid() };
@@ -88,7 +89,7 @@
         }
 
         [Fact]
-        public void GetProject_Throws_ProjectsException()
+        public void GetProject_IdIsNotValid_NotFound()
         {
             // Arrange
             this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584df"))).Throws(new ProjectsException(ProjectsErrors.NotFound, new Exception()));
@@ -98,7 +99,7 @@
         }
 
         [Fact]
-        public void GetProjects_Returns_EmptyResult()
+        public void GetProjects_ProjectsDontExist_EmptyArray()
         {
             // Arrange
             var stubEmptyProjectList = new List<Project>();
@@ -112,7 +113,7 @@
         }
 
         [Fact]
-        public void GetProjects_Returns_AllItemsResult()
+        public void GetProjects_ProjectsExist_ProjectsArray()
         {
             // Arrange
             this.mockRepository.Setup(repository => repository.GetAll()).Returns(MockProjects());
@@ -125,17 +126,22 @@
         }
 
         [Fact]
-        public void DeleteProjectById_ProcessSuccess()
+        public void DeleteProjectById_IdIsValid_ProjectRemoved()
         {
             // Arrange
             var stubProject = new Project { Id = Guid.NewGuid() };
-            this.mockRepository.Setup(repository => repository.Remove(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")));
+
+            var memoryRepository = new ProjectsInMemoryRepository();
+            var projectService = new ProjectsService(memoryRepository);
+            var list = projectService.GetProjects();
+            var countBeforeDelete = list.Length;
 
             // Act
-            this.service.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
+            projectService.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
+            var countAfterDelete = projectService.GetProjects().Length;
 
             // Assert
-            Assert.True(true);
+            Assert.NotEqual(countBeforeDelete, countAfterDelete);
         }
     }
 }
