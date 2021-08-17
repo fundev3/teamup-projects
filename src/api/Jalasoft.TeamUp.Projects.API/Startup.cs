@@ -19,6 +19,7 @@ namespace Jalasoft.TeamUp.Projects.API
             builder.Services.AddScoped<IHealthService, HealthService>();
             builder.Services.AddScoped<IHealthRepository, HealthRepository>();
             builder.Services.AddScoped<IProjectsService, ProjectsService>();
+            builder.Services.AddScoped<InvitationService>();
 #if DEBUG
             builder.Services.AddScoped<IRepository<Project>, ProjectsInMemoryRepository>();
 #else
