@@ -10,17 +10,17 @@
     using Moq;
     using Xunit;
 
-    public class UpdateProjectTest
+    public class PatchProjectByIdTest
 {
     private readonly Mock<IProjectsService> mockProjectsService;
     private readonly DefaultHttpContext mockHttpContext;
-    private readonly UpdateProject updateProject;
+    private readonly PatchProjectById updateProject;
 
-    public UpdateProjectTest()
+    public PatchProjectByIdTest()
     {
         this.mockProjectsService = new Mock<IProjectsService>();
         this.mockHttpContext = new DefaultHttpContext();
-        this.updateProject = new UpdateProject(this.mockProjectsService.Object);
+        this.updateProject = new PatchProjectById(this.mockProjectsService.Object);
     }
 
     [Fact]
@@ -49,12 +49,28 @@
             TextInvitation = "You are invited to be part of TeamUp",
             CreationDate = DateTime.Today.AddDays(-10),
         };
-        var request = this.mockHttpContext.Request;
+        static Stream SetStream(string body)
+            {
+                var stream = new MemoryStream();
+                var writer = new StreamWriter(stream);
+                writer.Write(body);
+                writer.Flush();
+                stream.Position = 0;
+                return stream;
+            }
+
+        HttpRequest request = this.mockHttpContext.Request;
+        request.Body = SetStream(
+                @"[
+        {""op"" : ""replace"", ""path"" : ""/name"", ""value"" : ""Tony""},
+        { ""op"" : ""replace"", ""path"" : ""/description"", ""value"" : ""asff""}
+        ]");
         this.mockProjectsService.Setup(service => service.GetProject(new Guid("5a7939fd-59de-33bd-a092-f5d8434584de"))).Returns(stubProject);
         this.mockProjectsService.Setup(service => service.UpdateProject(null)).Returns(stubProject);
-        var response = await this.updateProject.UpdateProjectTask(request, new Guid("5a7939fd-59de-33bd-a092-f5d8434584de"));
-        var createdResult = Assert.IsType<CreatedResult>(response);
-        Assert.IsType<Project>(createdResult.Value);
-    }
+        var response = await this.updateProject.UpdateProject(request, new Guid("5a7939fd-59de-33bd-a092-f5d8434584de"));
+        var okObjectResult = Assert.IsType<OkObjectResult>(response);
+
+        Assert.Equal(200, okObjectResult.StatusCode);
+        }
 }
 }

@@ -17,11 +17,11 @@
     using Microsoft.OpenApi.Models;
     using Newtonsoft.Json;
 
-    public class UpdateProject
+    public class PatchProjectById
     {
         private readonly IProjectsService updateProjectService;
 
-        public UpdateProject(IProjectsService updateProjectService)
+        public PatchProjectById(IProjectsService updateProjectService)
         {
             this.updateProjectService = updateProjectService;
         }
@@ -31,7 +31,7 @@
         [OpenApiRequestBody("application/json", typeof(JsonPatchDocument<Project>), Description = "JSON request body")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
-        public async Task<IActionResult> UpdateProjectTask(
+        public async Task<IActionResult> UpdateProject(
             [HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "v1/projects/{id:guid}")] HttpRequest req, Guid id)
         {
             try
@@ -42,7 +42,7 @@
                 var data = JsonConvert.DeserializeObject<JsonPatchDocument<Project>>(requestBody);
                 data.ApplyTo(projectUpd);
                 var result = this.updateProjectService.UpdateProject(projectUpd);
-                return new CreatedResult("v1/projects/:id", result);
+                return new OkObjectResult(result);
             }
             catch (ValidationException exVal)
             {
