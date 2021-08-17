@@ -7,7 +7,6 @@
     using Jalasoft.TeamUp.Projects.Core.Validators;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
-    using Jalasoft.TeamUp.Projects.ProjectsException;
 
     public class ProjectsService : IProjectsService
     {

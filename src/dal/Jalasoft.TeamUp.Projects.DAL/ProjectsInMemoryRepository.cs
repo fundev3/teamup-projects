@@ -77,8 +77,7 @@
 
         public void Remove(Guid id)
         {
-            int projectIndex = Array.IndexOf(projects, this.GetById(id));
-            projects = projects.Where((val, idx) => idx != projectIndex).ToArray();
+            projects.Where(x => x.Id != id).ToArray();
         }
     }
 }

@@ -5,7 +5,6 @@
     using Jalasoft.TeamUp.Projects.DAL;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
-    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Moq;
     using Xunit;
 
@@ -86,16 +85,6 @@
 
             // Assert
             Assert.NotNull(result);
-        }
-
-        [Fact]
-        public void GetProject_IdIsNotValid_NotFound()
-        {
-            // Arrange
-            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584df"))).Throws(new ProjectsException(ProjectsErrors.NotFound, new Exception()));
-
-            // Assert
-            Assert.Throws<ProjectsException>(() => this.service.GetProject(Guid.Parse("4a7939fd-59de-44bd-a092-f5d8434584df")));
         }
 
         [Fact]
