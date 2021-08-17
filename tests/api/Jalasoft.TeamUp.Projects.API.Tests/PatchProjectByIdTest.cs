@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public async void UpdateProject_Returns_CreatedResult()
+        public async void UpdateProjectById_IdIsValid_OkObjectResult()
         {
             var stubProject = new Project
             {

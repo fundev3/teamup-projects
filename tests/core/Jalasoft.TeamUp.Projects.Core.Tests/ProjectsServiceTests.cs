@@ -134,7 +134,7 @@
         }
 
         [Fact]
-        public void UpdateProject_Returns_SingleUpdatedProject()
+        public void UpdateProjectById_ProjectIsValid_ProjectUpdated()
         {
             // Arrange
             var stubProject = new Project
