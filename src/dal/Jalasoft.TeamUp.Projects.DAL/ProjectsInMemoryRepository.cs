@@ -77,7 +77,7 @@
 
         public void Remove(Guid id)
         {
-            projects.Where(x => x.Id != id).ToArray();
+            projects = projects.Where(x => x.Id != id).ToArray();
         }
     }
 }
