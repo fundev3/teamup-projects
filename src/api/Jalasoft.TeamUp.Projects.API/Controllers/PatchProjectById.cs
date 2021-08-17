@@ -37,6 +37,10 @@
             try
             {
                 var projectUpd = this.updateProjectService.GetProject(id);
+                if (projectUpd == null)
+                {
+                    throw new ProjectsException(ProjectsErrors.NotFound);
+                }
 
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 var data = JsonConvert.DeserializeObject<JsonPatchDocument<Project>>(requestBody);

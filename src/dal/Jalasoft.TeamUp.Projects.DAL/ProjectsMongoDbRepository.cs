@@ -40,7 +40,12 @@
             return project;
         }
 
-        public Project UpdateProject(Project project)
+        public void Remove(Guid id)
+        {
+           collection.FindOneAndDelete(x => x.Id == id);
+        }
+
+        public Project UpdateById(Project project)
         {
             var filter = Builders<Project>.Filter.Eq(s => s.Id, project.Id);
             var proj = collection.ReplaceOne(filter, project);

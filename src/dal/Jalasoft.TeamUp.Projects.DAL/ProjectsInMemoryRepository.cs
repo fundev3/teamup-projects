@@ -75,7 +75,12 @@
             return project;
         }
 
-        public Project UpdateProject(Project project)
+        public void Remove(Guid id)
+        {
+            projects = projects.Where(x => x.Id != id).ToArray();
+        }
+
+        public Project UpdateById(Project project)
         {
             var projectsList = new List<Project>(projects);
             Project result = projectsList.FirstOrDefault(p => Equals(p.Id, project.Id));

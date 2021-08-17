@@ -18,6 +18,7 @@
 		<ProjectReference Include="..\..\core\Jalasoft.TeamUp.Projects.Core\Jalasoft.TeamUp.Projects.Core.csproj" />
 		<ProjectReference Include="..\..\dal\Jalasoft.TeamUp.Projects.DAL\Jalasoft.TeamUp.Projects.DAL.csproj" />
 		<ProjectReference Include="..\..\models\Jalasoft.TeamUp.Projects.Models\Jalasoft.TeamUp.Projects.Models.csproj" />
+		<ProjectReference Include="..\..\Utils\Jalasoft.TeamUp.Projects.ProjectsException\Jalasoft.TeamUp.Projects.ProjectsException.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="host.json">
