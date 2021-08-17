@@ -10,5 +10,7 @@
         public Project GetProject(Guid id);
 
         Project[] GetProjects();
+
+        public void RemoveProject(Guid id);
     }
 }

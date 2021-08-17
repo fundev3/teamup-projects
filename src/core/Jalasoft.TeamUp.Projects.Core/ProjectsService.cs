@@ -7,7 +7,6 @@
     using Jalasoft.TeamUp.Projects.Core.Validators;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
-    using Jalasoft.TeamUp.Projects.ProjectsException;
 
     public class ProjectsService : IProjectsService
     {
@@ -37,6 +36,11 @@
         {
                 var projects = this.projectsRepository.GetAll().ToArray();
                 return projects;
+        }
+
+        public void RemoveProject(Guid id)
+        {
+            this.projectsRepository.Remove(id);
         }
     }
 }
