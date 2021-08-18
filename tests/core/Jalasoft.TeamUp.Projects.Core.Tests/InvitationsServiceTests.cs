@@ -80,5 +80,33 @@
             // Assert
             Assert.Empty(result);
         }
+
+        [Fact]
+        public void GetInvitationsByProjectId_ProjectIdIsValid_EnumerableInvitations()
+        {
+            // Arrange
+            var stubInvitation = new Invitation { Id = Guid.NewGuid() };
+            this.mockRepository.Setup(repository => repository.GetAllInvitationsByProjectId("f2879e14-fd99-4364-8e18-7a1a07f3ea55")).Returns(MockInvitations);
+
+            // Act
+            var result = this.service.GetInvitationsByProjectId("f2879e14-fd99-4364-8e18-7a1a07f3ea55");
+
+            // Assert
+            Assert.IsType<Invitation[]>(result);
+        }
+
+        [Fact]
+        public void GetInvitationsByProjectId_InvitationsDontExist_EmptyArray()
+        {
+            // Arrange
+            var stubEmptyInvitationList = new List<Invitation>();
+            this.mockRepository.Setup(repository => repository.GetAllInvitationsByProjectId("f2879e14-fd99-4364-8e18-7a1a07f3ea77")).Returns(stubEmptyInvitationList);
+
+            // Act
+            var result = this.service.GetInvitationsByProjectId("f2879e14-fd99-4364-8e18-7a1a07f3ea77");
+
+            // Assert
+            Assert.Empty(result);
+        }
     }
 }
