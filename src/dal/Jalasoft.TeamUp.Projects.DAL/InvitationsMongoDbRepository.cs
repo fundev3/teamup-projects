@@ -8,13 +8,13 @@
     using MongoDB.Bson;
     using MongoDB.Driver;
 
-    public class InvitationsRepository : IInvitationsRepository
+    public class InvitationsMongoDbRepository : IInvitationsRepository
     {
         private static MongoClient client;
         private static IMongoDatabase database;
         private static IMongoCollection<Invitation> collection;
 
-        public InvitationsRepository()
+        public InvitationsMongoDbRepository()
         {
             string stringConnection = Environment.GetEnvironmentVariable("MongoSessionServices", EnvironmentVariableTarget.Process);
             client = new MongoClient(stringConnection);
