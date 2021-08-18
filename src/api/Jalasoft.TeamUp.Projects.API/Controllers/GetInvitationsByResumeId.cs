@@ -16,7 +16,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
 
     public class GetInvitationsByResumeId
     {
-        private readonly IProjectsService projectService;
+        /*private readonly IProjectsService projectService;
 
         public GetInvitationsByResumeId(IProjectsService projectService)
         {
@@ -31,7 +31,6 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/resumes/{id:int}/invitations/")] HttpRequest req, int id)
         {
-           
-        }
+        }*/
     }
 }

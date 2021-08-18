@@ -14,7 +14,7 @@
 
         public string ResumeName { get; set; }
 
-        public string PictureName { get; set; }
+        public string PictureResume { get; set; }
 
         public string TextInvitation { get; set; }
 

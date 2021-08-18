@@ -6,5 +6,7 @@
     public interface IInvitationsService
     {
         Invitation[] GetInvitationsByResumeId(int resumeId);
+
+        Invitation[] GetInvitationsByProjectId(string projectId);
     }
 }
