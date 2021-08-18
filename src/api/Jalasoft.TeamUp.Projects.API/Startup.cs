@@ -22,7 +22,7 @@ namespace Jalasoft.TeamUp.Projects.API
             builder.Services.AddScoped<IInvitationsService, InvitationsService>();
 #if DEBUG
             builder.Services.AddScoped<IRepository<Project>, ProjectsMongoDbRepository>();
-            builder.Services.AddScoped<IRepository<Invitation>, InvitationsRepository>();
+            builder.Services.AddScoped<IInvitationsRepository, InvitationsRepository>();
 #else
             builder.Services.AddScoped<IRepository<Project>, ProjectsInMemoryRepository>();
 #endif
