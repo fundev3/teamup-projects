@@ -36,16 +36,16 @@
         {
             try
             {
-                var projectUpd = this.updateProjectService.GetProject(id);
-                if (projectUpd == null)
+                var project = this.updateProjectService.GetProject(id);
+                if (project == null)
                 {
                     throw new ProjectsException(ProjectsErrors.NotFound);
                 }
 
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 var data = JsonConvert.DeserializeObject<JsonPatchDocument<Project>>(requestBody);
-                data.ApplyTo(projectUpd);
-                var result = this.updateProjectService.UpdateProject(projectUpd);
+                data.ApplyTo(project);
+                var result = this.updateProjectService.UpdateProject(project);
                 return new OkObjectResult(result);
             }
             catch (ValidationException exVal)

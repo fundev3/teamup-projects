@@ -25,6 +25,7 @@
 	  <ProjectReference Include="..\..\..\src\dal\Jalasoft.TeamUp.Projects.DAL.Interfaces\Jalasoft.TeamUp.Projects.DAL.Interfaces.csproj" />
 	  <ProjectReference Include="..\..\..\src\dal\Jalasoft.TeamUp.Projects.DAL\Jalasoft.TeamUp.Projects.DAL.csproj" />
 	  <ProjectReference Include="..\..\..\src\models\Jalasoft.TeamUp.Projects.Models\Jalasoft.TeamUp.Projects.Models.csproj" />
+	  <ProjectReference Include="..\..\api\Jalasoft.TeamUp.Projects.API.Tests\Jalasoft.TeamUp.Projects.API.Tests.csproj" />
 	</ItemGroup>
 
 </Project>

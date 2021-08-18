@@ -15,6 +15,6 @@
 
         public void Remove(Guid id);
 
-        public T UpdateById(Project project);
+        public T UpdateById(T project);
     }
 }
