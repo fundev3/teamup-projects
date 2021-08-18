@@ -25,7 +25,7 @@
         }
 
         [Fact]
-        public void GetInvitationsByResumeId_Returns_OkObjectResult()
+        public void GetInvitationsByResumeId_IdIsValid_OkObjectResult()
         {
             // Arrange
             var request = this.mockHttpContext.Request;
@@ -40,17 +40,18 @@
         }
 
         [Fact]
-        public void GetInvitationsByResumeId_Returns_NotFoundResult()
+        public void GetInvitationsByResumeId_IdIsNotValid_NotFoundResult()
         {
             // Arrange
             var request = this.mockHttpContext.Request;
-            this.mockService.Setup(service => service.GetInvitationsByResumeId(3)).Throws(new ProjectsException(ProjectsErrors.NotFound));
+            this.mockService.Setup(service => service.GetInvitationsByResumeId(3)).Returns((Invitation[])null);
 
             // Act
             var response = this.getInvitations.Run(request, 3);
 
             // Assert
             var notfountObjectResult = Assert.IsType<ObjectResult>(response);
+            Assert.Equal(404, notfountObjectResult.StatusCode);
         }
     }
 }
