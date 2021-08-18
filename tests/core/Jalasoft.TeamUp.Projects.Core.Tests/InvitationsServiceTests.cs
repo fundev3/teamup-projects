@@ -82,7 +82,7 @@
         }
 
         [Fact]
-        public void GetInvitationsByProjectId_ProjectExist_InvitationsArray()
+        public void GetInvitationsByProjectId_ProjectIdIsValid_InvitationsArray()
         {
             // Arrange
             var stubInvitation = new Invitation { Id = Guid.NewGuid() };
@@ -96,7 +96,7 @@
         }
 
         [Fact]
-        public void GetInvitationsByProjectId_ProjectDontExist_EmptyArray()
+        public void GetInvitationsByProjectId_InvitationsDontExist_EmptyArray()
         {
             // Arrange
             var stubEmptyInvitationList = new List<Invitation>();
