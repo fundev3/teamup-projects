@@ -48,6 +48,11 @@
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Invitation> GetAllInvitationsByProjectId(string projectId)
+        {
+            return invitations.Where(x => Equals(x.ProjectId, projectId));
+        }
+
         public IEnumerable<Invitation> GetAllInvitationsByResumeId(int resumeId)
         {
             return invitations.Where(x => Equals(x.ResumeId, resumeId));

@@ -15,6 +15,12 @@
             this.invitationsRepository = invitationsRepository;
         }
 
+        public Invitation[] GetInvitationsByProjectId(string projectId)
+        {
+            var result = this.invitationsRepository.GetAllInvitationsByProjectId(projectId).ToArray();
+            return result;
+        }
+
         public Invitation[] GetInvitationsByResumeId(int resumeId)
         {
             return this.invitationsRepository.GetAllInvitationsByResumeId(resumeId).ToArray();

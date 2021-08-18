@@ -7,5 +7,7 @@
     public interface IInvitationsRepository : IRepository<Invitation>
     {
         public IEnumerable<Invitation> GetAllInvitationsByResumeId(int resumeId);
+
+        public IEnumerable<Invitation> GetAllInvitationsByProjectId(string projectId);
     }
 }

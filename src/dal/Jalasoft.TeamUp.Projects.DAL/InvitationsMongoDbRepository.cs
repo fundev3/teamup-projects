@@ -33,6 +33,11 @@
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Invitation> GetAllInvitationsByProjectId(string projectId)
+        {
+            return collection.Find(x => x.ProjectId == projectId).ToEnumerable<Invitation>();
+        }
+
         public IEnumerable<Invitation> GetAllInvitationsByResumeId(int resumeId)
         {
             return collection.Find(x => x.ResumeId == resumeId).ToEnumerable<Invitation>();
