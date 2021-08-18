@@ -4,7 +4,8 @@
     using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IProjectsInMemoryRepository : IRepository<Project>
+    public interface IInvitationsRepository : IRepository<Invitation>
     {
+        public IEnumerable<Invitation> GetAllInvitationsByResumeId(int resumeId);
     }
 }
