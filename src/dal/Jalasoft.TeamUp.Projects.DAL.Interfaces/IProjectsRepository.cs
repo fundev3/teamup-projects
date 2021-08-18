@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.Models;
 
-    public interface IProjectsInMemoryRepository : IRepository<Project>
+    public interface IProjectsRepository : IRepository<Project>
     {
     }
 }
