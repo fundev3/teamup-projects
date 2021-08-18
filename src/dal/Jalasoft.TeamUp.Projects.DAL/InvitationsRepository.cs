@@ -42,5 +42,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
