@@ -21,10 +21,10 @@ namespace Jalasoft.TeamUp.Projects.API
             builder.Services.AddScoped<IProjectsService, ProjectsService>();
             builder.Services.AddScoped<IInvitationsService, InvitationsService>();
 #if DEBUG
+            builder.Services.AddScoped<IRepository<Project>, ProjectsInMemoryRepository>();
+#else
             builder.Services.AddScoped<IRepository<Project>, ProjectsMongoDbRepository>();
             builder.Services.AddScoped<IInvitationsRepository, InvitationsRepository>();
-#else
-            builder.Services.AddScoped<IRepository<Project>, ProjectsInMemoryRepository>();
 #endif
         }
     }
