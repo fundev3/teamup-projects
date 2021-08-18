@@ -74,5 +74,10 @@
             projects = new List<Project>(projects) { project }.ToArray();
             return project;
         }
+
+        public void Remove(Guid id)
+        {
+            projects = projects.Where(x => x.Id != id).ToArray();
+        }
     }
 }
