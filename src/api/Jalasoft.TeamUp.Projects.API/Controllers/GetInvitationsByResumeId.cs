@@ -4,7 +4,9 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
     using System.IO;
     using System.Net;
     using System.Threading.Tasks;
+    using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.ProjectsException;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Azure.WebJobs;
@@ -16,21 +18,40 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
 
     public class GetInvitationsByResumeId
     {
-        /*private readonly IProjectsService projectService;
+        private readonly IInvitationsService invitationsService;
 
-        public GetInvitationsByResumeId(IProjectsService projectService)
+        public GetInvitationsByResumeId(IInvitationsService invitationsService)
         {
-            this.projectService = projectService;
+            this.invitationsService = invitationsService;
         }
 
         [FunctionName("GetInvitationsByResumeId")]
-        [OpenApiOperation(operationId: "GetInvitationsByResumeId", tags: new[] { "Projects" })]
-        [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(int), Description = "The project identifier.")]
+        [OpenApiOperation(operationId: "GetInvitationsByResumeId", tags: new[] { "Invitations" })]
+        [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(int), Description = "The invitation identifier.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Invitation), Description = "Successful response")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
-        public static async Task<IActionResult> Run(
+        public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/resumes/{id:int}/invitations/")] HttpRequest req, int id)
         {
-        }*/
+            try
+            {
+                var result = this.invitationsService.GetInvitationsByResumeId(id);
+                if (result == null)
+                {
+                    throw new ProjectsException(ProjectsErrors.NotFound);
+                }
+
+                return new OkObjectResult(result);
+            }
+            catch (ProjectsException e)
+            {
+                return e.Error;
+            }
+            catch (Exception ex)
+            {
+                var errorException = new ProjectsException(ProjectsErrors.InternalServerError, ex);
+                return errorException.Error;
+            }
+        }
     }
 }

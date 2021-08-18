@@ -1,10 +1,7 @@
 namespace Jalasoft.TeamUp.Projects.API.Controllers
 {
     using System;
-    using System.IO;
     using System.Net;
-    using System.Threading.Tasks;
-    using Jalasoft.TeamUp.Projects.Core;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.ProjectsException;
     using Microsoft.AspNetCore.Http;
@@ -12,9 +9,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-    using Microsoft.Extensions.Logging;
     using Microsoft.OpenApi.Models;
-    using Newtonsoft.Json;
 
     public class GetInvitationByProjectId
     {
