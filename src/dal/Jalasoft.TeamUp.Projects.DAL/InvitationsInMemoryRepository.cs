@@ -38,9 +38,10 @@
             }
         };
 
-        public Invitation Add(Invitation project)
+        public Invitation Add(Invitation invitation)
         {
-            throw new NotImplementedException();
+            invitations = new List<Invitation>(invitations) { invitation }.ToArray();
+            return invitation;
         }
 
         public IEnumerable<Invitation> GetAll()

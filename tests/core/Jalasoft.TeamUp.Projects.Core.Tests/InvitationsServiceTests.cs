@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Jalasoft.TeamUp.Projects.API.Tests.Utils;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Moq;
@@ -107,6 +108,24 @@
 
             // Assert
             Assert.Empty(result);
+        }
+
+        [Fact]
+        public void PostInvitation_Return_Invitation()
+        {
+            var stubInvitation = StubInvitation.GetStubInvitation();
+            this.mockRepository.Setup(repository => repository.Add(stubInvitation)).Returns(new Invitation());
+            var result = this.service.PostInvitation(stubInvitation);
+            Assert.IsType<Invitation>(result);
+        }
+
+        [Fact]
+        public void PostInvitation_Returns_ValidationException()
+        {
+            var badInvitation = StubInvitation.GetBadStubInvitation();
+            this.mockRepository.Setup(repository => repository.Add(badInvitation)).Returns(new Invitation());
+
+            Assert.Throws<FluentValidation.ValidationException>(() => this.service.PostInvitation(badInvitation));
         }
     }
 }

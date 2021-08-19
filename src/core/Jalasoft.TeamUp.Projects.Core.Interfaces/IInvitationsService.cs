@@ -8,5 +8,7 @@
         Invitation[] GetInvitationsByResumeId(int resumeId);
 
         Invitation[] GetInvitationsByProjectId(string projectId);
+
+        Invitation PostInvitation(Invitation invitation);
     }
 }
