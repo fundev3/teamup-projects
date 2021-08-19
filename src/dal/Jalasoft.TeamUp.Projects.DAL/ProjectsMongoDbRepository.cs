@@ -7,7 +7,7 @@
     using MongoDB.Bson;
     using MongoDB.Driver;
 
-    public class ProjectsMongoDbRepository : IProjectsMongoDbRepository
+    public class ProjectsMongoDbRepository : IProjectsRepository
     {
         private static MongoClient client;
         private static IMongoDatabase database;

@@ -11,12 +11,12 @@
 
     public class ProjectsServiceTests
     {
-        private readonly Mock<IRepository<Project>> mockRepository;
+        private readonly Mock<IProjectsRepository> mockRepository;
         private readonly ProjectsService service;
 
         public ProjectsServiceTests()
         {
-            this.mockRepository = new Mock<IRepository<Project>>();
+            this.mockRepository = new Mock<IProjectsRepository>();
             this.service = new ProjectsService(this.mockRepository.Object);
         }
 

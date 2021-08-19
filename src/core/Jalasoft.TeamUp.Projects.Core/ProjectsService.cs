@@ -10,9 +10,9 @@
 
     public class ProjectsService : IProjectsService
     {
-        private readonly IRepository<Project> projectsRepository;
+        private readonly IProjectsRepository projectsRepository;
 
-        public ProjectsService(IRepository<Project> projectsRepository)
+        public ProjectsService(IProjectsRepository projectsRepository)
         {
             this.projectsRepository = projectsRepository;
         }
