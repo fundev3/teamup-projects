@@ -24,20 +24,20 @@
         }
 
         [Fact]
-        public async void PostInvitation_Returns_CreateInvitation_Invitation()
+        public async void PostInvitation_ValidInvitation_CreatedResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockInvitationsService.Setup(service => service.PostInvitation(null)).Returns(new Invitation() { ProjectName = "TeamUp" });
             var response = await this.postInvitation.RunAsync(request);
-            var okObjectResult = Assert.IsType<CreatedResult>(response);
-            Assert.IsType<Invitation>(okObjectResult.Value);
+            var createdResult = Assert.IsType<CreatedResult>(response);
+            Assert.Equal(201, createdResult.StatusCode);
         }
 
         [Fact]
-        public async void PostInvitation_Returns_BadRequest()
+        public async void PostInvitation_InvalidInvitation_BadRequestResult()
         {
             var request = this.mockHttpContext.Request;
-            this.mockInvitationsService.Setup(service => service.PostInvitation(null)).Throws(new ProjectsException(ProjectsErrors.BadRequest, new FluentValidation.ValidationException("BadRequest")));
+            this.mockInvitationsService.Setup(service => service.PostInvitation(null)).Throws(new FluentValidation.ValidationException("BadRequest"));
             var response = await this.postInvitation.RunAsync(request);
             var objectResult = Assert.IsType<ObjectResult>(response);
             Assert.Equal(400, objectResult.StatusCode);

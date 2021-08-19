@@ -25,10 +25,10 @@
             this.invitationService = invitationService;
         }
 
-        [FunctionName("PostInvitationByProjectId")]
-        [OpenApiOperation(operationId: "PostInvitationByProjectId", tags: new[] { "Invitations" })]
+        [FunctionName("PostInvitation")]
+        [OpenApiOperation(operationId: "PostInvitation", tags: new[] { "Invitations" })]
         [OpenApiRequestBody("application/json", typeof(Invitation), Description = "JSON request body")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(Invitation[]), Description = "Successful response")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(Invitation), Description = "Successful response")]
         public async Task<IActionResult> RunAsync(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/invitations")] HttpRequest req)
         {
