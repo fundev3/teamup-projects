@@ -13,6 +13,6 @@
 
         public void RemoveProject(Guid id);
 
-        Project UpdateProject(Project projectUpd);
+        Project UpdateProject(Project project);
     }
 }
