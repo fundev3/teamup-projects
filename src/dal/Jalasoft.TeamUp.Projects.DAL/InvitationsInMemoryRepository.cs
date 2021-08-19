@@ -60,7 +60,7 @@
 
         public Invitation GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return invitations.FirstOrDefault(x => Equals(x.Id, id));
         }
 
         public void Remove(Guid id)
@@ -68,9 +68,14 @@
             throw new NotImplementedException();
         }
 
-        public Invitation UpdateById(Invitation project)
+        public Invitation UpdateById(Invitation invitation)
         {
-            throw new NotImplementedException();
+            var invitationsList = new List<Invitation>(invitations);
+            Invitation result = invitationsList.FirstOrDefault(x => Equals(x.Id, invitation.Id));
+            invitationsList.Remove(result);
+            invitationsList.Add(invitation);
+            invitations = new List<Invitation>(invitationsList).ToArray();
+            return invitation;
         }
     }
 }

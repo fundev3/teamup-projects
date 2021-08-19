@@ -45,7 +45,7 @@
 
         public Invitation GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return collection.Find(x => x.Id == id).FirstOrDefault();
         }
 
         public void Remove(Guid id)
@@ -53,9 +53,12 @@
             throw new NotImplementedException();
         }
 
-        public Invitation UpdateById(Invitation project)
+        public Invitation UpdateById(Invitation invitation)
         {
-            throw new NotImplementedException();
+            var filter = Builders<Invitation>.Filter.Eq(s => s.Id, invitation.Id);
+            var proj = collection.ReplaceOne(filter, invitation);
+
+            return invitation;
         }
     }
 }
