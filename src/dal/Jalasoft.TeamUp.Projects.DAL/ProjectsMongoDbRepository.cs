@@ -44,5 +44,13 @@
         {
            collection.FindOneAndDelete(x => x.Id == id);
         }
+
+        public Project UpdateById(Project project)
+        {
+            var filter = Builders<Project>.Filter.Eq(s => s.Id, project.Id);
+            var proj = collection.ReplaceOne(filter, project);
+
+            return project;
+        }
     }
 }

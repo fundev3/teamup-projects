@@ -13,5 +13,7 @@
         public T Add(T project);
 
         public void Remove(Guid id);
+
+        public T UpdateById(T project);
     }
 }

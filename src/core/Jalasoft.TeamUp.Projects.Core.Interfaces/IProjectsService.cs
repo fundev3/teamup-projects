@@ -12,5 +12,7 @@
         Project[] GetProjects();
 
         public void RemoveProject(Guid id);
+
+        Project UpdateProject(Project project);
     }
 }

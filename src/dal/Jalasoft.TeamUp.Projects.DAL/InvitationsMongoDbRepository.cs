@@ -52,5 +52,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public Invitation UpdateById(Invitation project)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

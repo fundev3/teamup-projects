@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Jalasoft.TeamUp.Projects.API.Tests.Utils;
     using Jalasoft.TeamUp.Projects.DAL;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
@@ -10,12 +11,12 @@
 
     public class ProjectsServiceTests
     {
-        private readonly Mock<IRepository<Project>> mockRepository;
+        private readonly Mock<IProjectsRepository> mockRepository;
         private readonly ProjectsService service;
 
         public ProjectsServiceTests()
         {
-            this.mockRepository = new Mock<IRepository<Project>>();
+            this.mockRepository = new Mock<IProjectsRepository>();
             this.service = new ProjectsService(this.mockRepository.Object);
         }
 
@@ -131,6 +132,21 @@
 
             // Assert
             Assert.NotEqual(countBeforeDelete, countAfterDelete);
+        }
+
+        [Fact]
+        public void UpdateProjectById_ProjectIsValid_ProjectUpdated()
+        {
+            // Arrange
+            Project stubProject = StubProject.GetStubProject();
+
+            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubProject);
+
+            // Act
+            var result = this.service.UpdateProject(stubProject);
+
+            // Assert
+            Assert.IsType<Project>(result);
         }
     }
 }
