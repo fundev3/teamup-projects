@@ -8,30 +8,30 @@
     {
         public InvitationValidator()
         {
+            this.RuleFor(invitation => invitation.ResumeName)
+                .Length(3, 15)
+                .Matches("^[a-zñ A-ZÑ]+$")
+                .NotEmpty();
+
             this.RuleFor(invitation => invitation.Id)
-                .NotEmpty().NotNull();
+                .NotEmpty();
 
             this.RuleFor(invitation => invitation.ProjectId)
-                .NotEmpty().NotNull();
+                .NotEmpty();
 
             this.RuleFor(invitation => invitation.ResumeId)
-                .NotEmpty().NotNull();
+                .NotEmpty();
 
             this.RuleFor(invitation => invitation.ProjectName)
                 .Length(3, 15)
                 .Matches("^[a-zñ A-ZÑ]+$")
-                .NotEmpty().NotNull();
-
-            this.RuleFor(invitation => invitation.ResumeName)
-                .Length(3, 15)
-                .Matches("^[a-zñ A-ZÑ]+$")
-                .NotEmpty().NotNull();
+                .NotEmpty();
 
             this.RuleFor(invitation => invitation.TextInvitation)
                 .MaximumLength(160);
 
             this.RuleFor(invitation => invitation.Status)
-                .Matches("^[a-zñ A-ZÑ]+$");
+                .Matches("^(Invited|Rejected|Accepted)$");
 
             this.RuleFor(invitation => invitation.PictureResume)
                 .Matches("[^\\s]+(.*?)\\.(jpg|jpeg|png|JPG|JPEG|PNG)$");

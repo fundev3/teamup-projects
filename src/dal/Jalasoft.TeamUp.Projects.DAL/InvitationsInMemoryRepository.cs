@@ -71,7 +71,7 @@
         public Invitation UpdateById(Invitation invitation)
         {
             var invitationsList = new List<Invitation>(invitations);
-            Invitation result = invitationsList.FirstOrDefault(x => Equals(x.Id, invitation.Id));
+            Invitation result = invitations.FirstOrDefault(x => Equals(x.Id, invitation.Id));
             invitationsList.Remove(result);
             invitationsList.Add(invitation);
             invitations = new List<Invitation>(invitationsList).ToArray();

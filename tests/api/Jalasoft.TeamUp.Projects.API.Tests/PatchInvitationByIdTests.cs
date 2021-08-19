@@ -29,6 +29,12 @@
         [InlineData(@"[
         {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Accepted""}
         ]")]
+        [InlineData(@"[
+        {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Rejected""}
+        ]")]
+        [InlineData(@"[
+        {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Invited""}
+        ]")]
         public async void PatchInvitationById_IdIsValid_OkObjectResult(string body)
         {
             Invitation stubInvitation = StubInvitation.GetStubInvitation();
@@ -47,6 +53,12 @@
         [InlineData(@"[
         {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Accepted""}
         ]")]
+        [InlineData(@"[
+        {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Rejected""}
+        ]")]
+        [InlineData(@"[
+        {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Invited""}
+        ]")]
         public async void PatchInvitationById_IdIsNotValid_NotFoundResult(string body)
         {
             HttpRequest request = this.mockHttpContext.Request;
@@ -62,6 +74,12 @@
         [Theory]
         [InlineData(@"[
         {""op"" : ""replace"", ""path"" : "" /statuuus"", ""value"" : ""Accepted""}
+        ]")]
+        [InlineData(@"[
+        {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Rejected""}
+        ]")]
+        [InlineData(@"[
+        {""op"" : ""replace"", ""path"" : ""/status"", ""value"" : ""Invited""}
         ]")]
         public async void PatchInvitationById_BadRequestBody_BadRequestResult(string body)
         {
