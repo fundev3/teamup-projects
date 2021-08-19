@@ -2,7 +2,9 @@
 {
     using System;
     using System.Linq;
+    using FluentValidation;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
+    using Jalasoft.TeamUp.Projects.Core.Validators;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
 
@@ -24,6 +26,15 @@
         public Invitation[] GetInvitationsByResumeId(int resumeId)
         {
             return this.invitationsRepository.GetAllInvitationsByResumeId(resumeId).ToArray();
+        }
+
+        public Invitation PostInvitation(Invitation invitation)
+        {
+            invitation.Id = Guid.NewGuid();
+            InvitationValidator validator = new InvitationValidator();
+            validator.ValidateAndThrow(invitation);
+            var result = this.invitationsRepository.Add(invitation);
+            return result;
         }
     }
 }

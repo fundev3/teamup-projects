@@ -23,9 +23,10 @@
             collection = database.GetCollection<Invitation>("Invitations");
         }
 
-        public Invitation Add(Invitation project)
+        public Invitation Add(Invitation invitation)
         {
-            throw new NotImplementedException();
+            collection.InsertOne(invitation);
+            return invitation;
         }
 
         public IEnumerable<Invitation> GetAll()
