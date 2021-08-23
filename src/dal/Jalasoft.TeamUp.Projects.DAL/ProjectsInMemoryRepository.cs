@@ -30,6 +30,19 @@
                         }
                     },
                     State = true,
+                    Skills = new Skill[2]
+                    {
+                        new Skill
+                        {
+                            SkillId = "KS125LS6N7WP4S6SFTCK",
+                            Name = "Python (Programming Language)"
+                        },
+                        new Skill
+                        {
+                            SkillId = "KSDJCA4E89LB98JAZ7LZ",
+                            Name = "React.js"
+                        }
+                    },
                     TextInvitation = "You are invited to be part of TeamUp",
                     CreationDate = DateTime.Today.AddDays(-10),
                 },
@@ -50,6 +63,14 @@
                         {
                             Name = "Paola Quintanilla",
                             IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
+                        }
+                    },
+                    Skills = new Skill[1]
+                    {
+                        new Skill
+                        {
+                            SkillId = "KS125LS6N7WP4S6SFTAM",
+                            Name = "C#"
                         }
                     },
                     State = true,
@@ -88,6 +109,11 @@
             projectsList.Add(project);
             projects = new List<Project>(projectsList).ToArray();
             return project;
+        }
+
+        public IEnumerable<Project> GetAllBySkill(string skill)
+        {
+            return projects.Where(project => project.Skills.Any(item => item.Name == skill));
         }
     }
 }

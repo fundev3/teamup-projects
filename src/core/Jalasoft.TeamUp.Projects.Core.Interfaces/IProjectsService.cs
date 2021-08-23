@@ -14,5 +14,7 @@
         public void RemoveProject(Guid id);
 
         Project UpdateProject(Project project);
+
+        Project[] GetProjectsBySkill(string skill);
     }
 }

@@ -50,5 +50,11 @@
             var result = this.projectsRepository.UpdateById(project);
             return project;
         }
+
+        public Project[] GetProjectsBySkill(string skill)
+        {
+            var projects = this.projectsRepository.GetAllBySkill(skill).ToArray();
+            return projects;
+        }
     }
 }

@@ -20,6 +20,8 @@
 
         public Contact[] MemberList { get; set; }
 
+        public Skill[] Skills { get; set; }
+
         public DateTime CreationDate { get; set; }
     }
 }
