@@ -34,12 +34,12 @@
                     {
                         new Skill
                         {
-                            Id = "KS125LS6N7WP4S6SFTCK",
+                            SkillId = "KS125LS6N7WP4S6SFTCK",
                             Name = "Python (Programming Language)"
                         },
                         new Skill
                         {
-                            Id = "KSDJCA4E89LB98JAZ7LZ",
+                            SkillId = "KSDJCA4E89LB98JAZ7LZ",
                             Name = "React.js"
                         }
                     },
