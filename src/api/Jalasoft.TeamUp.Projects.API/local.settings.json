@@ -4,7 +4,7 @@
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL": "true",
-    "MongoSessionServices": "mongodb://cosmos-tuapi-dev-bra:qASYGOAujR95j6u1BEaHQGqJhqRK2SplWNTjlFKYoJ9abZ2lXb1ZKC1Z7no8KbBoSCSXC5ZbFbqatWNl1qJvuw==@cosmos-tuapi-dev-bra.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmos-tuapi-dev-bra@"
+    "MongoSessionServices": "mongodb://localhost:27017"
   },
   "Host": {
     "LocalHttpPort": 7072,
