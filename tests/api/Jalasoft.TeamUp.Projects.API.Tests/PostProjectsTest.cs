@@ -24,7 +24,7 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
         }
 
         [Fact]
-        public async void PostProject_Returns_CreateProject_Project()
+        public async void PostProject_RequestIsValid_OkObjectResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockProjectsService.Setup(service => service.PostProject(null)).Returns(new Project() { Name = "TeamUp" });
@@ -34,7 +34,7 @@ namespace Jalasoft.TeamUp.Projects.API.Tests
         }
 
         [Fact]
-        public async void PostProject_Returns_BadRequest()
+        public async void PostProject_RequestIsNotValid_BadRequestResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockProjectsService.Setup(service => service.PostProject(null)).Throws(new ProjectsException(ProjectsErrors.BadRequest, new FluentValidation.ValidationException("BadRequest")));

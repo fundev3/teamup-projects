@@ -25,7 +25,7 @@
         };
 
         [Fact]
-        public void InvitationValidator_Valid_Id_Success()
+        public void InvitationValidator_IdIsValid_Success()
         {
             // Arrange
             var invitation = new Invitation { Id = Guid.NewGuid() };
@@ -38,7 +38,7 @@
         }
 
         [Fact]
-        public void InvitationValidator_Valid_ProjectId_ThrowsError()
+        public void InvitationValidator_ProjectIdIsNotValid_ThrowsError()
         {
             // Arrange
             var invitation = new Invitation { ProjectId = " " };
@@ -51,7 +51,7 @@
         }
 
         [Fact]
-        public void InvitationValidator_Valid_ResumeId_ThrowsError()
+        public void InvitationValidator_ResumeIdIsNotValid_ThrowsError()
         {
             // Arrange
             var invitation = new Invitation { ResumeId = 0 };
@@ -64,7 +64,7 @@
         }
 
         [Fact]
-        public void InvitationValidator_Valid_ProjectName_ThrowsError()
+        public void InvitationValidator_ProjectNameIsNotValid_ThrowsError()
         {
             // Arrange
             var invitation = new Invitation { ProjectName = "@123^" };
@@ -77,7 +77,7 @@
         }
 
         [Fact]
-        public void InvitationValidator_Valid_ResumeName_ThrowsError()
+        public void InvitationValidator_ResumeNameIsNotValid_ThrowsError()
         {
             // Arrange
             var invitation = new Invitation { ResumeName = "@123^" };
@@ -91,7 +91,7 @@
 
         [Theory]
         [MemberData(nameof(Invitations))]
-        public void InvitationValidator_Validate_Status_Without_Errors_Success(Invitation invitation)
+        public void InvitationValidator_StatusIsValid_Success(Invitation invitation)
         {
             // Arrange
             var invitationToTest = invitation;
@@ -104,7 +104,7 @@
         }
 
         [Fact]
-        public void InvitationValidator_Text_Invitation_More_Than_160_characters_ThrowsError()
+        public void InvitationValidator_TextInvitationHasMoreThan160Characters_ThrowsError()
         {
             // Arrange
             var invitation = new Invitation { TextInvitation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus in eros eu hendrerit. Nulla a nunc eget est tempor placerat at nec diam. Donec at tincidunt." };
@@ -117,7 +117,7 @@
         }
 
         [Fact]
-        public void InvitationValidator_Picture_Extension_Invalid_ThrowsError()
+        public void InvitationValidator_PictureExtensionNotValid_ThrowsError()
         {
             // Arrange
             var invitation = new Invitation { PictureResume = "noextensionvalid.com" };
