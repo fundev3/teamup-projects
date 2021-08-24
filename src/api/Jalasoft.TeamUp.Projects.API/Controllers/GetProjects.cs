@@ -9,6 +9,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+    using Microsoft.Extensions.Primitives;
     using Microsoft.OpenApi.Models;
 
     public class GetProjects
@@ -22,19 +23,34 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
 
         [FunctionName("GetProjects")]
         [OpenApiOperation(operationId: "GetProjects", tags: new[] { "Projects" })]
+        [OpenApiParameter(name: "skill", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The project skill name.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project[]), Description = "Successful response")]
         public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects")] HttpRequest req)
         {
             try
             {
-                var projects = this.projectService.GetProjects();
-                if (projects == null)
+                req.Query.TryGetValue("skill", out StringValues skill);
+                if (string.IsNullOrEmpty(skill))
                 {
-                    throw new ProjectsException(ProjectsErrors.NotFound);
-                }
+                    var projects = this.projectService.GetProjects();
+                    if (projects == null)
+                    {
+                        throw new ProjectsException(ProjectsErrors.NotFound);
+                    }
 
-                return new OkObjectResult(projects);
+                    return new OkObjectResult(projects);
+                }
+                else
+                {
+                    var projects = this.projectService.GetProjectsBySkill(skill);
+                    if (projects == null)
+                    {
+                        throw new ProjectsException(ProjectsErrors.NotFound);
+                    }
+
+                    return new OkObjectResult(projects);
+                }
             }
             catch (ProjectsException e)
             {
