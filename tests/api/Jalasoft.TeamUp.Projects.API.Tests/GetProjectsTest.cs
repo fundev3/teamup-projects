@@ -23,7 +23,7 @@
         }
 
         [Fact]
-        public void GetProject_Returns_OkObjectResult()
+        public void GetProjects_ProjectsExist_OkObjectResult()
         {
             // Arrange
             var request = this.mockHttpContext.Request;

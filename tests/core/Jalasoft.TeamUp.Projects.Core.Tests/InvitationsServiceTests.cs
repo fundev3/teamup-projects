@@ -111,7 +111,7 @@
         }
 
         [Fact]
-        public void PostInvitation_Return_Invitation()
+        public void PostInvitation_InvitationIsValid_SingleInvitation()
         {
             var stubInvitation = StubInvitation.GetStubInvitation();
             this.mockRepository.Setup(repository => repository.Add(stubInvitation)).Returns(new Invitation());
@@ -120,7 +120,7 @@
         }
 
         [Fact]
-        public void PostInvitation_Returns_ValidationException()
+        public void PostInvitation_InvitationIsNotValid_ValidationException()
         {
             var badInvitation = StubInvitation.GetBadStubInvitation();
             this.mockRepository.Setup(repository => repository.Add(badInvitation)).Returns(new Invitation());

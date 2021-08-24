@@ -25,7 +25,7 @@
         };
 
         [Fact]
-        public void ProjectValidator_Valid_Id_Success()
+        public void ProjectValidator_IdIsValid_ValidProject()
         {
             // Arrange
             var project = new Project { Name = "TeamUp", Id = Guid.NewGuid() };
@@ -39,7 +39,7 @@
 
         [Theory]
         [MemberData(nameof(Projects))]
-        public void ProjectValidator_Validate_Name_With_Errors_ThrowsError(Project project)
+        public void ProjectValidator_NameIsNotValid_ThrowsError(Project project)
         {
             // Arrange
             var projectToTest = project;
@@ -52,7 +52,7 @@
         }
 
         [Fact]
-        public void ProjectValidator_Description_More_Than_160_characters_ThrowsError()
+        public void ProjectValidator_DescriptionHasMoreThan160Characters_ThrowsError()
         {
             // Arrange
             var project = new Project { Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus in eros eu hendrerit. Nulla a nunc eget est tempor placerat at nec diam. Donec at tincidunt." };
@@ -65,7 +65,7 @@
         }
 
         [Fact]
-        public void ProjectValidator_Text_Invitation_More_Than_160_characters_ThrowsError()
+        public void ProjectValidator_TextInvitationHasMoreThan160Characters_ThrowsError()
         {
             // Arrange
             var project = new Project { TextInvitation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus in eros eu hendrerit. Nulla a nunc eget est tempor placerat at nec diam. Donec at tincidunt." };
@@ -78,7 +78,7 @@
         }
 
         [Fact]
-        public void ProjectValidator_Logo_Extension_Invalid_ThrowsError()
+        public void ProjectValidator_LogoExtensionNotValid_ThrowsError()
         {
             // Arrange
             var project = new Project { Logo = "noextensionvalid.com" };
@@ -91,7 +91,7 @@
         }
 
         [Fact]
-        public void ProjectValidator_Creating_New_Project_Valid_Success()
+        public void ProjectValidator_CreatingNewValidProject_ValidProject()
         {
             // Arrange
             var project = new Project

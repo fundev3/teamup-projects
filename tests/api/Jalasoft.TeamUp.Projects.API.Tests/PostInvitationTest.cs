@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public async void PostInvitation_ValidInvitation_CreatedResult()
+        public async void PostInvitation_InvitationIsValid_CreatedResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockInvitationsService.Setup(service => service.PostInvitation(null)).Returns(new Invitation() { ProjectName = "TeamUp" });
@@ -34,7 +34,7 @@
         }
 
         [Fact]
-        public async void PostInvitation_InvalidInvitation_BadRequestResult()
+        public async void PostInvitation_InvitationIsNotValid_BadRequestResult()
         {
             var request = this.mockHttpContext.Request;
             this.mockInvitationsService.Setup(service => service.PostInvitation(null)).Throws(new FluentValidation.ValidationException("BadRequest"));

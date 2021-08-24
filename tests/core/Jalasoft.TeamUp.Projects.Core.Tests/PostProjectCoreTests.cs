@@ -18,7 +18,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
         }
 
         [Fact]
-        public void PostProject_Return_Project()
+        public void PostProject_ProjectIsValid_SingleProject()
         {
             var stubProject = new Project()
             {
@@ -49,7 +49,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
         }
 
         [Fact]
-        public void PostProject_Returns_ValidationException()
+        public void PostProject_ProjectIsNotValid_ValidationException()
         {
             var badProject = new Project()
             {
