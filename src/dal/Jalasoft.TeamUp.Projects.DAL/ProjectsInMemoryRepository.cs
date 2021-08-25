@@ -65,6 +65,14 @@
                             IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
                         }
                     },
+                    Skills = new Skill[1]
+                    {
+                        new Skill
+                        {
+                            SkillId = "KS125LS6N7WP4S6SFTAM",
+                            Name = "C#"
+                        }
+                    },
                     State = true,
                     TextInvitation = "laboriosam cumque consequatur",
                     CreationDate = DateTime.Today.AddDays(-5),
@@ -101,6 +109,11 @@
             projectsList.Add(project);
             projects = new List<Project>(projectsList).ToArray();
             return project;
+        }
+
+        public IEnumerable<Project> GetAllBySkill(string skill)
+        {
+            return projects.Where(project => project.Skills.Any(item => item.Name == skill));
         }
     }
 }

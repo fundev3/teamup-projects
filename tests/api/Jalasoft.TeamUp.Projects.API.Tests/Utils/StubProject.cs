@@ -29,6 +29,19 @@
                         }
         },
                 State = true,
+                Skills = new Skill[2]
+                    {
+                        new Skill
+                        {
+                            SkillId = "KS125LS6N7WP4S6SFTCK",
+                            Name = "Python (Programming Language)"
+                        },
+                        new Skill
+                        {
+                            SkillId = "KSDJCA4E89LB98JAZ7LZ",
+                            Name = "C#"
+                        }
+                    },
                 TextInvitation = "You are invited to be part of TeamUp",
                 CreationDate = DateTime.Today.AddDays(-10),
             };

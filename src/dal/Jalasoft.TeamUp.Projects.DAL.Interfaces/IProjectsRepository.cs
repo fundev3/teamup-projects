@@ -6,5 +6,6 @@
 
     public interface IProjectsRepository : IRepository<Project>
     {
+        public IEnumerable<Project> GetAllBySkill(string skill);
     }
 }

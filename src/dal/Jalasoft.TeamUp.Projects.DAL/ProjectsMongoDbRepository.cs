@@ -52,5 +52,11 @@
 
             return project;
         }
+
+        public IEnumerable<Project> GetAllBySkill(string skill)
+        {
+            var filter = Builders<Project>.Filter.ElemMatch(x => x.Skills, x => x.Name == skill);
+            return collection.Find(filter).ToEnumerable<Project>();
+        }
     }
 }
