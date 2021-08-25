@@ -39,7 +39,7 @@
                         new Skill
                         {
                             SkillId = "KSDJCA4E89LB98JAZ7LZ",
-                            Name = "React.js"
+                            Name = "C#"
                         }
                     },
                 TextInvitation = "You are invited to be part of TeamUp",

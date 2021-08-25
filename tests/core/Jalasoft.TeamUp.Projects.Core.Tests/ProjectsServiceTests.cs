@@ -148,7 +148,7 @@
             this.mockRepository.Setup(repository => repository.GetAll()).Returns(stubEmptyProjectList);
 
             // Act
-            var result = this.service.GetProjects();
+            var result = this.service.GetProjects(null);
 
             // Assert
             Assert.Empty(result);
@@ -161,7 +161,7 @@
             this.mockRepository.Setup(repository => repository.GetAll()).Returns(MockProjects());
 
             // Act
-            var result = this.service.GetProjects();
+            var result = this.service.GetProjects(null);
 
             // Assert
             Assert.Equal(3, result.Length);
@@ -175,12 +175,12 @@
 
             var memoryRepository = new ProjectsInMemoryRepository();
             var projectService = new ProjectsService(memoryRepository);
-            var list = projectService.GetProjects();
+            var list = projectService.GetProjects(null);
             var countBeforeDelete = list.Length;
 
             // Act
             projectService.RemoveProject(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"));
-            var countAfterDelete = projectService.GetProjects().Length;
+            var countAfterDelete = projectService.GetProjects(null).Length;
 
             // Assert
             Assert.NotEqual(countBeforeDelete, countAfterDelete);
@@ -208,7 +208,7 @@
             this.mockRepository.Setup(repository => repository.GetAllBySkill("C#")).Returns(MockProjects());
 
             // Act
-            var result = this.service.GetProjectsBySkill("C#");
+            var result = this.service.GetProjects("C#");
 
             // Assert
             Assert.IsType<Project[]>(result);
@@ -222,7 +222,7 @@
             this.mockRepository.Setup(repository => repository.GetAllBySkill("Pedro#")).Returns(stubEmptyProjectList);
 
             // Act
-            var result = this.service.GetProjectsBySkill("Pedro#");
+            var result = this.service.GetProjects("Pedro#");
 
             // Assert
             Assert.Empty(result);

@@ -9,12 +9,10 @@
 
         public Project GetProject(Guid id);
 
-        Project[] GetProjects();
+        Project[] GetProjects(string skill);
 
         public void RemoveProject(Guid id);
 
         Project UpdateProject(Project project);
-
-        Project[] GetProjectsBySkill(string skill);
     }
 }

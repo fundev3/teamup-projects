@@ -25,32 +25,20 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         [OpenApiOperation(operationId: "GetProjects", tags: new[] { "Projects" })]
         [OpenApiParameter(name: "skill", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The project skill name.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Project[]), Description = "Successful response")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
         public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/projects")] HttpRequest req)
         {
             try
             {
                 req.Query.TryGetValue("skill", out StringValues skill);
-                if (string.IsNullOrEmpty(skill))
+                var projects = this.projectService.GetProjects(skill);
+                if (projects.Length == 0 || projects == null)
                 {
-                    var projects = this.projectService.GetProjects();
-                    if (projects == null)
-                    {
-                        throw new ProjectsException(ProjectsErrors.NotFound);
-                    }
-
-                    return new OkObjectResult(projects);
+                    throw new ProjectsException(ProjectsErrors.NotFound);
                 }
-                else
-                {
-                    var projects = this.projectService.GetProjectsBySkill(skill);
-                    if (projects == null)
-                    {
-                        throw new ProjectsException(ProjectsErrors.NotFound);
-                    }
 
-                    return new OkObjectResult(projects);
-                }
+                return new OkObjectResult(projects);
             }
             catch (ProjectsException e)
             {
