@@ -32,10 +32,18 @@
             return result;
         }
 
-        public Project[] GetProjects()
+        public Project[] GetProjects(string skill)
         {
+            if (skill == null)
+            {
                 var projects = this.projectsRepository.GetAll().ToArray();
                 return projects;
+            }
+            else
+            {
+                var projects = this.projectsRepository.GetAllBySkill(skill).ToArray();
+                return projects;
+            }
         }
 
         public void RemoveProject(Guid id)

@@ -16,7 +16,7 @@
                 Contact = new Contact()
                 {
                     Name = "Jose Ecos",
-                    IdResume = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")
+                    IdResume = 1
                 },
                 Description = "Centralize resumes and project",
                 Logo = "https://www.example.com/images/dinosaur.jpg",
@@ -25,10 +25,23 @@
                         new Contact
                         {
                             Name = "Paola Quintanilla",
-                            IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
+                            IdResume = 2
                         }
         },
                 State = true,
+                Skills = new Skill[2]
+                    {
+                        new Skill
+                        {
+                            SkillId = "KS125LS6N7WP4S6SFTCK",
+                            Name = "Python (Programming Language)"
+                        },
+                        new Skill
+                        {
+                            SkillId = "KSDJCA4E89LB98JAZ7LZ",
+                            Name = "C#"
+                        }
+                    },
                 TextInvitation = "You are invited to be part of TeamUp",
                 CreationDate = DateTime.Today.AddDays(-10),
             };

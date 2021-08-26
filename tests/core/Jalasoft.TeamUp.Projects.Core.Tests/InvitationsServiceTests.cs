@@ -116,13 +116,31 @@
             // Arrange
             Invitation stubInvitation = StubInvitation.GetStubInvitation();
 
-            this.mockRepository.Setup(repository => repository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de"))).Returns(stubInvitation);
+            this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
 
             // Act
             var result = this.service.UpdateInvitation(stubInvitation);
 
             // Assert
             Assert.IsType<Invitation>(result);
+        }
+
+        [Fact]
+        public void PostInvitation_InvitationIsValid_SingleInvitation()
+        {
+            var stubInvitation = StubInvitation.GetStubInvitation();
+            this.mockRepository.Setup(repository => repository.Add(stubInvitation)).Returns(new Invitation());
+            var result = this.service.PostInvitation(stubInvitation);
+            Assert.IsType<Invitation>(result);
+        }
+
+        [Fact]
+        public void PostInvitation_InvitationIsNotValid_ValidationException()
+        {
+            var badInvitation = StubInvitation.GetBadStubInvitation();
+            this.mockRepository.Setup(repository => repository.Add(badInvitation)).Returns(new Invitation());
+
+            Assert.Throws<FluentValidation.ValidationException>(() => this.service.PostInvitation(badInvitation));
         }
     }
 }

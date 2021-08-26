@@ -21,7 +21,7 @@
                 TextInvitation = "We invite you to collaborate with the development team",
                 StartDate = DateTime.Today.AddDays(-10),
                 ExpireDate = DateTime.Today.AddDays(+10),
-                Status = "invited"
+                Status = "Invited"
             },
             new Invitation()
             {
@@ -34,13 +34,14 @@
                 TextInvitation = "We invite you to collaborate with the development team",
                 StartDate = DateTime.Today.AddDays(-10),
                 ExpireDate = DateTime.Today.AddDays(+10),
-                Status = "invited"
+                Status = "Invited"
             }
         };
 
-        public Invitation Add(Invitation project)
+        public Invitation Add(Invitation invitation)
         {
-            throw new NotImplementedException();
+            invitations = new List<Invitation>(invitations) { invitation }.ToArray();
+            return invitation;
         }
 
         public IEnumerable<Invitation> GetAll()

@@ -27,7 +27,7 @@
         }
 
         [Fact]
-        public void GetProject_Returns_OkObjectResult()
+        public void GetProjectById_IdIsValid_OkObjectResult()
         {
             // Arrange
             var request = this.mockHttpContext.Request;
@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public void GetProject_Returns_NotFoundResult()
+        public void GetProjectById_IdIsNotValid_NotFoundResult()
         {
             // Arrange
             var request = this.mockHttpContext.Request;

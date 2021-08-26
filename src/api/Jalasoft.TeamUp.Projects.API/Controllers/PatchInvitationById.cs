@@ -1,10 +1,10 @@
 namespace Jalasoft.TeamUp.Projects.API.Controllers
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.IO;
     using System.Net;
     using System.Threading.Tasks;
+    using FluentValidation;
     using Jalasoft.TeamUp.Projects.Core.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Jalasoft.TeamUp.Projects.ProjectsException;
@@ -34,7 +34,7 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Invitation), Description = "Successful response")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
         public async Task<IActionResult> UpdateInvitation(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "v1/invitations/{id}")] HttpRequest req, Guid id)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "v1/invitations/{id:guid}")] HttpRequest req, Guid id)
         {
             try
             {

@@ -38,7 +38,16 @@
             InvitationValidator validator = new InvitationValidator();
             validator.ValidateAndThrow(invitation);
             var result = this.invitationsRepository.UpdateById(invitation);
-            return invitation;
+            return result;
+        }
+
+        public Invitation PostInvitation(Invitation invitation)
+        {
+            invitation.Id = Guid.NewGuid();
+            InvitationValidator validator = new InvitationValidator();
+            validator.ValidateAndThrow(invitation);
+            var result = this.invitationsRepository.Add(invitation);
+            return result;
         }
     }
 }
