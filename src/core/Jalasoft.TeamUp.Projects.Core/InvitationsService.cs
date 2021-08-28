@@ -28,6 +28,19 @@
             return this.invitationsRepository.GetAllInvitationsByResumeId(resumeId).ToArray();
         }
 
+        public Invitation GetInvitation(Guid invitationId)
+        {
+            return this.invitationsRepository.GetById(invitationId);
+        }
+
+        public Invitation UpdateInvitation(Invitation invitation)
+        {
+            InvitationValidator validator = new InvitationValidator();
+            validator.ValidateAndThrow(invitation);
+            var result = this.invitationsRepository.UpdateById(invitation);
+            return result;
+        }
+
         public Invitation PostInvitation(Invitation invitation)
         {
             invitation.Id = Guid.NewGuid();

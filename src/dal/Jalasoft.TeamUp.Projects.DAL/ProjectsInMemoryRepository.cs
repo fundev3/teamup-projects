@@ -17,7 +17,7 @@
                     Contact = new Contact()
                     {
                         Name = "Jose Ecos",
-                        IdResume = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")
+                        IdResume = 1
                     },
                     Description = "Centralize resumes and project",
                     Logo = "https://www.example.com/images/dinosaur.jpg",
@@ -26,7 +26,7 @@
                         new Contact
                         {
                             Name = "Paola Quintanilla",
-                            IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
+                            IdResume = 2
                         }
                     },
                     State = true,
@@ -53,7 +53,7 @@
                     Contact = new Contact()
                     {
                         Name = "Jose Ecos",
-                        IdResume = Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584de")
+                        IdResume = 1
                     },
                     Description = "Molestiae numquam possimus sit delectus. Sit ut consequatur est magni. Dolorem voluptatum et distinctio omnis et sit et. Ea soluta optio saepe ea voluptatem pariatur voluptas qui nihil.",
                     Logo = "https://www.example.com/images/dinosaur.jpg",
@@ -62,7 +62,7 @@
                         new Contact
                         {
                             Name = "Paola Quintanilla",
-                            IdResume = new Guid("536316e6-f8f6-41ea-b1ce-455b92be9303")
+                            IdResume = 2
                         }
                     },
                     Skills = new Skill[1]

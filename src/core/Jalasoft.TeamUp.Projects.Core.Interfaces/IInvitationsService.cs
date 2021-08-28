@@ -9,6 +9,10 @@
 
         Invitation[] GetInvitationsByProjectId(string projectId);
 
+        Invitation GetInvitation(Guid invitationId);
+
+        Invitation UpdateInvitation(Invitation invitation);
+
         Invitation PostInvitation(Invitation invitation);
     }
 }

@@ -35,7 +35,7 @@
                     TextInvitation = "We invite you to collaborate with the development team",
                     StartDate = DateTime.Today.AddDays(-10),
                     ExpireDate = DateTime.Today.AddDays(+10),
-                    Status = "invited"
+                    Status = "Invited"
                 },
                 new Invitation
                 {
@@ -48,7 +48,7 @@
                     TextInvitation = "We invite you to collaborate with the development team",
                     StartDate = DateTime.Today.AddDays(-10),
                     ExpireDate = DateTime.Today.AddDays(+10),
-                    Status = "invited"
+                    Status = "Invited"
                 }
             };
             return invitations;
@@ -108,6 +108,21 @@
 
             // Assert
             Assert.Empty(result);
+        }
+
+        [Fact]
+        public void PatchInvitationByProjectId_InvitationIsValid_InvitationUpdated()
+        {
+            // Arrange
+            Invitation stubInvitation = StubInvitation.GetStubInvitation();
+
+            this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
+
+            // Act
+            var result = this.service.UpdateInvitation(stubInvitation);
+
+            // Assert
+            Assert.IsType<Invitation>(result);
         }
 
         [Fact]

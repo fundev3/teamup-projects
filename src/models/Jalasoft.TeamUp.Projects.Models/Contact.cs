@@ -6,6 +6,6 @@
     {
         public string Name { get; set; }
 
-        public Guid IdResume { get; set; }
+        public int IdResume { get; set; }
     }
 }

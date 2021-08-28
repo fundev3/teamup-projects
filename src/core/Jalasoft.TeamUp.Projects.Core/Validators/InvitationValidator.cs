@@ -1,6 +1,7 @@
 ﻿namespace Jalasoft.TeamUp.Projects.Core.Validators
 {
     using System;
+    using System.Collections.Generic;
     using FluentValidation;
     using Jalasoft.TeamUp.Projects.Models;
 
@@ -31,7 +32,7 @@
                 .MaximumLength(160);
 
             this.RuleFor(invitation => invitation.Status)
-                .Matches("^(Invited|Rejected|Accepted)$");
+                .IsEnumName(typeof(Status));
 
             this.RuleFor(invitation => invitation.PictureResume)
                 .Matches("[^\\s]+(.*?)\\.(jpg|jpeg|png|JPG|JPEG|PNG)$");
