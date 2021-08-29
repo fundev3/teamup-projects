@@ -20,7 +20,7 @@
                 },
                 Description = "Centralize resumes and project",
                 Logo = "https://www.example.com/images/dinosaur.jpg",
-                MemberList = new Contact[1]
+                MemberList = new List<Contact>
         {
                         new Contact
                         {

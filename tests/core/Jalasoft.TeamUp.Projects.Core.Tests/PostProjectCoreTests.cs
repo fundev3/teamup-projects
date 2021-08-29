@@ -1,6 +1,7 @@
 namespace Jalasoft.TeamUp.Projects.Core.Tests
 {
     using System;
+    using System.Collections.Generic;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using Moq;
@@ -31,7 +32,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
                     IdResume = 1
                 },
                 Logo = "https://www.example.com/images/dinosaur.jpg",
-                MemberList = new Contact[1]
+                MemberList = new List<Contact>
                 {
                     new Contact
                     {
@@ -62,7 +63,7 @@ namespace Jalasoft.TeamUp.Projects.Core.Tests
                     IdResume = 1
                 },
                 Logo = "BAD LOGO FORMAT",
-                MemberList = new Contact[1]
+                MemberList = new List<Contact>
                 {
                     new Contact
                     {
