@@ -10,7 +10,7 @@
         public InvitationValidator()
         {
             this.RuleFor(invitation => invitation.ResumeName)
-                .Length(3, 15)
+                .Length(3, 30)
                 .Matches("^[a-zñ A-ZÑ]+$")
                 .NotEmpty();
 

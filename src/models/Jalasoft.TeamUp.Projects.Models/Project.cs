@@ -19,7 +19,7 @@
 
         public string Logo { get; set; }
 
-        public Contact[] MemberList { get; set; }
+        public List<Contact> MemberList { get; set; }
 
         public Skill[] Skills { get; set; }
 

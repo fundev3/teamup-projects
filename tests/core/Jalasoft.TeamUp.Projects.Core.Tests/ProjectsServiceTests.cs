@@ -35,7 +35,7 @@
                     },
                     Description = "Centralize resumes and project",
                     Logo = "https://www.example.com/images/dinosaur.jpg",
-                    MemberList = new Contact[1]
+                    MemberList = new List<Contact>
                     {
                         new Contact
                         {
@@ -71,7 +71,7 @@
                     },
                     Description = "Molestiae numquam possimus sit delectus. Sit ut consequatur est magni. Dolorem voluptatum et distinctio omnis et sit et. Ea soluta optio saepe ea voluptatem pariatur voluptas qui nihil.",
                     Logo = "https://www.example.com/images/dinosaur.jpg",
-                    MemberList = new Contact[1]
+                    MemberList = new List<Contact>
                     {
                         new Contact
                         {
@@ -102,7 +102,7 @@
                     },
                     Description = "Molestiae numquam possimus sit delectus. Sit ut consequatur est magni. Dolorem voluptatum et distinctio omnis et sit et. Ea soluta optio saepe ea voluptatem pariatur voluptas qui nihil.",
                     Logo = "https://www.example.com/images/dinosaur.jpg",
-                    MemberList = new Contact[1]
+                    MemberList = new List<Contact>
                     {
                         new Contact
                         {
