@@ -30,7 +30,7 @@
 
         public IEnumerable<Project> GetAll()
         {
-            return collection.Find(new BsonDocument()).ToEnumerable<Project>();
+            return collection.Find(new BsonDocument()).SortByDescending(project => project.CreationDate).ToEnumerable<Project>();
         }
 
         public Project GetById(Guid id)
