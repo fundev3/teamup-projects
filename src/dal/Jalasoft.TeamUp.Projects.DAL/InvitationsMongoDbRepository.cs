@@ -13,6 +13,7 @@
         private static MongoClient client;
         private static IMongoDatabase database;
         private static IMongoCollection<Invitation> collection;
+        private readonly IProjectsRepository projectsRepository;
 
         public InvitationsMongoDbRepository()
         {
@@ -57,6 +58,16 @@
         public Invitation UpdateById(Invitation invitation)
         {
             var filter = Builders<Invitation>.Filter.Eq(s => s.Id, invitation.Id);
+            if (invitation.Status == "Accepted")
+            {
+                Contact contact = new Contact();
+                contact.IdResume = invitation.ResumeId;
+                contact.Name = invitation.ResumeName;
+                var project = this.projectsRepository.GetById(Guid.Parse(invitation.ProjectId));
+                project.MemberList.Add(contact);
+                this.projectsRepository.UpdateById(project);
+            }
+
             var proj = collection.ReplaceOne(filter, invitation);
 
             return invitation;
