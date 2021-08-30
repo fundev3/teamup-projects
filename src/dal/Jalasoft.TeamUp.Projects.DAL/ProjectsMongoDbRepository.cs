@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Jalasoft.TeamUp.Projects.DAL.Interfaces;
     using Jalasoft.TeamUp.Projects.Models;
     using MongoDB.Bson;
@@ -30,7 +31,7 @@
 
         public IEnumerable<Project> GetAll()
         {
-            return collection.Find(new BsonDocument()).SortByDescending(project => project.CreationDate).ToEnumerable<Project>();
+            return collection.Find(new BsonDocument()).ToEnumerable<Project>().OrderByDescending(x => x.CreationDate);
         }
 
         public Project GetById(Guid id)
