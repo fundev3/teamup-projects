@@ -12,12 +12,15 @@
     public class InvitationsServiceTests
     {
         private readonly Mock<IInvitationsRepository> mockRepository;
+        private readonly Mock<IProjectsRepository> mockProjectsRepository;
         private readonly InvitationsService service;
 
         public InvitationsServiceTests()
         {
             this.mockRepository = new Mock<IInvitationsRepository>();
-            this.service = new InvitationsService(this.mockRepository.Object);
+            this.mockProjectsRepository = new Mock<IProjectsRepository>();
+
+            this.service = new InvitationsService(this.mockRepository.Object, this.mockProjectsRepository.Object);
         }
 
         public static IEnumerable<Invitation> MockInvitations()
