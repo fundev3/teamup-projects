@@ -13,7 +13,6 @@
     {
         private readonly IInvitationsRepository invitationsRepository;
         private readonly IProjectsRepository projectsRepository;
-        private IInvitationsRepository @object;
 
         public InvitationsService(IInvitationsRepository invitationsRepository, IProjectsRepository projectsRepository)
         {
