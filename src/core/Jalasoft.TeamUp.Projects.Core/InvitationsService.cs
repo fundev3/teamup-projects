@@ -48,10 +48,12 @@
                     IdResume = invitation.ResumeId,
                     Name = invitation.ResumeName
                 };
-
                 var project = this.projectsRepository.GetById(Guid.Parse(invitation.ProjectId));
-                project.MemberList.Add(contact);
-                this.projectsRepository.UpdateById(project);
+                if (project.MemberList.Contains(contact) == false)
+                {
+                    project.MemberList.Add(contact);
+                    this.projectsRepository.UpdateById(project);
+                }
             }
 
             var result = this.invitationsRepository.UpdateById(invitation);

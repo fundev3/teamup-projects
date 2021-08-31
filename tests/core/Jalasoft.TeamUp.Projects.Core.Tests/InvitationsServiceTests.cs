@@ -118,7 +118,6 @@
         {
             // Arrange
             Invitation stubInvitation = StubInvitation.GetStubInvitation();
-
             this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
 
             // Act
@@ -144,6 +143,39 @@
             this.mockRepository.Setup(repository => repository.Add(badInvitation)).Returns(new Invitation());
 
             Assert.Throws<FluentValidation.ValidationException>(() => this.service.PostInvitation(badInvitation));
+        }
+
+        [Fact]
+        public void PatchInvitation_invitationsStatusAccepted_InvitationUpdated()
+        {
+            // Arrange
+            Invitation stubInvitation = StubInvitation.GetStubInvitation();
+            stubInvitation.Status = "Accepted";
+            Project stubProject = StubProject.GetStubProject();
+            this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584df"))).Returns(stubProject);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.UpdateById(stubProject)).Returns(stubProject);
+            var result = this.service.UpdateInvitation(stubInvitation);
+            Assert.Equal(stubInvitation, result);
+        }
+
+        [Fact]
+        public void PatchInvitation_invitationsStatusRejected_InvitationUpdated()
+        {
+            // Arrange
+            Invitation stubInvitation = StubInvitation.GetStubInvitation();
+            Contact contact = new Contact
+            {
+                IdResume = stubInvitation.ResumeId,
+                Name = stubInvitation.ResumeName
+            };
+            stubInvitation.Status = "Rejected";
+            Project stubProject = StubProject.GetStubProject();
+            this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584df"))).Returns(stubProject);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.UpdateById(stubProject)).Returns(stubProject);
+            var result = this.service.UpdateInvitation(stubInvitation);
+            Assert.DoesNotContain(contact, stubProject.MemberList);
         }
     }
 }

@@ -11,7 +11,7 @@
         {
             Project stubProject = new Project
             {
-                Id = new Guid("5a7939fd-59de-44bd-a092-f5d8434584de"),
+                Id = new Guid("5a7939fd-59de-44bd-a092-f5d8434584df"),
                 Name = "TeamUp",
                 Contact = new Contact()
                 {
