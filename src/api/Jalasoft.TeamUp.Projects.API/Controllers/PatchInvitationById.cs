@@ -30,9 +30,11 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         [FunctionName("UpdateInvitation")]
         [OpenApiOperation(operationId: "UpdateInvitation", tags: new[] { "Invitations" })]
         [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "The invitation identifier.")]
-        [OpenApiRequestBody("application/json", typeof(JsonPatchDocument<Invitation>), Description = "JSON request body")]
+        [OpenApiRequestBody("application/json", typeof(JsonPatchDocument), Description = "JSON request body")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(Invitation), Description = "Successful response")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Description = "Resource bad request")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.InternalServerError, Description = "Resource internal server error")]
         public async Task<IActionResult> UpdateInvitation(
             [HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "v1/invitations/{id:guid}")] HttpRequest req, Guid id)
         {

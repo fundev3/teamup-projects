@@ -25,6 +25,8 @@
         [OpenApiOperation(operationId: "DeleteProjectById", tags: new[] { "Projects" })]
         [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "The project identifier.")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NoContent, Description = "There's no content to be returned")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Description = "Resource not found")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.InternalServerError, Description = "Resource internal server error")]
         public IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "v1/projects/{id:guid}")] HttpRequest req, Guid id)
         {
