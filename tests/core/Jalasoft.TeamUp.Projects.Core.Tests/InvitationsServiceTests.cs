@@ -160,7 +160,7 @@
         }
 
         [Fact]
-        public void PatchInvitation_invitationsStatusRejected_InvitationUpdated()
+        public void PatchInvitation_invitationsStatusRejected_MemberListWithOutChanges()
         {
             // Arrange
             Invitation stubInvitation = StubInvitation.GetStubInvitation();
