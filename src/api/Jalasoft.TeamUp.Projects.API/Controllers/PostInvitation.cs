@@ -29,6 +29,8 @@
         [OpenApiOperation(operationId: "PostInvitation", tags: new[] { "Invitations" })]
         [OpenApiRequestBody("application/json", typeof(Invitation), Description = "JSON request body")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(Invitation), Description = "Successful response")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Description = "Resource bad request")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.InternalServerError, Description = "Resource internal server error")]
         public async Task<IActionResult> RunAsync(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/invitations")] HttpRequest req)
         {

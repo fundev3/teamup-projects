@@ -29,6 +29,8 @@ namespace Jalasoft.TeamUp.Projects.API.Controllers
         [OpenApiOperation(operationId: "PostProject", tags: new[] { "Projects" })]
         [OpenApiRequestBody("application/json", typeof(Project), Description = "JSON request body")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(Project), Description = "Successful response")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Description = "Resource bad request")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.InternalServerError, Description = "Resource internal server error")]
         public async Task<IActionResult> CreateProject(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/projects")] HttpRequest req)
         {
