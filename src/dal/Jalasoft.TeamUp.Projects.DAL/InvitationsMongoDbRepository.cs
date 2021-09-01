@@ -57,6 +57,7 @@
         public Invitation UpdateById(Invitation invitation)
         {
             var filter = Builders<Invitation>.Filter.Eq(s => s.Id, invitation.Id);
+
             var proj = collection.ReplaceOne(filter, invitation);
 
             return invitation;

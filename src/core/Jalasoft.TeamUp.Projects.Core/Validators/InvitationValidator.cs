@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using FluentValidation;
     using Jalasoft.TeamUp.Projects.Models;
+    using Jalasoft.TeamUp.Projects.Models.Enums;
 
     public class InvitationValidator : AbstractValidator<Invitation>
     {
@@ -32,7 +33,7 @@
                 .MaximumLength(160);
 
             this.RuleFor(invitation => invitation.Status)
-                .IsEnumName(typeof(Status));
+                .IsEnumName(typeof(InvitationStatus));
 
             this.RuleFor(invitation => invitation.PictureResume)
                 .Matches("[^\\s]+(.*?)\\.(jpg|jpeg|png|JPG|JPEG|PNG)$");

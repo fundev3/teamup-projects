@@ -12,12 +12,15 @@
     public class InvitationsServiceTests
     {
         private readonly Mock<IInvitationsRepository> mockRepository;
+        private readonly Mock<IProjectsRepository> mockProjectsRepository;
         private readonly InvitationsService service;
 
         public InvitationsServiceTests()
         {
             this.mockRepository = new Mock<IInvitationsRepository>();
-            this.service = new InvitationsService(this.mockRepository.Object);
+            this.mockProjectsRepository = new Mock<IProjectsRepository>();
+
+            this.service = new InvitationsService(this.mockRepository.Object, this.mockProjectsRepository.Object);
         }
 
         public static IEnumerable<Invitation> MockInvitations()
@@ -115,7 +118,6 @@
         {
             // Arrange
             Invitation stubInvitation = StubInvitation.GetStubInvitation();
-
             this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
 
             // Act
@@ -141,6 +143,39 @@
             this.mockRepository.Setup(repository => repository.Add(badInvitation)).Returns(new Invitation());
 
             Assert.Throws<FluentValidation.ValidationException>(() => this.service.PostInvitation(badInvitation));
+        }
+
+        [Fact]
+        public void PatchInvitation_invitationsStatusAccepted_InvitationUpdated()
+        {
+            // Arrange
+            Invitation stubInvitation = StubInvitation.GetStubInvitation();
+            stubInvitation.Status = "Accepted";
+            Project stubProject = StubProject.GetStubProject();
+            this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584df"))).Returns(stubProject);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.UpdateById(stubProject)).Returns(stubProject);
+            var result = this.service.UpdateInvitation(stubInvitation);
+            Assert.Equal(stubInvitation, result);
+        }
+
+        [Fact]
+        public void PatchInvitation_invitationsStatusRejected_MemberListWithOutChanges()
+        {
+            // Arrange
+            Invitation stubInvitation = StubInvitation.GetStubInvitation();
+            Contact contact = new Contact
+            {
+                IdResume = stubInvitation.ResumeId,
+                Name = stubInvitation.ResumeName
+            };
+            stubInvitation.Status = "Rejected";
+            Project stubProject = StubProject.GetStubProject();
+            this.mockRepository.Setup(repository => repository.UpdateById(stubInvitation)).Returns(stubInvitation);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.GetById(Guid.Parse("5a7939fd-59de-44bd-a092-f5d8434584df"))).Returns(stubProject);
+            this.mockProjectsRepository.Setup(projectRepository => projectRepository.UpdateById(stubProject)).Returns(stubProject);
+            var result = this.service.UpdateInvitation(stubInvitation);
+            Assert.DoesNotContain(contact, stubProject.MemberList);
         }
     }
 }
